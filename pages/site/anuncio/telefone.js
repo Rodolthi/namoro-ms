@@ -7,7 +7,7 @@ const Telefone = ({ numero, pequeno }) => {
   return (
     <Link href={`https://api.whatsapp.com/send?phone=${numero}`}>
       <LinkTelefone className={pequeno && "pequeno"} variant="contained" color="primary" size="large">
-        <img src="whatsappp-logo.svg" />
+        <img src="/whatsappp-logo.svg" />
         {numero}
       </LinkTelefone>
     </Link>

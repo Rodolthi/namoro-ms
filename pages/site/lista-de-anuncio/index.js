@@ -1,16 +1,17 @@
 import React from "react"
 import styled from "styled-components"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 const divStyle = (src) => ({
   backgroundImage: 'url(' + src + ')'
 })
 
 const ListaDeAnuncios = () => {
-
+  const router = useRouter();
 
   const irParaOAnuncio = () => {
-    data.link = "/anuncio"
+    router.push("/site/anuncio/")
   }
 
   return (
@@ -18,7 +19,10 @@ const ListaDeAnuncios = () => {
       {itens.map((item, index) => {
         return (
           <li key={index}>
-            <Item href="/anuncio/" style={divStyle(item.imagem)}>
+            <Item onClick={irParaOAnuncio}>
+              <Foto>
+                <img src={item.imagem} />
+              </Foto>
               <span className="infos">
                 <p className="nome">{item.nome}</p>
                 <p className="telefone">
@@ -51,17 +55,19 @@ const Lista = styled.ul`
   flex-wrap: wrap;
 `
 
-const Item = styled(Link)`
+const Item = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: flex-end;
   background-size: cover;
   background-position: center center;
-  min-width: 240px;
+  width: 240px;
   height: 320px;
   border-radius: 8px;
   transition: ease .2s;
   cursor: pointer;
+  overflow: hidden;
   &:hover,&:focus{
     transform: translate(0, -3px);
     background-color: green;
@@ -106,6 +112,23 @@ const Item = styled(Link)`
       margin-right: 8px;
       height: 20px;
     }
+  }
+`
+
+const Foto = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 `
 

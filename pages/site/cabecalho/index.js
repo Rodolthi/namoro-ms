@@ -7,14 +7,7 @@ import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
 import Icone from "../../components/icone"
 
-const useStyles = makeStyles(() => ({
-  formControl: {
-    width: 240
-  },
-}));
-
 const Cabecalho = () => {
-  const classes = useStyles();
   const [cidadeSelecionada, setCidadeSelecionada] = useState("")
   const [acompanhante, setAcompanhante] = useState("mulher")
   const [menuAberto, setMenuAberto] = useState(false)
@@ -43,7 +36,7 @@ const Cabecalho = () => {
 
   const acoesParaUsuario = () => (
     <>
-      <FormControl className={classes.formControl} variant="filled">
+      <FormControl style={{ width: 240 }} variant="filled">
         <InputLabel id="cidade-label">Selecione sua região</InputLabel>
 
         <Select
@@ -58,7 +51,7 @@ const Cabecalho = () => {
         </Select>
       </FormControl>
 
-      <FormControl className={classes.formControl} variant="filled">
+      <FormControl style={{ width: 240 }} variant="filled">
         <InputLabel id="acompanhante">Acompanhante</InputLabel>
 
         <Select
@@ -73,7 +66,7 @@ const Cabecalho = () => {
         </Select>
       </FormControl>
 
-      <Link href="/portal/">
+      <Link href="/portal/login/">
         <Button color="primary" variant="outlined">Quero anunciar</Button>
       </Link>
     </>
@@ -85,9 +78,7 @@ const Cabecalho = () => {
         <ModalDeSelecaoDeCidade setCidadeSelecionada={setCidadeSelecionada} />
 
         <Container>
-          <Logo href="/">
-            <img src="logo.svg" />
-          </Logo>
+          <Logo src="/logo.svg" />
 
           <Acoes>
             {acoesParaUsuario()}
@@ -106,12 +97,8 @@ const Cabecalho = () => {
 
 export default Cabecalho
 
-const Logo = styled(Link)`
+const Logo = styled.img`
   width: 200px;
-  display: inline-flex;
-  img {
-    width: 100%;
-  }
 `
 
 const Container = styled.div`

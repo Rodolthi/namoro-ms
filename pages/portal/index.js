@@ -5,14 +5,16 @@ import Inicio from "./inicio";
 import Cabecalho from "./cabecalho";
 import Planos from "./planos";
 import FormularioParaAnuncio from "./formulario-para-anuncio";
+import { useRouter } from "next/router";
 
 const Portal = () => {
+  const router = useRouter()
+
   return (
     <>
-      <Login />
-
       <Page>
         <Cabecalho></Cabecalho>
+
         <Inicio />
         <Planos></Planos>
         <FormularioParaAnuncio></FormularioParaAnuncio>

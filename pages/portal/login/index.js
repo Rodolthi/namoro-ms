@@ -12,15 +12,17 @@ const Login = () => {
 
   return (
     <ContainerLogin>
-      <img src="logo.svg" style={{ width: 240, marginBottom: 16 }} />
-      <FormularioDeLogin
-        // when={loginAtivado}
-        irParaCriacaoDeConta={alternarEntreLoginECriacaoDeConta}
-      />
-      <FormularioDeCriacaoDeConta
-        // when={!loginAtivado}
-        irParaLogin={alternarEntreLoginECriacaoDeConta}
-      />
+      <img src="/logo.svg" style={{ width: 240, marginBottom: 16 }} />
+
+      {loginAtivado ?
+        <FormularioDeLogin
+          irParaCriacaoDeConta={alternarEntreLoginECriacaoDeConta}
+        />
+        :
+        <FormularioDeCriacaoDeConta
+          irParaLogin={alternarEntreLoginECriacaoDeConta}
+        />
+      }
     </ContainerLogin>
   );
 };
@@ -33,7 +35,7 @@ const ContainerLogin = styled.section`
   padding: 24px;
   background: #000;
   border-radius: 8px;
-  margin: 48px 16px;
+  margin: 48px auto;
   width: 100%;
   max-width: 480px;
 `;

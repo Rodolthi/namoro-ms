@@ -4,14 +4,16 @@ import { TextField, Button } from "@material-ui/core";
 import Icone from "../../components/icone";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
-  
+
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
+  const router = useRouter()
+
   const logar = (user) => {
-    //TODO: Validar usuário
-    data.link = "/portal/inicio/";
+    router.push("/portal/inicio")
   };
 
   const { register, formState: { errors }, handleSubmit } = useForm();

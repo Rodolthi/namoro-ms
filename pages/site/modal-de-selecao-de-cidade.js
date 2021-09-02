@@ -25,7 +25,7 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
 
   const body = (
     <CorpoModal>
-      <Logo src="logo.svg" />
+      <Logo src="/logo.svg" />
       <Label>Escolha a cidade:</Label>
       <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade("campogrande")}>Campo Grande</Button>
       <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade("sidrolandia")}>Sidrolândia</Button>

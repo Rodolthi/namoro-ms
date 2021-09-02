@@ -7,7 +7,7 @@ const Cabecalho = () => {
   return (
     <CabecalhoDoPortal>
       <LogoDoCabecalho href="/portal/inicio/">
-        <img className="logo" src="logo.svg" />
+        <Logo src="/logo.svg" />
       </LogoDoCabecalho>
 
       <Icone nome="account_circle" />
@@ -32,7 +32,8 @@ const LogoDoCabecalho = styled(Link)`
   &:focus {
     opacity: 0.7;
   }
-  .logo {
-    height: 100%;
-  }
 `;
+
+const Logo = styled.img`
+  height: 100%;
+`

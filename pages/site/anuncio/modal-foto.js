@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
-import Icone from '../../icone';
+import Icone from '../../components/icone';
 
 const ModalFoto = ({ setAberto, imagem, setImagem, aberto, galeria }) => {
   const avancarFoto = (e, imagem) => {
@@ -69,6 +69,7 @@ const Imagem = styled.div`
       height: auto;
       width: 90vw;
       max-width: 800px;
+      object-fit: cover;
     }
   }
 `

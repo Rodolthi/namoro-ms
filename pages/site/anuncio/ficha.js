@@ -1,13 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-import Icone from '../../icone';
+import Icone from '../../components/icone';
 import Telefone from './telefone';
 
 const Ficha = () => {
   return (
     <ContainerFicha>
       <Foto>
-        <img src="exemple1.jpg" />
+        <img src="/exemple1.jpg" />
       </Foto>
       <Nome>Alessandra Loira Bonita</Nome>
       <Nome>22 Anos</Nome>

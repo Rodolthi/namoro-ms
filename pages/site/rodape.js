@@ -15,7 +15,7 @@ Termos de um site que fornecem apenas informações.
 const Rodape = () => {
   return (
     <RodapeContainer>
-      <img className="logo" src="logo.svg" />
+      <img className="logo" src="/logo.svg" />
       <p className="texto">{termosDeUso}</p>
     </RodapeContainer>
   )
