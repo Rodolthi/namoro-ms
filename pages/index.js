@@ -1,19 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Portal from "./components/portal";
-import { ThemeProvider } from "@material-ui/styles";
-import configuracaoDoTema from "./tema";
-import SiteNamoros from "./components/siteNamoros";
 import React from "react";
-import styled from "styled-components";
-import { Switch, Route } from "react-router";
 
-export default function Home() {
-  const estaEmAlgumaPaginaDoPortal = () => {
-    const palavrasDoLink = location.pathname;
-    return palavrasDoLink.some((palavra) => palavra === "portal");
-  };
-
+const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -29,24 +18,8 @@ export default function Home() {
         />
         <html lang="pt-br" />
       </Head>
-
-      <ThemeProvider theme={configuracaoDoTema}>
-        <Main>
-          <Switch>
-            <Route path={estaEmAlgumaPaginaDoPortal()}>
-              <Portal />
-            </Route>
-            <Route path={!estaEmAlgumaPaginaDoPortal()}>
-              <SiteNamoros />
-            </Route>
-          </Switch>
-        </Main>
-      </ThemeProvider>
     </div>
   );
 }
 
-const Main = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+export default Home

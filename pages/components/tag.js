@@ -7,7 +7,7 @@ const Tag = ({ children, sucesso }) => {
   );
 };
 
-export default Tag;
+export default Tag
 
 const TagLabel = styled.label`
   padding: 4px 16px;

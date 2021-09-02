@@ -4,4 +4,4 @@ const Icone = ({ nome }) => {
   return <span className="material-icons-round">{nome}</span>;
 };
 
-export default Icone;
+export default Icone
