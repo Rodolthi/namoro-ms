@@ -67,7 +67,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
           valor="mulher"
         >
           <MenuItem value="mulher">Mulher</MenuItem>
-          <MenuItem value="homens">Homem</MenuItem>
+          <MenuItem value="homen">Homem</MenuItem>
           <MenuItem value="travesti">Travesti</MenuItem>
         </Select>
       </FormControl>
@@ -220,9 +220,9 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
           variant="outlined"
           fullWidth
           type="time"
-          helperText={errors.comecaoAtender?.message}
-          error={errors?.comecaoAtender}
-          {...register("comecaoAtender", { required: "Obrigatório" })}
+          helperText={errors.comecaAtender?.message}
+          error={errors?.comecaAtender}
+          {...register("comecaAtender", { required: "Obrigatório" })}
           InputLabelProps={{
             shrink: true,
           }}
