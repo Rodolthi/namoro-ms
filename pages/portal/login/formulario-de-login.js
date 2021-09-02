@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { TextField, Button } from "@material-ui/core";
-import Icone from "../../components/icone";
+import Icone from "../../../components/icone";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";

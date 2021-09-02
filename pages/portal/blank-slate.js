@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import Icone from "../components/icone";
+import Icone from "../../components/icone";
 
 const BlankSlate = ({ texto, iconeBotao, textoBotao, acaoDoBotao }) => {
   return (

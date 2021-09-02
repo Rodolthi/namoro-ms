@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import Icone from '../../components/icone';
+import Icone from '../../../components/icone';
 import Telefone from './telefone';
 
 const Ficha = () => {

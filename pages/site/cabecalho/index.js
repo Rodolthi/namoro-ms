@@ -5,7 +5,7 @@ import Link from "next/link"
 import ModalDeSelecaoDeCidade from "../modal-de-selecao-de-cidade"
 import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
-import Icone from "../../components/icone"
+import Icone from "../../../components/icone"
 
 const Cabecalho = () => {
   const [cidadeSelecionada, setCidadeSelecionada] = useState("")

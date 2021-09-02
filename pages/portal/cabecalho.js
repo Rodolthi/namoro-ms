@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import Icone from "../components/icone";
+import Icone from "../../components/icone";
 
 const Cabecalho = () => {
   return (

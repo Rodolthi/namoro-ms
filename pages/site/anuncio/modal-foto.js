@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
-import Icone from '../../components/icone';
+import Icone from '../../../components/icone';
 
 const ModalFoto = ({ setAberto, imagem, setImagem, aberto, galeria }) => {
   const avancarFoto = (e, imagem) => {
