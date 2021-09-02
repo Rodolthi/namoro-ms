@@ -5,16 +5,16 @@ import React from "react"
 import styled from "styled-components"
 
 const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
-  const [open, setOpen] = useState(false);;
+  const [open, setOpen] = useState(false);
 
   const abrirModal = () => {
     setOpen(true);
-    // document.getElementById("root").style.filter = 'blur(8px)';
   };
 
   const fecharModal = () => {
+    const elementoRaiz = document.getElementById("__next")
     setOpen(false)
-    // document.getElementById("root").style.filter = 'blur(0)';
+    elementoRaiz.style.filter = "blur(0px)"
   }
 
   const escolherCidade = (cidade) => {
@@ -34,7 +34,11 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   );
 
   useEffect(() => {
-    !sessionStorage.getItem("cidadeSelecionada") && abrirModal()
+    const elementoRaiz = document.getElementById("__next")
+    if (!sessionStorage.getItem("cidadeSelecionada")) {
+      abrirModal();
+      elementoRaiz.style.filter = "blur(16px)"
+    }
   }, []);
 
   return (

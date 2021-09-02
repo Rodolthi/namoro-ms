@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Icone from "../../components/icone";
+import { useRouter } from "next/router";
 
 const Cabecalho = () => {
+  const router = useRouter()
+
   return (
     <CabecalhoDoPortal>
-      <LogoDoCabecalho href="/portal/inicio/">
-        <Logo src="/logo.svg" />
-      </LogoDoCabecalho>
+      <Logo onClick={() => router.push("/portal/inicio")} src="/logo.svg" />
 
       <Icone nome="account_circle" />
     </CabecalhoDoPortal>
@@ -26,14 +27,7 @@ const CabecalhoDoPortal = styled.header`
   background-color: #000;
 `;
 
-const LogoDoCabecalho = styled(Link)`
-  height: 100%;
-  &:hover,
-  &:focus {
-    opacity: 0.7;
-  }
-`;
-
 const Logo = styled.img`
   height: 100%;
+  cursor: pointer;
 `

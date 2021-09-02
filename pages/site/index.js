@@ -7,9 +7,7 @@ import Rodape from "./rodape"
 const SiteNamoros = () => {
   return (
     <Site>
-      <Cabecalho />
       <ListaDeAnuncios />
-      <Rodape />
     </Site>
   )
 }

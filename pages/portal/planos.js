@@ -28,7 +28,7 @@ const Planos = () => {
               <Conteudo>
                 <Descricao>{plano.dias} dias de anúncio</Descricao>
                 <Preco>R${plano.preco}</Preco>
-                <Link href="/portal/anunciar/">
+                <Link href="/portal/formulario-para-anuncio/">
                   <Button
                     fullWidth
                     size="large"
@@ -51,7 +51,7 @@ const Planos = () => {
 const ContainerFormulario = styled.div`
   background: #000;
   padding: 24px;
-  margin: 40px 16px;
+  margin: 40px auto;
   max-width: 720px;
   border-radius: 8px;
   color: #fff;

@@ -7,6 +7,7 @@ import { Button } from "@material-ui/core";
 import Icone from "../../../components/icone";
 import InformacoesDoAnuncio from "./informacoes-do-anuncio";
 import UploadDeImagens from "./upload-de-imagens";
+import { useRouter } from "next/router";
 
 const etapas = [
   {
@@ -31,40 +32,54 @@ const FormularioParaAnuncio = () => {
   const [imagensGaleria, setImagensGaleria] = useState([]);
   const [imagemPrincipal, setImagemPrincipal] = useState([]);
   const [etapaSelecionada, setEtapaSelecionada] = useState(0);
+  const [dadosPessoais, setDadosPessoais] = useState({})
+
+  const router = useRouter()
+
   const avancarEtapa = () => {
     setEtapaSelecionada(etapaSelecionada + 1);
   };
+
   const voltarEtapa = () => {
     setEtapaSelecionada(etapaSelecionada - 1);
   };
+
   const finalizarCadastro = () => {
     alert("Cadastro Finalizado com sucesso");
-    history.push("/portal/inicio/");
+    router.push("/portal/inicio/");
   };
-  const [dadosPessoais, setDadosPessoais] = useState({})
 
   return (
     <ContainerFormulario>
+
       <Etapas
         etapas={etapas}
         etapaSelecionada={etapaSelecionada}
         setarEtapa={setEtapaSelecionada}
       />
 
-      <DadosPessoais
-        dadosPessoais={dadosPessoais}
-        setDadosPessoais={setDadosPessoais}
-      />
+      {etapaSelecionada === 0 &&
+        <DadosPessoais
+          dadosPessoais={dadosPessoais}
+          setDadosPessoais={setDadosPessoais}
+        />
+      }
 
-      <InformacoesDoAnuncio />
+      {etapaSelecionada === 1 &&
+        <InformacoesDoAnuncio />
+      }
 
-      <UploadDeImagens imagensGaleria={imagensGaleria}
-        setImagemPrincipal={setImagemPrincipal}
-        setImagensGaleria={setImagensGaleria}
-        imagemPrincipal={imagemPrincipal}
-      />
+      {etapaSelecionada === 2 &&
+        <UploadDeImagens imagensGaleria={imagensGaleria}
+          setImagemPrincipal={setImagemPrincipal}
+          setImagensGaleria={setImagensGaleria}
+          imagemPrincipal={imagemPrincipal}
+        />
+      }
 
-      <div>Etapa 4</div>
+      {etapaSelecionada === 3 &&
+        <div>Etapa 4</div>
+      }
 
       <ContainerBotoes>
         {etapaSelecionada > 0 && (
@@ -111,7 +126,7 @@ const ContainerFormulario = styled.div`
   align-items: center;
   max-width: 720px;
   width: 100%;
-  margin: 40px 16px;
+  margin: 40px auto;
   background-color: #000;
   padding: 24px;
   border-radius: 16px;

@@ -59,7 +59,7 @@ const Container = styled.section`
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  margin: 40px 16px;
+  margin: 40px auto;
 `;
 
 const Titulo = styled.h1`

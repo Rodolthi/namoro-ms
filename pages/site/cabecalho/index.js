@@ -1,4 +1,4 @@
-import { Button, FormControl, IconButton, InputLabel, makeStyles, MenuItem, Select } from "@material-ui/core"
+import { Button, FormControl, IconButton, InputLabel, MenuItem, Select } from "@material-ui/core"
 import React from "react"
 import styled from "styled-components"
 import Link from "next/link"
@@ -6,11 +6,14 @@ import ModalDeSelecaoDeCidade from "../modal-de-selecao-de-cidade"
 import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
 import Icone from "../../../components/icone"
+import { useRouter } from "next/router"
 
 const Cabecalho = () => {
   const [cidadeSelecionada, setCidadeSelecionada] = useState("")
   const [acompanhante, setAcompanhante] = useState("mulher")
   const [menuAberto, setMenuAberto] = useState(false)
+
+  const router = useRouter();
 
   useEffect(() => {
     sessionStorage.getItem('cidadeSelecionada') && setCidadeSelecionada(sessionStorage.getItem('cidadeSelecionada'))
@@ -78,7 +81,7 @@ const Cabecalho = () => {
         <ModalDeSelecaoDeCidade setCidadeSelecionada={setCidadeSelecionada} />
 
         <Container>
-          <Logo src="/logo.svg" />
+          <Logo onClick={() => router.push("/")} src="/logo.svg" tabIndex="0" />
 
           <Acoes>
             {acoesParaUsuario()}
@@ -99,6 +102,7 @@ export default Cabecalho
 
 const Logo = styled.img`
   width: 200px;
+  cursor: pointer;
 `
 
 const Container = styled.div`
