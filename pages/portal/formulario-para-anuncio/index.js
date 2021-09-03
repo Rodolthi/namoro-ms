@@ -134,7 +134,9 @@ const ContainerFormulario = styled.div`
 
 const ContainerBotoes = styled.div`
   display: flex;
-  gap: 16px;
+  .MuiButton--root {
+    margin: 12px;
+  }
 `;
 
 export default FormularioParaAnuncio

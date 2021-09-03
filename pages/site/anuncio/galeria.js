@@ -72,7 +72,6 @@ const ContainerGaleria = styled.div`
   inset -16px 0 48px rgba(0,0,0,.9);
   display: flex;
   justify-content: center;
-  gap: 8px;
 `
 
 const GaleriaScroll = styled.div`
@@ -86,11 +85,15 @@ const Coluna = styled.div`
   min-width: calc(33.33% - 16px);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  margin-right: 8px;
+  &:last-child {
+    margin-right: 0;
+  }
   img {
     height: auto;
     width: 100%;
     cursor: pointer;
+    margin-bottom: 8px;
     &:hover,&:focus {
       opacity: 0.8;
     }

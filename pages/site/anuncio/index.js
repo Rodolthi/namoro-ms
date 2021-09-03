@@ -20,7 +20,6 @@ export default Anuncio
 
 const ContainerAnuncio = styled.section`
   display: flex;
-  gap: 16px;
   width: 100%;
   max-width: 1366px;
   margin: 0 auto;
@@ -29,8 +28,13 @@ const ContainerAnuncio = styled.section`
     flex-direction: column;
     max-width: auto;
   }
-`
+  `
 
 const Conteudo = styled.div`
   width: 100%;
-`
+  margin-left: 16px;
+  @media screen and (max-width: 640px) {
+  margin-right: 0;
+  margin-top: 16px; 
+}
+  `

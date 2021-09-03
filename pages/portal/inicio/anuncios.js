@@ -32,7 +32,6 @@ const ListaDeAnuncios = styled.ul`
   display: flex;
   list-style: none;
   padding: 0;
-  gap: 24px;
   flex-wrap: wrap;
   justify-content: center;
 `;
@@ -46,6 +45,7 @@ const Item = styled.li`
   border-radius: 8px;
   max-width: 240px;
   width: 100%;
+  margin: 16px;
 `;
 
 const Texto = styled.p`

@@ -61,14 +61,18 @@ const Imagem = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: hidden;
+  background-color: red;
+  height: 90vh;
+  max-width: 90vw;
+  width: auto;
+  border-radius: 8px;
+  @media screen and (max-width: 1366px) {
+    height: 70vh;
+  }
   img {
-    border-radius: 8px;
-    height: 80vh;
+    height: 100%;
+    object-fit: cover;
     @media screen and (max-width: 1366px) {
-      max-height: auto;
-      height: auto;
-      width: 90vw;
-      max-width: 800px;
       object-fit: cover;
     }
   }

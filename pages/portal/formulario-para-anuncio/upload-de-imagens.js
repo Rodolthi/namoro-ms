@@ -94,7 +94,6 @@ const ImagensParaGaleria = styled.div`
   grid-auto-rows: min-content;
   width: 100%;
   flex-wrap: wrap;
-  gap: 16px;
   margin: 24px 0;
 `;
 
@@ -132,7 +131,7 @@ const BotaoDeUpload = styled.label`
 const ContainerImagem = styled.div`
   position: relative;
   max-width: 320px;
-  margin-top: 16px;
+  margin: 16px;
 `;
 
 const BotaoExcluirImagem = styled.button`

@@ -336,7 +336,6 @@ const Titulo = styled.h2`
 const Row = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
   min-height: 56px;
   margin-bottom: 16px;
   .MuiFormControl-root {

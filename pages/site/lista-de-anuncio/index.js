@@ -43,8 +43,7 @@ const ListaDeAnuncios = () => {
 export default ListaDeAnuncios
 
 const Lista = styled.ul`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
   justify-content: center;
   list-style: none;
   min-height: 60vh;
@@ -52,7 +51,6 @@ const Lista = styled.ul`
   margin: 0 auto;
   width: 100%;
   max-width: 1240px;
-  gap: 24px;
   flex-wrap: wrap;
 `
 
@@ -69,6 +67,7 @@ const Item = styled.div`
   transition: ease .2s;
   cursor: pointer;
   overflow: hidden;
+  margin: 12px;
   &:hover,&:focus{
     transform: translate(0, -3px);
     background-color: green;
