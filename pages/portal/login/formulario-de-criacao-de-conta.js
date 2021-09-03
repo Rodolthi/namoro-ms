@@ -7,7 +7,7 @@ import {
   FormGroup,
   FormControlLabel,
 } from "@material-ui/core";
-import Icone from "../../../components/icone";
+import Icone from "components/icone";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
 import lerURI from "../formulario-para-anuncio/lerURI";

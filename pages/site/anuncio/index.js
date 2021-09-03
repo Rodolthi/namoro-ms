@@ -34,7 +34,7 @@ const Conteudo = styled.div`
   width: 100%;
   margin-left: 16px;
   @media screen and (max-width: 640px) {
-  margin-right: 0;
+  margin-left: 0;
   margin-top: 16px; 
 }
   `

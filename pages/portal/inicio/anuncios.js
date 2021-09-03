@@ -1,5 +1,5 @@
 import React from "react"; import styled from "styled-components";
-import Tag from "../../../components/tag";
+import Tag from "components/tag";
 
 const Anuncios = ({ anuncios }) => {
   return (

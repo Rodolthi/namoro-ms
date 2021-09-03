@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import Icone from "../../../components/icone";
+import Icone from "components/icone";
 import BlankSlate from "../blank-slate";
 import Anuncios from "./anuncios";
 

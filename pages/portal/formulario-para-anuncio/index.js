@@ -4,7 +4,7 @@ import Etapas from "./etapas";
 import { useState } from "react";
 import DadosPessoais from "./dados-pessoais";
 import { Button } from "@material-ui/core";
-import Icone from "../../../components/icone";
+import Icone from "components/icone";
 import InformacoesDoAnuncio from "./informacoes-do-anuncio";
 import UploadDeImagens from "./upload-de-imagens";
 import { useRouter } from "next/router";
