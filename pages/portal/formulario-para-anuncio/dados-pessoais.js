@@ -77,7 +77,6 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
           {...register("sexo", { required: true })}
           labelId="sexo-label"
           id="sexo"
-          valor="mulher"
         >
           <MenuItem value="mulher">Mulher</MenuItem>
           <MenuItem value="homen">Homem</MenuItem>
