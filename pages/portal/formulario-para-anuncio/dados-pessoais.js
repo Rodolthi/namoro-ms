@@ -45,7 +45,6 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
 
   const combinarValorDoPrograma = () => {
     const campoDeValor = document.getElementById("valor-do-programa");
-
     if (!combinarValor) campoDeValor.value = undefined;
     setCombinarValor(!combinarValor)
   }
@@ -180,9 +179,9 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
           type="number"
           id="valor-do-programa"
           disabled={combinarValor}
-          error={errors?.valor}
-          {...register("valor", { required: "Insira um valor" })}
-          helperText={errors.valor?.message}
+          error={errors?.valorDoPrograma}
+          {...register("valorDoPrograma", { required: "Insira um valor" })}
+          helperText={errors.valorDoPrograma?.message}
         />
 
         <FormControl fullWidth component="fieldset">
