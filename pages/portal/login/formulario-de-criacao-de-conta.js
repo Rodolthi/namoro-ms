@@ -198,7 +198,10 @@ const BotaoDeCriarUsuario = styled(Button)`
 `;
 
 const ImagemDocumento = styled.img`
-  height: 400px;
+  height: auto;
+  width: 80%;
+  object-fit: cover;
+  margin: 0 auto;
 `;
 
 const Documentos = styled.div`

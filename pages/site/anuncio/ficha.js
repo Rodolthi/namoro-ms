@@ -11,7 +11,6 @@ const Ficha = () => {
       </Foto>
       <Nome>Alessandra Loira Bonita</Nome>
       <Nome>22 Anos</Nome>
-      <Telefone pequeno={true} numero="(56) 99999-9990" />
 
       <TituloItem>Atendo:</TituloItem>
       <ItemFicha><Icone nome="male" /> Homem</ItemFicha>

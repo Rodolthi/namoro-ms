@@ -1,6 +1,7 @@
+import { Button, Link } from "@material-ui/core"
+import Icone from "components/icone"
 import React from "react"
 import styled from "styled-components"
-import Telefone from "./telefone"
 
 const telefone = "(67) 99999-8383"
 const descricaoDoAnuncio = "Descrição completa do anúncio aqui nessa.  completa do anúncio aqui nessa. página. Descrição completa do anúncio aqui nessa página. Descrição completa do anúncio aqui nessa página.Descrição completa do anúncio aqui nessa página."
@@ -13,7 +14,18 @@ const Descricao = () => {
       </Texto>
 
       <Contato>
-        <Telefone numero={telefone} />
+        <Link style={{ width: '100%' }} href={`https://api.whatsapp.com/send?phone=${telefone}`}>
+          <LinkWhats variant="contained" color="primary" size="large">
+            <img src="/whatsappp-logo.svg" />
+            {telefone}
+          </LinkWhats>
+        </Link>
+
+        <Link style={{ width: '100%' }} href={`tel:${telefone}`}>
+          <LinkTelefone variant="outlined" color="primary" size="large" startIcon={<Icone nome="call" />}>
+            {telefone}
+          </LinkTelefone>
+        </Link>
         <Detalhes>Com local</Detalhes>
         <Detalhes>Campo Grande/MS</Detalhes>
       </Contato>
@@ -59,3 +71,23 @@ const Detalhes = styled.p`
   font-size: 20px;
 `
 
+const LinkWhats = styled(Button)`
+  color: black !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  margin-bottom: 16px !important;
+  width: 100% !important;
+  img {
+    height: 32px;
+    margin-right: 8px;
+  }
+`
+
+const LinkTelefone = styled(Button)`
+  color: black !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  margin-bottom: 16px !important;
+  color: #FAC045 !important;
+  width: 100% !important;
+`
