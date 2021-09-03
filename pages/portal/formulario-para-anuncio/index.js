@@ -40,10 +40,6 @@ const FormularioParaAnuncio = () => {
     setEtapaSelecionada(etapaSelecionada + 1);
   };
 
-  const voltarEtapa = () => {
-    setEtapaSelecionada(etapaSelecionada - 1);
-  };
-
   const finalizarCadastro = () => {
     alert("Cadastro Finalizado com sucesso");
     router.push("/portal/inicio/");
@@ -82,17 +78,6 @@ const FormularioParaAnuncio = () => {
       }
 
       <ContainerBotoes>
-        {etapaSelecionada > 0 && (
-          <Button
-            onClick={voltarEtapa}
-            variant="outlined"
-            size="large"
-            color="primary"
-            startIcon={<Icone nome="navigate_before" />}
-          >
-            Etapa anterior
-          </Button>
-        )}
         {etapaSelecionada <= etapas.length - 2 && (
           <Button
             onClick={avancarEtapa}
@@ -134,6 +119,8 @@ const ContainerFormulario = styled.div`
 
 const ContainerBotoes = styled.div`
   display: flex;
+  width: 100%;
+  justify-content: flex-end;
   .MuiButton--root {
     margin: 12px;
   }

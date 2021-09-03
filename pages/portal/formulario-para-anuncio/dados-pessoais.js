@@ -106,6 +106,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
 
       <Row>
         <TextField
+          className="u-margem"
           autoComplete="off"
           label="Telefone"
           variant="outlined"
@@ -172,6 +173,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
         <Label>Valor do programa:</Label>
 
         <TextField
+          className="u-margem"
           autoComplete="off"
           label="Valor"
           variant="outlined"
@@ -254,6 +256,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
 
       <Row>
         <TextField
+          className="u-margem"
           autoComplete="off"
           label="Começa a atender que horas?"
           variant="outlined"
@@ -287,7 +290,6 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
           }}
         />
       </Row>
-
 
       <FormControl
         error={errors?.aceitaCartao}
@@ -338,12 +340,25 @@ const Row = styled.div`
   align-items: center;
   min-height: 56px;
   margin-bottom: 16px;
-  .MuiFormControl-root {
-    margin-bottom: 0;
+  @media screen and (min-width: 1000px) {
+    .MuiFormControl-root {
+      margin-bottom: 0;
+    }
+    .u-margem {
+      margin-right: 16px;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    .margem {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
   }
 `;
 
 const Label = styled.label`
   color: #fff;
+  margin-right: 8px;
   white-space: nowrap;
 `
