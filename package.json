@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:10004",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,6 +11,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
+    "axios": "^0.21.1",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",

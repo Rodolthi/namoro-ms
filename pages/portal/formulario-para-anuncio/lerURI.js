@@ -7,7 +7,7 @@ const lerURI = (e) => {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.addEventListener("load", (ev) => {
-            resolve(ev.target.result);
+            resolve({result: ev.target.result, files: e.target.files[0]});
           });
           reader.addEventListener("error", reject);
           reader.readAsDataURL(file);

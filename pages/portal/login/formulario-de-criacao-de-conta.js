@@ -9,16 +9,31 @@ import {
 } from "@material-ui/core";
 import Icone from "../../../components/icone";
 import Checkbox from "@material-ui/core/Checkbox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import lerURI from "../formulario-para-anuncio/lerURI";
 import { useForm } from "react-hook-form";
+import {postUsuario} from '../../api/controllers/criacao-conta';
 
 const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
-  const criarConta = () => alert("Criando");
+  const criarConta = async (e) => {
+    const form = new FormData();
+    form.append('nome', e.usuario);
+    form.append('email', e.novoEmail);
+    form.append('senha', e.senha);
+    form.append('documentoFrente', documentoFrente[0].files);
+    form.append('documentoVerso', documentoVerso[0].files);
+    form.append('perfilComDocumento', perfilComDocumento[0].files);
+
+    console.log('formData: ', form);
+
+    const data = await postUsuario(form);
+    console.log('post Usuario: ', data);
+    
+  }
   const [ehMaiorDeIdade, setEhMaiorDeIdade] = useState(false);
-  const [documentoFrente, setDocumentoFrente] = useState()
-  const [documentoVerso, setDocumentoVerso] = useState()
-  const [perfilComDocumento, setPerfilComDocumento] = useState()
+  const [documentoFrente, setDocumentoFrente] = useState();
+  const [documentoVerso, setDocumentoVerso] = useState();
+  const [perfilComDocumento, setPerfilComDocumento] = useState();
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   const formularioValido = () => ehMaiorDeIdade && documentoFrente && perfilComDocumento && perfilComDocumento;
@@ -31,7 +46,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
 
   const handleDocumentoFrente = (e) => {
     lerURI(e).then((imagem) => {
-      setDocumentoFrente(imagem)
+      setDocumentoFrente(imagem);      
     })
   }
 
@@ -46,6 +61,21 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
       setPerfilComDocumento(imagem)
     })
   }
+
+  // useEffect(() => {
+  //   (async() => {
+  //     const data = await postUsuario({
+  //       "email":"conta3@gmail.com",
+  //       "senha":"senha123",
+  //       "nome": "Conta3"
+  //     })
+  //     console.log('post Usuario: ', data);
+  //   })()
+  // },[])
+
+  useEffect(() => {
+    console.log('documentoFrente: ', documentoFrente);
+  },[documentoFrente])
 
 
 
@@ -109,7 +139,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
           name="documento-frente"
           accept="image/png, image/jpeg"
           onChange={(e) => handleDocumentoFrente(e)} />
-        {documentoFrente && <ImagemDocumento src={documentoFrente} />}
+        {documentoFrente && <ImagemDocumento src={documentoFrente[0].result} />}
 
         <label tabIndex="0" htmlFor="documento-verso">
           <Icone nome="assignment_turned_in" />
@@ -122,7 +152,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
           accept="image/png, image/jpeg"
           onChange={(e) => handleDocumentoVerso(e)}
         />
-        {documentoVerso && <ImagemDocumento src={documentoVerso} />}
+        {documentoVerso && <ImagemDocumento src={documentoVerso[0].result} />}
 
         <label tabIndex="0" htmlFor="foto-do-rosto">
           <Icone nome="person" />
@@ -136,7 +166,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
           accept="image/png, image/jpeg"
           onChange={(e) => handlePerfilComDocumento(e)}
         />
-        {perfilComDocumento && <ImagemDocumento src={perfilComDocumento} />}
+        {perfilComDocumento && <ImagemDocumento src={perfilComDocumento[0].result} />}
       </Documentos>
 
       <FormControl component="fieldset">
