@@ -3,6 +3,7 @@ import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
 import React from "react"
 import styled from "styled-components"
+import { eventoGA } from 'utils/analytics';
 
 const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,12 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   const escolherCidade = (cidade) => {
     sessionStorage.setItem("cidadeSelecionada", cidade)
     setCidadeSelecionada(cidade)
+    eventoGA({
+      action: "Selecionar cidade",
+      params: {
+        search_term: `Cidade selecionada: ${cidade}`
+      }
+    })
     fecharModal();
   };
 

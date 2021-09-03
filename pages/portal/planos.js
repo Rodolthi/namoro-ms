@@ -55,6 +55,9 @@ const ContainerFormulario = styled.div`
   max-width: 720px;
   border-radius: 8px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const Titulo = styled.h2`
   font-size: 24px;
@@ -81,6 +84,7 @@ const ItemPlano = styled.div`
   background-color: #333;
   display: flex;
   flex-direction: column;
+  margin: 16px;
 `;
 
 const Cabecalho = styled.div`
@@ -101,7 +105,6 @@ const Conteudo = styled.div`
 
 const ListaDePlanos = styled.div`
   display: flex;
-  gap: 16px;
   justify-content: center;
   padding: 24px 0;
   @media screen and (max-width: 800px) {

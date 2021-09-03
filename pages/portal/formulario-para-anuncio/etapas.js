@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Icone from "../../../components/icone";
+import Icone from "components/icone";
 
 const Etapas = ({ etapas, setarEtapa, etapaSelecionada }) => {
   const handleChange = (indexDaEtapa) => {
@@ -37,7 +37,6 @@ const ListaDeEtapas = styled.ul`
   padding: 0;
   list-style: none;
   display: flex;
-  gap: 16px;
 `;
 
 const Etapa = styled.button`
@@ -52,6 +51,7 @@ const Etapa = styled.button`
   cursor: pointer;
   color: white;
   font-size: 16px;
+  margin: 8px;
   &.etapaAtiva {
     border-color: #eee400;
     pointer-events: none;

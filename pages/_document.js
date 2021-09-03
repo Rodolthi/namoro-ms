@@ -4,13 +4,10 @@ import { ServerStyleSheet } from 'styled-components';
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
-
     const page = renderPage((App) => (props) =>
       sheet.collectStyles(<App {...props} />),
     );
-
     const styleTags = sheet.getStyleElement();
-
     return { ...page, styleTags };
   }
 
@@ -27,6 +24,19 @@ export default class MyDocument extends Document {
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
             rel="stylesheet"
+          />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-WJKB28TYTJ" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', ${process.env.ID_GA}, {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
           />
         </Head>
 

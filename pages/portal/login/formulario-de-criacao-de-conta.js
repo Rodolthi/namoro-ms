@@ -7,7 +7,7 @@ import {
   FormGroup,
   FormControlLabel,
 } from "@material-ui/core";
-import Icone from "../../../components/icone";
+import Icone from "components/icone";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useState, useEffect } from "react";
 import lerURI from "../formulario-para-anuncio/lerURI";
@@ -24,10 +24,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
     form.append('documentoVerso', documentoVerso[0].files);
     form.append('perfilComDocumento', perfilComDocumento[0].files);
 
-    console.log('formData: ', form);
-
     const data = await postUsuario(form);
-    console.log('post Usuario: ', data);
     
   }
   const [ehMaiorDeIdade, setEhMaiorDeIdade] = useState(false);
@@ -61,23 +58,6 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
       setPerfilComDocumento(imagem)
     })
   }
-
-  // useEffect(() => {
-  //   (async() => {
-  //     const data = await postUsuario({
-  //       "email":"conta3@gmail.com",
-  //       "senha":"senha123",
-  //       "nome": "Conta3"
-  //     })
-  //     console.log('post Usuario: ', data);
-  //   })()
-  // },[])
-
-  useEffect(() => {
-    console.log('documentoFrente: ', documentoFrente);
-  },[documentoFrente])
-
-
 
   return (
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(criarConta)}>

@@ -1,15 +1,23 @@
 import { TextField } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import maximoDeCaracteres from "./maximo-de-caracteres";
+import { useForm } from "react-hook-form";
 
 const InformacoesDoAnuncio = () => {
+  const { register, getValues, formState: { errors }, handleSubmit } = useForm();
+
+  const proximaEtapa = () => {
+  }
+
   return (
-    <Formulario noValidate autoComplete="off">
+    <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(proximaEtapa)} >
       <Titulo>Descrição do anúncio</Titulo>
       <TextField
+        {...register("descricao", { required: "É obrigatório inserir a descrição" })}
         label="Descrição do anúncio"
         multiline
+        error={errors?.descricao}
+        helperText={errors?.message}
         rows={4}
         variant="outlined"
         fullWidth

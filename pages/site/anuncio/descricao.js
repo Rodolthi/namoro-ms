@@ -26,7 +26,6 @@ export default Descricao
 const ContainerDescricao = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
   margin-top: 16px;
   padding: 24px;
   border: 2px solid #FAC045;
@@ -43,6 +42,8 @@ const Texto = styled.p`
   margin: 0;
   font-size: 18px;
   line-height: 24px;
+  margin-right: 16px;
+  margin-bottom: 16px;
 `
 
 const Contato = styled.div`

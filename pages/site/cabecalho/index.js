@@ -5,7 +5,7 @@ import Link from "next/link"
 import ModalDeSelecaoDeCidade from "../modal-de-selecao-de-cidade"
 import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
-import Icone from "../../../components/icone"
+import Icone from "components/icone"
 import { useRouter } from "next/router"
 
 const Cabecalho = () => {
@@ -117,8 +117,10 @@ const Container = styled.div`
 
 const Acoes = styled.div`
   display: flex;
-  gap: 12px;
   align-items: center;
+  .MuiFormControl-root {
+    margin-right: 16px;
+  }
   & ~ .MuiIconButton-root {
     display: none;
   }
@@ -137,8 +139,13 @@ const AcoesMobile = styled.div`
   background-color: black;
   border-radius: 8px;
   align-items: center;
-  gap: 32px;
   padding: 24px;
+  .MuiFormControl-root {
+    margin: 16px 0;
+  }
+  .MuiButton-root {
+    margin-top: 48px;
+  }
 `
 
 const Header = styled.header`
