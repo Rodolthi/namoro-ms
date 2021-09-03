@@ -12,14 +12,17 @@ import {
   Checkbox,
   Button,
 } from "@material-ui/core";
-import React from "react";
+import { Autocomplete } from '@material-ui/lab'
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { obterCidades } from "../../api/cidades";
 
 const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
+  const [combinarValor, setCombinarValor] = useState(false)
   const { register, getValues, formState: { errors }, handleSubmit } = useForm();
-  const [cidades] = useState(["Campo Grande", "Sidrolândia", "Terenos"])
+  const [cidades, setCidades] = useState([]);
 
   const normalizarTelefone = (valor) => {
     let novoValor = valor.replace(/\D/g, '')
@@ -40,6 +43,17 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
     alert("Deu certo")
   }
 
+  const combinarValorDoPrograma = () => {
+    const campoDeValor = document.getElementById("valor-do-programa");
+
+    if (!combinarValor) campoDeValor.value = undefined;
+    setCombinarValor(!combinarValor)
+  }
+
+  useEffect(() => {
+    obterCidades().then(resposta => setCidades(resposta))
+  }, [])
+
   return (
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(avancarEtapa)}>
       <Titulo>Dados do anunciante</Titulo>
@@ -57,12 +71,12 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
       />
 
       <FormControl fullWidth variant="filled">
-        <InputLabel id="cidade-label">Como você se identifica</InputLabel>
+        <InputLabel id="sexo-label">Como você se identifica</InputLabel>
 
         <Select
           error={errors?.sexo}
           {...register("sexo", { required: true })}
-          labelId="cidade-label"
+          labelId="sexo-label"
           id="sexo"
           valor="mulher"
         >
@@ -155,21 +169,47 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
         </FormGroup>
       </FormControl>
 
-      <FormControl fullWidth variant="filled">
-        <InputLabel id="cidade-label">Cidade</InputLabel>
+      <Row>
+        <Label>Valor do programa:</Label>
 
-        <Select
-          error={errors?.cidade}
-          {...register("cidade", { required: true })}
-          labelId="cidade-label"
-          id="cidade"
-          valor={cidades[0]}
-        >
-          {cidades.map((cidade, index) => (
-            <MenuItem key={index} value={cidade}>{cidade}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+        <TextField
+          autoComplete="off"
+          label="Valor"
+          variant="outlined"
+          fullWidth
+          type="number"
+          id="valor-do-programa"
+          disabled={combinarValor}
+          error={errors?.valor}
+          {...register("valor", { required: "Insira um valor" })}
+          helperText={errors.valor?.message}
+        />
+
+        <FormControl fullWidth component="fieldset">
+          <FormGroup row style={{ color: "white" }}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={combinarValor}
+                  color="primary"
+                  {...register("valorACombinar")}
+                  onChange={(e) => combinarValorDoPrograma(e)}
+                />
+              }
+              label="A combinar"
+            />
+          </FormGroup>
+        </FormControl>
+      </Row>
+
+      <Autocomplete
+        id="combo-box-demo"
+        options={cidades}
+        getOptionLabel={(option) => option.nome}
+        fullWidth
+        renderInput={(params) => <TextField error={errors?.cidade}
+          {...register("cidade", { required: true })} {...params} label="Selecione sua cidade" variant="outlined" />}
+      />
 
       <FormControl fullWidth component="fieldset">
         <FormLabel component="legend">Local que atende</FormLabel>
@@ -282,6 +322,7 @@ export default DadosPessoais
 
 const Formulario = styled.form`
   background: #000;
+  width: 100%;
   .MuiTextField-root,
   .MuiFormControl-root {
     margin-bottom: 16px;
@@ -295,6 +336,16 @@ const Titulo = styled.h2`
 
 const Row = styled.div`
   display: flex;
+  align-items: center;
   gap: 16px;
+  min-height: 56px;
+  margin-bottom: 16px;
+  .MuiFormControl-root {
+    margin-bottom: 0;
+  }
 `;
 
+const Label = styled.label`
+  color: #fff;
+  white-space: nowrap;
+`
