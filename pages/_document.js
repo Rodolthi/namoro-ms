@@ -25,6 +25,19 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
             rel="stylesheet"
           />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-WJKB28TYTJ" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', ${process.env.ID_GA}, {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
         </Head>
 
         <body>
