@@ -43,7 +43,8 @@ const ListaDeAnuncios = () => {
 export default ListaDeAnuncios
 
 const Lista = styled.ul`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: center;
   list-style: none;
   min-height: 60vh;

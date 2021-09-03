@@ -23,16 +23,6 @@ const InformacoesDoAnuncio = () => {
         fullWidth
         id="texto-descritivo"
       />
-
-      <Button
-        onClick={avancarEtapa}
-        variant="contained"
-        size="large"
-        color="primary"
-        endIcon={<Icone nome="navigate_next" />}
-      >
-        Próximo
-      </Button>
     </Formulario>
   );
 };
