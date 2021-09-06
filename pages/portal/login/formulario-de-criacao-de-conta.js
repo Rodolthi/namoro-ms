@@ -10,7 +10,7 @@ import {
 import Icone from "components/icone";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
-import lerURI from "../formulario-para-anuncio/lerURI";
+import lerURI from "utils/lerURI";
 import { useForm } from "react-hook-form";
 
 const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {

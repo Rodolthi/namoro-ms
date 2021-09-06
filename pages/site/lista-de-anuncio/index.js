@@ -16,7 +16,7 @@ const ListaDeAnuncios = () => {
 
   return (
     <Lista>
-      {itens.map((item, index) => {
+      {itens?.map((item, index) => {
         return (
           <li key={index}>
             <Item onClick={irParaOAnuncio}>

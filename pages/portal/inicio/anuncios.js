@@ -4,7 +4,7 @@ import Tag from "components/tag";
 const Anuncios = ({ anuncios }) => {
   return (
     <ListaDeAnuncios>
-      {anuncios.map((anuncio, index) => (
+      {anuncios?.map((anuncio, index) => (
         <Item className="lista" key={index}>
           <div>
             <Label>TÍTULO DO ANÚNCIO:</Label>

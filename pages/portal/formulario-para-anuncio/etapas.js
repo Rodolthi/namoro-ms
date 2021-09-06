@@ -9,7 +9,7 @@ const Etapas = ({ etapas, setarEtapa, etapaSelecionada }) => {
 
   return (
     <ListaDeEtapas>
-      {etapas.map((etapa, index) => (
+      {etapas?.map((etapa, index) => (
         <li key={index}>
           <Etapa
             onClick={() => handleChange(index)}

@@ -25,7 +25,7 @@ const Home = () => {
       <Titulo>Meus anúncios</Titulo>
 
       <Content>
-        {anuncios.length && anuncios ? (
+        {anuncios?.length && anuncios ? (
           <Anuncios anuncios={anuncios} />
         ) : (
           <BlankSlate

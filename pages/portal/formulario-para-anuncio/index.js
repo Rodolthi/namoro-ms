@@ -78,7 +78,7 @@ const FormularioParaAnuncio = () => {
       }
 
       <ContainerBotoes>
-        {etapaSelecionada <= etapas.length - 2 && (
+        {etapaSelecionada <= etapas?.length - 2 && (
           <Button
             onClick={avancarEtapa}
             variant="contained"
@@ -89,7 +89,7 @@ const FormularioParaAnuncio = () => {
             Próximo
           </Button>
         )}
-        {etapaSelecionada === etapas.length - 1 && (
+        {etapaSelecionada === etapas?.length - 1 && (
           <Button
             onClick={finalizarCadastro}
             variant="contained"

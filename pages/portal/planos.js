@@ -21,7 +21,7 @@ const Planos = () => {
     <ContainerFormulario>
       <Titulo>Escolha seu plano</Titulo>
       <ListaDePlanos>
-        {planos.map((plano, index) => {
+        {planos?.map((plano, index) => {
           return (
             <ItemPlano key={index}>
               <Cabecalho>Plano {plano.nome}</Cabecalho>

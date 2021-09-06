@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Icone from "components/icone";
-import lerURI from "./lerURI";
+import lerURI from "utils/lerURI";
 
 const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, setImagemPrincipal }) => {
   const handleImages = (e) => {
@@ -36,9 +36,9 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
       <BotaoDeUpload htmlFor="imagens-galeria">
         Selecione as imagens da galeria
       </BotaoDeUpload>
-      {imagensGaleria.length && imagensGaleria ? (
+      {imagensGaleria?.length && imagensGaleria ? (
         <ImagensParaGaleria>
-          {imagensGaleria.map((imagem, index) => {
+          {imagensGaleria?.map((imagem, index) => {
             return (
               <ContainerImagem key={index}>
                 <Imagem src={imagem} />
@@ -65,7 +65,7 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
       <BotaoDeUpload htmlFor="imagem-principal">
         Selecione uma imagem para destaque
       </BotaoDeUpload>
-      {imagemPrincipal.length ? (
+      {imagemPrincipal?.length ? (
         <ContainerImagem>
           <Imagem src={imagemPrincipal[0]} />
         </ContainerImagem>

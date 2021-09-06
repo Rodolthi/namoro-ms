@@ -1,9 +1,9 @@
 const lerURI = (e) => {
-  if (e.target.files) {
-    const files = Array.from(e.target.files);
+  const files = Array.from(e.target?.files);
 
-    return Promise.all(
-      files.map((file) => {
+  e.target?.files &&
+    Promise.all(
+      files?.map((file) => {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.addEventListener("load", (ev) => {
@@ -14,7 +14,6 @@ const lerURI = (e) => {
         });
       })
     );
-  }
 };
 
 export default lerURI;
