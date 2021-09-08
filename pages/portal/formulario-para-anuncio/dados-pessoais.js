@@ -18,6 +18,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { obterCidades } from "api/cidades";
+import { obterDadosDoFormulario, salvarDadosDoFormulario } from "utils/storage";
 
 const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
   const [combinarValor, setCombinarValor] = useState(false)
@@ -36,11 +37,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
   }
 
   const avancarEtapa = () => {
-    setDadosPessoais(getValues())
-
-    console.log("state", JSON.stringify(dadosPessoais))
-    console.log("get", JSON.stringify(getValues()))
-    alert("Deu certo")
+    salvarDadosDoFormulario("dadosPessoais", JSON.stringify(getValues()))
   }
 
   const combinarValorDoPrograma = () => {

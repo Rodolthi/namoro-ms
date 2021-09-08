@@ -2,11 +2,13 @@ import { TextField } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { salvarDadosDoFormulario } from "utils/storage";
 
 const InformacoesDoAnuncio = () => {
   const { register, getValues, formState: { errors }, handleSubmit } = useForm();
 
   const proximaEtapa = () => {
+    salvarDadosDoFormulario("descricaoDoAnuncio", getValues())
   }
 
   return (
@@ -23,6 +25,8 @@ const InformacoesDoAnuncio = () => {
         fullWidth
         id="texto-descritivo"
       />
+
+      <Button color="primary" type="submit">Próxima</Button>
     </Formulario>
   );
 };

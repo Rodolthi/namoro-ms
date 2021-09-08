@@ -72,6 +72,8 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
       ) : (
         ""
       )}
+
+      <Button color="primary" type="submit">Próxima</Button>
     </Formulario>
   );
 };
