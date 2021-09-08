@@ -1,5 +1,7 @@
 export const salvarDadosDoFormulario = (nome, valores) => {
-  sessionStorage.setItem(nome, valores)
+  let dados;
+  dados = JSON.stringify(valores)
+  sessionStorage.setItem(nome, dados)
 }
 
 export const obterDadosDoFormulario = (nomes) => {

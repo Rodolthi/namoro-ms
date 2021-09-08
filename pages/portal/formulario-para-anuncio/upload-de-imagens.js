@@ -2,8 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Icone from "components/icone";
 import lerURI from "utils/lerURI";
+import { salvarDadosDoFormulario } from "utils/storage";
+import Button from "@material-ui/core/Button";
+import { base64 } from "utils/imagem-base-64";
 
 const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, setImagemPrincipal }) => {
+
   const handleImages = (e) => {
     lerURI(e).then((images) => {
       setImagensGaleria(images);
@@ -21,6 +25,11 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
       imagensGaleria.filter((item) => imagensGaleria.indexOf(item) !== index)
     );
   };
+
+  const avancarEtapa = () => {
+    salvarDadosDoFormulario("imagensDaGaleria", imagensGaleria)
+    salvarDadosDoFormulario("imagemPrincipal", imagemPrincipal)
+  }
 
   return (
     <Formulario>
@@ -73,7 +82,7 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
         ""
       )}
 
-      <Button color="primary" type="submit">Próxima</Button>
+      <Button color="primary" type="button" onClick={avancarEtapa}>Avançar</Button>
     </Formulario>
   );
 };

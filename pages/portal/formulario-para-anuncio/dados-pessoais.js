@@ -37,7 +37,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
   }
 
   const avancarEtapa = () => {
-    salvarDadosDoFormulario("dadosPessoais", JSON.stringify(getValues()))
+    salvarDadosDoFormulario("dadosPessoais", getValues())
   }
 
   const combinarValorDoPrograma = () => {
