@@ -166,7 +166,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
       </FormControl>
 
       <Row>
-        F       <FormControl fullWidth component="fieldset">
+        <FormControl fullWidth component="fieldset">
           <FormLabel component="legend">Valor do programa:</FormLabel>
 
           <FormGroup row style={{ color: "white" }}>

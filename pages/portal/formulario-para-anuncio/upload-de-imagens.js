@@ -4,7 +4,6 @@ import Icone from "components/icone";
 import lerURI from "utils/lerURI";
 import { salvarDadosDoFormulario } from "utils/storage";
 import Button from "@material-ui/core/Button";
-import { base64 } from "utils/imagem-base-64";
 
 const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, setImagemPrincipal }) => {
 
@@ -27,8 +26,8 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
   };
 
   const avancarEtapa = () => {
-    salvarDadosDoFormulario("imagensDaGaleria", imagensGaleria)
-    salvarDadosDoFormulario("imagemPrincipal", imagemPrincipal)
+    salvarDadosDoFormulario("imagensDaGaleria", { galeria: imagensGaleria })
+    salvarDadosDoFormulario("imagemPrincipal", { imagemPrincipal: imagemPrincipal })
   }
 
   return (

@@ -8,6 +8,7 @@ import Icone from "components/icone";
 import InformacoesDoAnuncio from "./informacoes-do-anuncio";
 import UploadDeImagens from "./upload-de-imagens";
 import { useRouter } from "next/router";
+import Checkout from "./checkout";
 
 const etapas = [
   {
@@ -74,7 +75,7 @@ const FormularioParaAnuncio = () => {
       }
 
       {etapaSelecionada === 3 &&
-        <div>Etapa 4</div>
+        <Checkout />
       }
 
       <ContainerBotoes>
