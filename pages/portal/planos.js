@@ -5,14 +5,22 @@ import Link from "next/link";
 
 const planos = [
   {
-    nome: "Smart",
-    preco: 40,
+    nome: "30 dias",
+    preco: 100,
     dias: 30,
+    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
   },
   {
-    nome: "Premium",
-    preco: 60,
-    dias: 60,
+    nome: "15 dias",
+    preco: 55,
+    dias: 15,
+    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
+  },
+  {
+    nome: "7 dias",
+    preco: 30,
+    dias: 7,
+    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
   },
 ];
 
@@ -28,6 +36,7 @@ const Planos = () => {
               <Conteudo>
                 <Descricao>{plano.dias} dias de anúncio</Descricao>
                 <Preco>R${plano.preco}</Preco>
+                <Descricao>{plano.descricao}</Descricao>
                 <Link href="/portal/formulario-para-anuncio/">
                   <Button
                     fullWidth
@@ -52,10 +61,12 @@ const ContainerFormulario = styled.div`
   background: #000;
   padding: 24px;
   margin: 40px auto;
-  max-width: 720px;
+  max-width: 1000px;
+  width: calc(100% - 32px);
   border-radius: 8px;
   color: #fff;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
 `;
@@ -67,15 +78,17 @@ const Titulo = styled.h2`
 `;
 
 const Descricao = styled.p`
-  font-size: 20px;
+  font-size: 16px;
   color: #fff;
   margin-top: 8px;
+  opacity: 0.8;
 `;
 
 const Preco = styled.p`
   color: #fff;
   font-size: 40px;
   margin-top: 8px;
+  margin-bottom: 0;
 `;
 
 const ItemPlano = styled.div`

@@ -169,23 +169,9 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
       </FormControl>
 
       <Row>
-        <Label>Valor do programa:</Label>
+        F       <FormControl fullWidth component="fieldset">
+          <FormLabel component="legend">Valor do programa:</FormLabel>
 
-        <TextField
-          className="u-margem"
-          autoComplete="off"
-          label="Valor"
-          variant="outlined"
-          fullWidth
-          type="number"
-          id="valor-do-programa"
-          disabled={combinarValor}
-          error={errors?.valorDoPrograma}
-          {...register("valorDoPrograma", { required: "Insira um valor" })}
-          helperText={errors.valorDoPrograma?.message}
-        />
-
-        <FormControl fullWidth component="fieldset">
           <FormGroup row style={{ color: "white" }}>
             <FormControlLabel
               control={
@@ -196,10 +182,24 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
                   onChange={(e) => combinarValorDoPrograma(e)}
                 />
               }
-              label="A combinar"
+              label="A combinar com o cliente"
             />
           </FormGroup>
         </FormControl>
+
+        {!combinarValor && <TextField
+          className="u-margem"
+          autoComplete="off"
+          label="Insira o valor"
+          variant="outlined"
+          fullWidth
+          type="number"
+          id="valor-do-programa"
+          disabled={combinarValor}
+          error={errors?.valorDoPrograma}
+          {...register("valorDoPrograma", { required: "Insira um valor" })}
+          helperText={errors.valorDoPrograma?.message}
+        />}
       </Row>
 
       <Autocomplete
