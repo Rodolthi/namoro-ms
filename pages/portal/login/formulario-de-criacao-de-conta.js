@@ -209,19 +209,19 @@ const Documentos = styled.div`
   flex-direction: column;
   margin-bottom: 24px;
   * {
-    color: white;
+    color: var(--branca);
   }
   label {
     margin-top: 16px;
     padding: 24px;
-    border: 2px solid #fac045;
+    border: 2px solid var(--primaria);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     border-radius: 8px;
-    color: #fac045;
+    color: var(--primaria);
     outline: 0;
     margin-bottom: 8px;
     &:focus,
@@ -230,7 +230,7 @@ const Documentos = styled.div`
     }
     .material-icons-round {
       margin-bottom: 8px;
-      color: #fac045;
+      color: var(--primaria);
     }
   }
   input {

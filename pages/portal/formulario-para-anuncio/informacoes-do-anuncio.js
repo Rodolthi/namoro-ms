@@ -40,5 +40,5 @@ const Formulario = styled.form`
 
 const Titulo = styled.h2`
   font-size: 24px;
-  color: white;
+  color: var(--branca);
 `;

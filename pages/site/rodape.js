@@ -36,7 +36,7 @@ const RodapeContainer = styled.footer`
     max-width: 240px;
   }
   .texto {
-    color: white;
+    color: var(--branca);
     font-size: 16px;
     line-height: 24px;
     max-width: 1200px;

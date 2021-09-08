@@ -86,7 +86,7 @@ const Formulario = styled.form`
 
 const Titulo = styled.h2`
   font-size: 24px;
-  color: white;
+  color: var(--branca);
 `;
 const ImagensParaGaleria = styled.div`
   display: grid;
@@ -104,11 +104,11 @@ const Imagem = styled.img`
 `;
 
 const BotaoDeUpload = styled.label`
-  border: 2px solid #fac045;
+  border: 2px solid var(--primaria);
   width: 100%;
   height: 80px;
   font-family: "proxima-nova" sans-serif;
-  color: #fac045;
+  color: var(--primaria);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -138,8 +138,8 @@ const BotaoExcluirImagem = styled.button`
   position: absolute;
   right: -8px;
   top: -8px;
-  color: black;
-  background-color: #fac045;
+  color: var(--preta);
+  background-color: var(--primaria);
   border-radius: 100px;
   padding: 8px;
   font-size: 10px;

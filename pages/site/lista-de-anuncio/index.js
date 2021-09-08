@@ -89,7 +89,7 @@ const Item = styled.div`
       height: 12px;
       width: 12px;
       border-radius: 12px;
-      background-color: white;
+      background-color: var(--branca);
     }
   }
   .nome {

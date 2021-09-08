@@ -24,7 +24,7 @@ const CabecalhoDoPortal = styled.header`
   width: 100%;
   height: 64px;
   padding: 16px;
-  background-color: #000;
+  background-color: var(--preta);
 `;
 
 const Logo = styled.img`

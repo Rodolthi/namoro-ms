@@ -112,7 +112,7 @@ const ContainerFormulario = styled.div`
   max-width: 720px;
   width: 100%;
   margin: 40px auto;
-  background-color: #000;
+  background-color: var(--preta);
   padding: 24px;
   border-radius: 16px;
 `;

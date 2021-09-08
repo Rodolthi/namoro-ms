@@ -38,7 +38,7 @@ const ListaDeAnuncios = styled.ul`
 
 const Item = styled.li`
   background-color: #202020;
-  color: white;
+  color: var(--branca);
   display: flex;
   flex-direction: column;
   padding: 16px;

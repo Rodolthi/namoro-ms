@@ -64,7 +64,7 @@ const ContainerFormulario = styled.div`
   max-width: 1000px;
   width: calc(100% - 32px);
   border-radius: 8px;
-  color: #fff;
+  color: var(--branca);
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -73,19 +73,19 @@ const ContainerFormulario = styled.div`
 const Titulo = styled.h2`
   font-size: 24px;
   margin: 0 0 24px 0;
-  color: #fff;
+  color: var(--branca);
   width: 100%;
 `;
 
 const Descricao = styled.p`
   font-size: 16px;
-  color: #fff;
+  color: var(--branca);
   margin-top: 8px;
   opacity: 0.8;
 `;
 
 const Preco = styled.p`
-  color: #fff;
+  color: var(--branca);
   font-size: 40px;
   margin-top: 8px;
   margin-bottom: 0;
@@ -103,7 +103,7 @@ const ItemPlano = styled.div`
 const Cabecalho = styled.div`
   font-size: 24px;
   background-color: #eeba00;
-  color: #000;
+  color: var(--preta);
   text-align: center;
   font-weight: 700;
   width: 100%;

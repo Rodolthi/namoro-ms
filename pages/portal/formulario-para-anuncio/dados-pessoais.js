@@ -331,7 +331,7 @@ const Formulario = styled.form`
 
 const Titulo = styled.h2`
   font-size: 24px;
-  color: white;
+  color: var(--branca);
 `;
 
 const Row = styled.div`
@@ -357,7 +357,7 @@ const Row = styled.div`
 `;
 
 const Label = styled.label`
-  color: #fff;
+  color: var(--branca);
   margin-right: 8px;
   white-space: nowrap;
 `

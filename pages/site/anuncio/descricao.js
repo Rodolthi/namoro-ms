@@ -40,7 +40,7 @@ const ContainerDescricao = styled.div`
   flex-direction: column;
   margin-top: 16px;
   padding: 24px;
-  border: 2px solid #FAC045;
+  border: 2px solid var(--primaria);
   border-radius: 24px;
   @media screen and (min-width: 1080px) {
     flex-direction: row;
@@ -49,7 +49,7 @@ const ContainerDescricao = styled.div`
 
 const Texto = styled.p`
   display: inline-flex;
-  color: white;
+  color: var(--branca);
   opacity: 0.8;
   margin: 0;
   font-size: 18px;
@@ -67,12 +67,12 @@ const Contato = styled.div`
 
 const Detalhes = styled.p`
   margin: 0;
-  color: white;
+  color: var(--branca);
   font-size: 20px;
 `
 
 const LinkWhats = styled(Button)`
-  color: black !important;
+  color: var(--preta) !important;
   font-size: 24px !important;
   font-weight: 800 !important;
   margin-bottom: 16px !important;
@@ -84,10 +84,10 @@ const LinkWhats = styled(Button)`
 `
 
 const LinkTelefone = styled(Button)`
-  color: black !important;
+  color: var(--preta) !important;
   font-size: 24px !important;
   font-weight: 800 !important;
   margin-bottom: 16px !important;
-  color: #FAC045 !important;
+  color: var(--primaria) !important;
   width: 100% !important;
 `
