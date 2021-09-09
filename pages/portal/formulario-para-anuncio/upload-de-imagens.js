@@ -26,8 +26,8 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
   };
 
   const avancarEtapa = () => {
-    salvarDadosDoFormulario("imagensDaGaleria", { galeria: imagensGaleria })
-    salvarDadosDoFormulario("imagemPrincipal", { imagemPrincipal: imagemPrincipal })
+    salvarDadosDoFormulario({ galeria: imagensGaleria })
+    salvarDadosDoFormulario({ imagemPrincipal: imagemPrincipal })
   }
 
   return (

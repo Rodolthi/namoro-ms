@@ -18,9 +18,9 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { obterCidades } from "api/cidades";
-import { obterDadosDoFormulario, salvarDadosDoFormulario } from "utils/storage";
+import { salvarDadosDoFormulario } from "utils/storage";
 
-const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
+const DadosPessoais = () => {
   const [combinarValor, setCombinarValor] = useState(false)
   const { register, getValues, formState: { errors }, handleSubmit } = useForm();
   const [cidades, setCidades] = useState([]);
@@ -37,7 +37,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
   }
 
   const avancarEtapa = () => {
-    salvarDadosDoFormulario("dadosPessoais", getValues())
+    salvarDadosDoFormulario(getValues())
   }
 
   const combinarValorDoPrograma = () => {

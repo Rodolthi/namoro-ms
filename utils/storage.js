@@ -1,27 +1,23 @@
-export const salvarDadosDoFormulario = (nome, valores) => {
-  let dados;
-  dados = JSON.stringify(valores)
-  sessionStorage.setItem(nome, dados)
+const nomeDaChave = "dadosDoFormulario"
+
+export const salvarDadosDoFormulario = (valores) => {
+  const storage = sessionStorage.getItem(nomeDaChave)
+  const dados = JSON.stringify(valores)
+
+  if (!storage) {
+    sessionStorage.setItem(nomeDaChave, dados)
+  } else atualizarDadosDoFormulario(dados)
 }
 
-//TODO : Aqui a ideia é fazer um incremento nos objetos
-export const atualizarDadosDoFormulario = (nome, valores) => {
-  let dados;
-  dados = JSON.stringify(valores)
-  sessionStorage.getItem(nome, dados)
+export const atualizarDadosDoFormulario = (valores) => {
+  const dadosExistentes = obterDadosDoFormulario(nomeDaChave)
+  const novosValores = JSON.parse(valores)
+  const valoresAtualizados = { ...dadosExistentes, ...novosValores }
 
-  sessionStorage.setItem(nome, dados)
+  sessionStorage.setItem(nomeDaChave, JSON.stringify(valoresAtualizados))
 }
 
-export const obterDadosDoFormulario = (nomes) => {
-  let dados = [];
-
-  nomes.forEach(nome => {
-    let itemStorage = {};
-
-    itemStorage = JSON.parse(sessionStorage.getItem(nome))
-    dados.push(itemStorage)
-  })
-
+export const obterDadosDoFormulario = () => {
+  const dados = JSON.parse(sessionStorage.getItem(nomeDaChave))
   return dados;
 }

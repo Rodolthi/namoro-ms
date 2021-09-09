@@ -35,6 +35,8 @@ const FormularioParaAnuncio = () => {
   const [etapaSelecionada, setEtapaSelecionada] = useState(0);
   const [dadosPessoais, setDadosPessoais] = useState({})
 
+  const [dadosDoFormulario, setDadosDoFormulario] = useState({})
+
   const router = useRouter()
 
   const avancarEtapa = () => {
@@ -57,6 +59,8 @@ const FormularioParaAnuncio = () => {
 
       {etapaSelecionada === 0 &&
         <DadosPessoais
+          dadosDoFormulario={dadosDoFormulario}
+          setDadosDoFormulario={setDadosDoFormulario}
           dadosPessoais={dadosPessoais}
           setDadosPessoais={setDadosPessoais}
         />

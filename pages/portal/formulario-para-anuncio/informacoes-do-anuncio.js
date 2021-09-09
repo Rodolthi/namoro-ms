@@ -8,7 +8,7 @@ const InformacoesDoAnuncio = () => {
   const { register, getValues, formState: { errors }, handleSubmit } = useForm();
 
   const proximaEtapa = () => {
-    salvarDadosDoFormulario("descricaoDoAnuncio", getValues())
+    salvarDadosDoFormulario(getValues())
   }
 
   return (

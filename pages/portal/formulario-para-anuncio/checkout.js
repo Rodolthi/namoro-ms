@@ -9,10 +9,8 @@ const Checkout = () => {
   const [deposito, setDeposito] = useState(false)
 
   const finalizarCadastro = () => {
-    salvarDadosDoFormulario("checkout", getValues())
-    const formularios = ["dadosPessoais", "descricaoDoAnuncio", "imagensDaGaleria", "imagemPrincipal", "checkout"]
-
-    const dados = obterDadosDoFormulario(formularios)
+    salvarDadosDoFormulario(getValues())
+    const dados = obterDadosDoFormulario("dadosDoFormulario")
     console.log(dados)
   }
 
