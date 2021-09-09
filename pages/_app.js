@@ -5,8 +5,13 @@ import Layout from "components/layout"
 import { useEffect } from 'react'
 import { visualizarPagina } from 'utils/analytics'
 import { useRouter } from 'next/router'
+import { Provider } from 'react-redux';
+import {useStore} from '../store/configureStore';
 
 function MyApp({ Component, pageProps }) {
+
+  const store = useStore(pageProps.initialReduxState);
+
   const router = useRouter()
 
   useEffect(() => {
@@ -24,7 +29,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={configuracaoDoTema}>
       <Layout>
-        <Component {...pageProps} />
+      <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </Layout>
     </ThemeProvider>
   )

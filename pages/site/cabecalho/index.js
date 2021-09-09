@@ -7,11 +7,15 @@ import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
 import Icone from "components/icone"
 import { useRouter } from "next/router"
+import {initializeStore} from 'store/configureStore';
 
 const Cabecalho = () => {
   const [cidadeSelecionada, setCidadeSelecionada] = useState("")
   const [acompanhante, setAcompanhante] = useState("mulher")
   const [menuAberto, setMenuAberto] = useState(false)
+
+  const reduxStore = initializeStore()
+  const { dispatch } = reduxStore
 
   const router = useRouter();
 
@@ -21,11 +25,20 @@ const Cabecalho = () => {
 
   const handleMudarCidade = (e) => {
     setCidadeSelecionada(e.target.value)
-    sessionStorage.setItem('cidadeSelecionada', e.target.value)
+
+    dispatch({
+      type: 'REGIAO',
+      regiao: e.target.value
+    })
   }
 
   const handleMudarAcompanhante = (e) => {
     setAcompanhante(e.target.value)
+
+    dispatch({
+      type: 'ACOMPANHANTE',
+      acompanhante: e.target.value
+    })
   }
 
   const ConteudoMenu = () => (

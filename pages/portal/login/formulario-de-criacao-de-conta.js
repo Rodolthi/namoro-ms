@@ -12,7 +12,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { useState, useEffect } from "react";
 import lerURI from "../formulario-para-anuncio/lerURI";
 import { useForm } from "react-hook-form";
-import {postUsuario} from '../../api/controllers/criacao-conta';
+import {postUsuario} from 'api/controllers/criacao-conta';
 
 const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
   const criarConta = async (e) => {

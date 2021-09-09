@@ -35,8 +35,9 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
     return novoValor;
   }
 
-  const avancarEtapa = () => {
+  const avancarEtapa = (e) => {
     setDadosPessoais(getValues())
+    console.log('getValues(): ', e);
 
     console.log("state", JSON.stringify(dadosPessoais))
     console.log("get", JSON.stringify(getValues()))

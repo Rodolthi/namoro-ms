@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Icone from "components/icone";
 import lerURI from "./lerURI";
@@ -22,6 +22,10 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
     );
   };
 
+  useEffect(() => {
+    console.log('imagensGaleria: ', imagensGaleria);
+  },[imagensGaleria])
+
   return (
     <Formulario>
       <Titulo>Dados do anunciante</Titulo>
@@ -41,7 +45,7 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
           {imagensGaleria.map((imagem, index) => {
             return (
               <ContainerImagem key={index}>
-                <Imagem src={imagem} />
+                <Imagem src={imagem.result} />
                 <BotaoExcluirImagem
                   type="button"
                   onClick={() => deletarImagemDaGaleria(index)}
@@ -67,7 +71,7 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
       </BotaoDeUpload>
       {imagemPrincipal.length ? (
         <ContainerImagem>
-          <Imagem src={imagemPrincipal[0]} />
+          <Imagem src={imagemPrincipal[0].result} />
         </ContainerImagem>
       ) : (
         ""

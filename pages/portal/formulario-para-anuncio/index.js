@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Etapas from "./etapas";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DadosPessoais from "./dados-pessoais";
 import { Button } from "@material-ui/core";
 import Icone from "components/icone";
@@ -33,6 +33,10 @@ const FormularioParaAnuncio = () => {
   const [imagemPrincipal, setImagemPrincipal] = useState([]);
   const [etapaSelecionada, setEtapaSelecionada] = useState(0);
   const [dadosPessoais, setDadosPessoais] = useState({})
+
+  useEffect(() => {
+    console.log('dadosPessoais: ', dadosPessoais);
+  },[dadosPessoais])
 
   const router = useRouter()
 

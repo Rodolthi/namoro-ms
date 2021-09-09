@@ -1,5 +1,5 @@
 import React from "react";
-import Site from "./site"
+import Site from "./site";
 
 const Home = () => {
   return (
