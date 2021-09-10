@@ -87,7 +87,7 @@ const CorpoModal = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 420px;
-  background-color: black;
+  background-color: var(--preta);
   padding: 24px;
   border-radius: 8px;
   outline: 0;
@@ -100,5 +100,5 @@ const Label = styled.label`
   margin-bottom: 24px;
   font-size: 24px;
   font-weight: 600;
-  color: white;
+  color: var(--branca);
 `

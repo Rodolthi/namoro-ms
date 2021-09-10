@@ -16,7 +16,7 @@ const ListaDeAnuncios = () => {
 
   return (
     <Lista>
-      {itens.map((item, index) => {
+      {itens?.map((item, index) => {
         return (
           <li key={index}>
             <Item onClick={irParaOAnuncio}>
@@ -89,7 +89,7 @@ const Item = styled.div`
       height: 12px;
       width: 12px;
       border-radius: 12px;
-      background-color: white;
+      background-color: var(--branca);
     }
   }
   .nome {

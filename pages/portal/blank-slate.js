@@ -35,7 +35,7 @@ const Container = styled.div`
 `;
 
 const Texto = styled.h2`
-  color: #fff;
+  color: var(--branca);
   font-size: 18px;
   font-weight: 600;
 `;

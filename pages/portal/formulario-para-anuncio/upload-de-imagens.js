@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Icone from "components/icone";
-import lerURI from "./lerURI";
+import lerURI from "utils/lerURI";
+import { salvarDadosDoFormulario } from "utils/storage";
+import Button from "@material-ui/core/Button";
 
 const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, setImagemPrincipal }) => {
+
   const handleImages = (e) => {
     lerURI(e).then((images) => {
       setImagensGaleria(images);
@@ -22,9 +25,10 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
     );
   };
 
-  useEffect(() => {
-    console.log('imagensGaleria: ', imagensGaleria);
-  },[imagensGaleria])
+  const avancarEtapa = () => {
+    salvarDadosDoFormulario({ galeria: imagensGaleria })
+    salvarDadosDoFormulario({ imagemPrincipal: imagemPrincipal })
+  }
 
   return (
     <Formulario>
@@ -40,9 +44,9 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
       <BotaoDeUpload htmlFor="imagens-galeria">
         Selecione as imagens da galeria
       </BotaoDeUpload>
-      {imagensGaleria.length && imagensGaleria ? (
+      {imagensGaleria?.length && imagensGaleria ? (
         <ImagensParaGaleria>
-          {imagensGaleria.map((imagem, index) => {
+          {imagensGaleria?.map((imagem, index) => {
             return (
               <ContainerImagem key={index}>
                 <Imagem src={imagem.result} />
@@ -69,13 +73,15 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
       <BotaoDeUpload htmlFor="imagem-principal">
         Selecione uma imagem para destaque
       </BotaoDeUpload>
-      {imagemPrincipal.length ? (
+      {imagemPrincipal?.length ? (
         <ContainerImagem>
           <Imagem src={imagemPrincipal[0].result} />
         </ContainerImagem>
       ) : (
         ""
       )}
+
+      <Button color="primary" type="button" onClick={avancarEtapa}>Avançar</Button>
     </Formulario>
   );
 };
@@ -90,7 +96,7 @@ const Formulario = styled.form`
 
 const Titulo = styled.h2`
   font-size: 24px;
-  color: white;
+  color: var(--branca);
 `;
 const ImagensParaGaleria = styled.div`
   display: grid;
@@ -108,11 +114,11 @@ const Imagem = styled.img`
 `;
 
 const BotaoDeUpload = styled.label`
-  border: 2px solid #fac045;
+  border: 2px solid var(--primaria);
   width: 100%;
   height: 80px;
   font-family: "proxima-nova" sans-serif;
-  color: #fac045;
+  color: var(--primaria);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -142,8 +148,8 @@ const BotaoExcluirImagem = styled.button`
   position: absolute;
   right: -8px;
   top: -8px;
-  color: black;
-  background-color: #fac045;
+  color: var(--preta);
+  background-color: var(--primaria);
   border-radius: 100px;
   padding: 8px;
   font-size: 10px;

@@ -19,9 +19,9 @@ const TagLabel = styled.label`
   text-transform: uppercase;
   font-weight: 600;
   &.sucesso {
-    background-color: #2ba118;
+    background-color: var(--sucesso);
   }
   &.alerta {
-    background-color: #2ba118;
+    background-color: var(--sucesso);
   }
 `;

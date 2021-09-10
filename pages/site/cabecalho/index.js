@@ -149,7 +149,7 @@ const AcoesMobile = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  background-color: black;
+  background-color: var(--preta);
   border-radius: 8px;
   align-items: center;
   padding: 24px;

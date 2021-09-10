@@ -17,7 +17,7 @@ const ModalFoto = ({ setAberto, imagem, setImagem, aberto, galeria }) => {
 
     e.stopPropagation()
     if (indexDaImagem === 0) {
-      setImagem(galeria[galeria.length - 1])
+      setImagem(galeria[galeria?.length - 1])
     } else setImagem(galeria[indexDaImagem - 1])
   }
 
