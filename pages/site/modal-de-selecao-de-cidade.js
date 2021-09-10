@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import React from "react"
 import styled from "styled-components"
 import { eventoGA } from 'utils/analytics';
+import {initializeStore} from 'store/configureStore';
 
 const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   const [open, setOpen] = useState(false);
@@ -11,6 +12,9 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   const abrirModal = () => {
     setOpen(true);
   };
+
+  const reduxStore = initializeStore()
+  const { dispatch } = reduxStore
 
   const fecharModal = () => {
     const elementoRaiz = document.getElementById("__next")
@@ -27,6 +31,12 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
         search_term: `Cidade selecionada: ${cidade}`
       }
     })
+
+    dispatch({
+      type: 'REGIAO',
+      regiao: cidade
+    })
+
     fecharModal();
   };
 
