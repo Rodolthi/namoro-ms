@@ -1,30 +1,18 @@
 import { Button } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import Link from "next/link";
+import { salvarDadosDoFormulario } from "utils/storage";
+import { useRouter } from "next/router";
 
-const planos = [
-  {
-    nome: "30 dias",
-    preco: 100,
-    dias: 30,
-    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
-  },
-  {
-    nome: "15 dias",
-    preco: 55,
-    dias: 15,
-    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
-  },
-  {
-    nome: "7 dias",
-    preco: 30,
-    dias: 7,
-    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
-  },
-];
 
 const Planos = () => {
+  const router = useRouter();
+
+  const escolherPlano = (plano) => {
+    salvarDadosDoFormulario({ planoEscolhido: plano })
+    router.push("/portal/formulario-para-anuncio/")
+  }
+
   return (
     <ContainerFormulario>
       <Titulo>Escolha seu plano</Titulo>
@@ -37,17 +25,16 @@ const Planos = () => {
                 <Descricao>{plano.dias} dias de anúncio</Descricao>
                 <Preco>R${plano.preco}</Preco>
                 <Descricao>{plano.descricao}</Descricao>
-                <Link href="/portal/formulario-para-anuncio/">
-                  <Button
-                    fullWidth
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    type="button"
-                  >
-                    Escolher
-                  </Button>
-                </Link>
+                <Button
+                  fullWidth
+                  size="large"
+                  variant="contained"
+                  color="primary"
+                  type="button"
+                  onClick={() => escolherPlano(plano.nome)}
+                >
+                  Escolher
+                </Button>
               </Conteudo>
             </ItemPlano>
           );
@@ -56,6 +43,8 @@ const Planos = () => {
     </ContainerFormulario>
   );
 };
+
+export default Planos
 
 const ContainerFormulario = styled.div`
   background: #000;
@@ -126,4 +115,23 @@ const ListaDePlanos = styled.div`
   }
 `;
 
-export default Planos
+const planos = [
+  {
+    nome: "30 dias",
+    preco: 100,
+    dias: 30,
+    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
+  },
+  {
+    nome: "15 dias",
+    preco: 55,
+    dias: 15,
+    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
+  },
+  {
+    nome: "7 dias",
+    preco: 30,
+    dias: 7,
+    descricao: 'Ganhe o dobro de dias ao escolher este plano.'
+  },
+];

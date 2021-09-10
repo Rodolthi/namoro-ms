@@ -9,14 +9,22 @@ import Anuncios from "./anuncios";
 const Home = () => {
   const anuncios = [
     {
-      titulo: "Morena Formosa com os peitos tão grandes",
+      titulo: "Morena Formosa 18",
       data: "2021-08-16 23:57:58",
-      plano: "Premium",
+      plano: "30 dias",
+      status: "pendente",
+    },
+    {
+      titulo: "Loira massagista",
+      data: "2021-08-16 23:57:58",
+      plano: "30 dias",
+      status: "ativo",
     },
     {
       titulo: "Morena Formosa",
       data: "2021-08-16 23:57:58",
-      plano: "Free",
+      plano: "60 dias",
+      status: "pendente",
     },
   ];
 

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const Tag = ({ children, sucesso }) => {
+const Tag = ({ children, sucesso, alerta }) => {
   return (
-    <TagLabel className={sucesso ? "sucesso" : "alerta"}>{children}</TagLabel>
+    <TagLabel className={`${sucesso && "sucesso"} ${alerta && "alerta"}`}>{children}</TagLabel>
   );
 };
 
@@ -22,6 +22,6 @@ const TagLabel = styled.label`
     background-color: var(--sucesso);
   }
   &.alerta {
-    background-color: var(--sucesso);
+    background-color: var(--alerta);
   }
 `;

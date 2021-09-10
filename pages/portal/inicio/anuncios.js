@@ -13,7 +13,10 @@ const Anuncios = ({ anuncios }) => {
           <div>
             <Label>STATUS:</Label>
             <Texto>
-              <Tag sucesso>Ativo</Tag>
+              {anuncio.status !== "pendente" ?
+                <Tag sucesso>{anuncio.status}</Tag>
+                : <Tag alerta>{anuncio.status}</Tag>
+              }
             </Texto>
           </div>
           <div>
