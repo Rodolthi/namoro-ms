@@ -9,7 +9,7 @@ const Etapas = ({ etapas, setarEtapa, etapaSelecionada }) => {
 
   return (
     <ListaDeEtapas>
-      {etapas.map((etapa, index) => (
+      {etapas?.map((etapa, index) => (
         <li key={index}>
           <Etapa
             onClick={() => handleChange(index)}
@@ -49,7 +49,7 @@ const Etapa = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: white;
+  color: var(--branca);
   font-size: 16px;
   margin: 8px;
   &.etapaAtiva {
@@ -58,7 +58,7 @@ const Etapa = styled.button`
   }
   &.etapaPreenchida {
     background: #eee400;
-    color: black;
+    color: var(--preta);
   }
   &:disabled {
     cursor: initial;

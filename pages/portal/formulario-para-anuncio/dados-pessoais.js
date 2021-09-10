@@ -18,8 +18,9 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { obterCidades } from "api/cidades";
+import { salvarDadosDoFormulario } from "utils/storage";
 
-const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
+const DadosPessoais = () => {
   const [combinarValor, setCombinarValor] = useState(false)
   const { register, getValues, formState: { errors }, handleSubmit } = useForm();
   const [cidades, setCidades] = useState([]);
@@ -35,13 +36,8 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
     return novoValor;
   }
 
-  const avancarEtapa = (e) => {
-    setDadosPessoais(getValues())
-    console.log('getValues(): ', e);
-
-    console.log("state", JSON.stringify(dadosPessoais))
-    console.log("get", JSON.stringify(getValues()))
-    alert("Deu certo")
+  const avancarEtapa = () => {
+    salvarDadosDoFormulario(getValues())
   }
 
   const combinarValorDoPrograma = () => {
@@ -78,7 +74,6 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
           {...register("sexo", { required: true })}
           labelId="sexo-label"
           id="sexo"
-          valor="mulher"
         >
           <MenuItem value="mulher">Mulher</MenuItem>
           <MenuItem value="homen">Homem</MenuItem>
@@ -107,6 +102,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
 
       <Row>
         <TextField
+          className="u-margem"
           autoComplete="off"
           label="Telefone"
           variant="outlined"
@@ -170,22 +166,9 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
       </FormControl>
 
       <Row>
-        <Label>Valor do programa:</Label>
-
-        <TextField
-          autoComplete="off"
-          label="Valor"
-          variant="outlined"
-          fullWidth
-          type="number"
-          id="valor-do-programa"
-          disabled={combinarValor}
-          error={errors?.valorDoPrograma}
-          {...register("valorDoPrograma", { required: "Insira um valor" })}
-          helperText={errors.valorDoPrograma?.message}
-        />
-
         <FormControl fullWidth component="fieldset">
+          <FormLabel component="legend">Valor do programa:</FormLabel>
+
           <FormGroup row style={{ color: "white" }}>
             <FormControlLabel
               control={
@@ -196,10 +179,24 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
                   onChange={(e) => combinarValorDoPrograma(e)}
                 />
               }
-              label="A combinar"
+              label="A combinar com o cliente"
             />
           </FormGroup>
         </FormControl>
+
+        {!combinarValor && <TextField
+          className="u-margem"
+          autoComplete="off"
+          label="Insira o valor"
+          variant="outlined"
+          fullWidth
+          type="number"
+          id="valor-do-programa"
+          disabled={combinarValor}
+          error={errors?.valorDoPrograma}
+          {...register("valorDoPrograma", { required: "Insira um valor" })}
+          helperText={errors.valorDoPrograma?.message}
+        />}
       </Row>
 
       <Autocomplete
@@ -255,6 +252,7 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
 
       <Row>
         <TextField
+          className="u-margem"
           autoComplete="off"
           label="Começa a atender que horas?"
           variant="outlined"
@@ -288,7 +286,6 @@ const DadosPessoais = ({ dadosPessoais, setDadosPessoais }) => {
           }}
         />
       </Row>
-
 
       <FormControl
         error={errors?.aceitaCartao}
@@ -331,7 +328,7 @@ const Formulario = styled.form`
 
 const Titulo = styled.h2`
   font-size: 24px;
-  color: white;
+  color: var(--branca);
 `;
 
 const Row = styled.div`
@@ -339,12 +336,25 @@ const Row = styled.div`
   align-items: center;
   min-height: 56px;
   margin-bottom: 16px;
-  .MuiFormControl-root {
-    margin-bottom: 0;
+  @media screen and (min-width: 1000px) {
+    .MuiFormControl-root {
+      margin-bottom: 0;
+    }
+    .u-margem {
+      margin-right: 16px;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    .margem {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
   }
 `;
 
 const Label = styled.label`
-  color: #fff;
+  color: var(--branca);
+  margin-right: 8px;
   white-space: nowrap;
 `

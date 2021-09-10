@@ -9,8 +9,8 @@ import {
 } from "@material-ui/core";
 import Icone from "components/icone";
 import Checkbox from "@material-ui/core/Checkbox";
-import { useState, useEffect } from "react";
-import lerURI from "../formulario-para-anuncio/lerURI";
+import { useState } from "react";
+import lerURI from "utils/lerURI";
 import { useForm } from "react-hook-form";
 import {postUsuario} from 'api/controllers/criacao-conta';
 
@@ -208,7 +208,10 @@ const BotaoDeCriarUsuario = styled(Button)`
 `;
 
 const ImagemDocumento = styled.img`
-  height: 400px;
+  height: auto;
+  width: 80%;
+  object-fit: cover;
+  margin: 0 auto;
 `;
 
 const Documentos = styled.div`
@@ -216,19 +219,19 @@ const Documentos = styled.div`
   flex-direction: column;
   margin-bottom: 24px;
   * {
-    color: white;
+    color: var(--branca);
   }
   label {
     margin-top: 16px;
     padding: 24px;
-    border: 2px solid #fac045;
+    border: 2px solid var(--primaria);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     border-radius: 8px;
-    color: #fac045;
+    color: var(--primaria);
     outline: 0;
     margin-bottom: 8px;
     &:focus,
@@ -237,7 +240,7 @@ const Documentos = styled.div`
     }
     .material-icons-round {
       margin-bottom: 8px;
-      color: #fac045;
+      color: var(--primaria);
     }
   }
   input {

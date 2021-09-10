@@ -4,7 +4,7 @@ import Tag from "components/tag";
 const Anuncios = ({ anuncios }) => {
   return (
     <ListaDeAnuncios>
-      {anuncios.map((anuncio, index) => (
+      {anuncios?.map((anuncio, index) => (
         <Item className="lista" key={index}>
           <div>
             <Label>TÍTULO DO ANÚNCIO:</Label>
@@ -38,7 +38,7 @@ const ListaDeAnuncios = styled.ul`
 
 const Item = styled.li`
   background-color: #202020;
-  color: white;
+  color: var(--branca);
   display: flex;
   flex-direction: column;
   padding: 16px;

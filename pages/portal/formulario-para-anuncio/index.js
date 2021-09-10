@@ -8,6 +8,7 @@ import Icone from "components/icone";
 import InformacoesDoAnuncio from "./informacoes-do-anuncio";
 import UploadDeImagens from "./upload-de-imagens";
 import { useRouter } from "next/router";
+import Checkout from "./checkout";
 
 const etapas = [
   {
@@ -33,19 +34,12 @@ const FormularioParaAnuncio = () => {
   const [imagemPrincipal, setImagemPrincipal] = useState([]);
   const [etapaSelecionada, setEtapaSelecionada] = useState(0);
   const [dadosPessoais, setDadosPessoais] = useState({})
-
-  useEffect(() => {
-    console.log('dadosPessoais: ', dadosPessoais);
-  },[dadosPessoais])
+  const [dadosDoFormulario, setDadosDoFormulario] = useState({})
 
   const router = useRouter()
 
   const avancarEtapa = () => {
     setEtapaSelecionada(etapaSelecionada + 1);
-  };
-
-  const voltarEtapa = () => {
-    setEtapaSelecionada(etapaSelecionada - 1);
   };
 
   const finalizarCadastro = () => {
@@ -64,6 +58,8 @@ const FormularioParaAnuncio = () => {
 
       {etapaSelecionada === 0 &&
         <DadosPessoais
+          dadosDoFormulario={dadosDoFormulario}
+          setDadosDoFormulario={setDadosDoFormulario}
           dadosPessoais={dadosPessoais}
           setDadosPessoais={setDadosPessoais}
         />
@@ -82,22 +78,11 @@ const FormularioParaAnuncio = () => {
       }
 
       {etapaSelecionada === 3 &&
-        <div>Etapa 4</div>
+        <Checkout />
       }
 
       <ContainerBotoes>
-        {etapaSelecionada > 0 && (
-          <Button
-            onClick={voltarEtapa}
-            variant="outlined"
-            size="large"
-            color="primary"
-            startIcon={<Icone nome="navigate_before" />}
-          >
-            Etapa anterior
-          </Button>
-        )}
-        {etapaSelecionada <= etapas.length - 2 && (
+        {etapaSelecionada <= etapas?.length - 2 && (
           <Button
             onClick={avancarEtapa}
             variant="contained"
@@ -108,7 +93,7 @@ const FormularioParaAnuncio = () => {
             Próximo
           </Button>
         )}
-        {etapaSelecionada === etapas.length - 1 && (
+        {etapaSelecionada === etapas?.length - 1 && (
           <Button
             onClick={finalizarCadastro}
             variant="contained"
@@ -131,13 +116,15 @@ const ContainerFormulario = styled.div`
   max-width: 720px;
   width: 100%;
   margin: 40px auto;
-  background-color: #000;
+  background-color: var(--preta);
   padding: 24px;
   border-radius: 16px;
 `;
 
 const ContainerBotoes = styled.div`
   display: flex;
+  width: 100%;
+  justify-content: flex-end;
   .MuiButton--root {
     margin: 12px;
   }

@@ -25,7 +25,7 @@ const Home = () => {
       <Titulo>Meus anúncios</Titulo>
 
       <Content>
-        {anuncios.length && anuncios ? (
+        {anuncios?.length && anuncios ? (
           <Anuncios anuncios={anuncios} />
         ) : (
           <BlankSlate
@@ -52,7 +52,7 @@ const Home = () => {
 export default Home
 
 const Container = styled.section`
-  background-color: #000;
+  background-color: var(--preta);
   width: calc(100% - 32px);
   max-width: 720px;
   padding: 24px;
@@ -63,7 +63,7 @@ const Container = styled.section`
 `;
 
 const Titulo = styled.h1`
-  color: #fff;
+  color: var(--branca);
   margin: 0;
 `;
 

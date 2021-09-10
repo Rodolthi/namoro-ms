@@ -1,7 +1,17 @@
+:root {
+  --primaria: #fac045;
+  --secundaria: #3079ff;
+  --branca: #fff;
+  --preta: #000;
+  --sucesso: #2ba118;
+  --alerta: rgb(255, 146, 4);
+  --cinza-800: #161616;
+}
+
 body {
   margin: 0;
   font-family: proxima-nova, sans-serif;
-  background-color: #161616;
+  background-color: var(--cinza-800);
 }
 * {
   box-sizing: border-box;

@@ -1,12 +1,14 @@
-import { TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { salvarDadosDoFormulario } from "utils/storage";
 
 const InformacoesDoAnuncio = () => {
   const { register, getValues, formState: { errors }, handleSubmit } = useForm();
 
   const proximaEtapa = () => {
+    salvarDadosDoFormulario(getValues())
   }
 
   return (
@@ -23,6 +25,8 @@ const InformacoesDoAnuncio = () => {
         fullWidth
         id="texto-descritivo"
       />
+
+      <Button color="primary" type="submit">Próxima</Button>
     </Formulario>
   );
 };
@@ -40,5 +44,5 @@ const Formulario = styled.form`
 
 const Titulo = styled.h2`
   font-size: 24px;
-  color: white;
+  color: var(--branca);
 `;

@@ -20,7 +20,7 @@ const Galeria = () => {
     Foto4,
   ]
 
-  const quantidadeDeFotos = listaDeImagens.length
+  const quantidadeDeFotos = listaDeImagens?.length
 
   const quebraDaLista = () => {
     const fotosPorColuna = quantidadeDeFotos / 3;
@@ -43,17 +43,17 @@ const Galeria = () => {
     <GaleriaScroll>
       <ContainerGaleria>
         <Coluna>
-          {listaDeImagens.slice(0, quebraDaLista()).map((imagem, index) => (
+          {listaDeImagens.slice(0, quebraDaLista())?.map((imagem, index) => (
             <img onClick={() => mudarImagemDoModal(imagem)} key={`coluna1${index}`} src={imagem} />
           ))}
         </Coluna>
         <Coluna>
-          {listaDeImagens.slice(quebraDaLista(), quebraDaLista() * 2).map((imagem, index) => (
+          {listaDeImagens.slice(quebraDaLista(), quebraDaLista() * 2)?.map((imagem, index) => (
             <img onClick={() => mudarImagemDoModal(imagem)} key={`coluna2${index}`} src={imagem} />
           ))}
         </Coluna>
         <Coluna>
-          {listaDeImagens.slice(quebraDaLista() * 2, quantidadeDeFotos).map((imagem, index) => (
+          {listaDeImagens.slice(quebraDaLista() * 2, quantidadeDeFotos)?.map((imagem, index) => (
             <img onClick={() => mudarImagemDoModal(imagem)} key={`coluna3${index}`} src={imagem} />
           ))}
         </Coluna>

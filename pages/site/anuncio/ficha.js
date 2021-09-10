@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import Icone from 'components/icone';
-import Telefone from './telefone';
 
 const Ficha = () => {
   return (
@@ -11,7 +10,6 @@ const Ficha = () => {
       </Foto>
       <Nome>Alessandra Loira Bonita</Nome>
       <Nome>22 Anos</Nome>
-      <Telefone pequeno={true} numero="(56) 99999-9990" />
 
       <TituloItem>Atendo:</TituloItem>
       <ItemFicha><Icone nome="male" /> Homem</ItemFicha>
@@ -45,7 +43,7 @@ const ContainerFicha = styled.div`
 `
 
 const Nome = styled.h2`
-  color: white;
+  color: var(--branca);
   margin: 0;
   margin-bottom: 4px;
   font-size: 20px;
@@ -76,13 +74,13 @@ const TituloItem = styled.h3`
   font-weight: 700;
   margin-top: 16px;
   margin-bottom: 0;
-  color: white;
+  color: var(--branca);
 `
 
 const ItemFicha = styled.p`
   margin: 0;
   margin-bottom: 4px;
-  color: white;
+  color: var(--branca);
   font-size: 16px;
   font-weight: 500;
   opacity: 0.7;
