@@ -84,13 +84,10 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
         <BotaoDeUpload htmlFor="imagem-comprovante">
           Faça o upload do comprovante de depósito
         </BotaoDeUpload>
-        {comprovante ? (
+        {comprovante?.length ?
           <ContainerImagem>
             <Imagem src={comprovante[0]?.result} />
-          </ContainerImagem>
-        ) : (
-          ""
-        )}
+          </ContainerImagem> : ""}
         <p style={{ color: "var(--branca)" }}>Deste modo de pagamento, teremos que aprovar seu anúncio para ele entrar no ar.</p>
       </>
       }

@@ -9,12 +9,20 @@ const Ficha = () => {
         <img src="/exemple1.jpg" />
       </Foto>
       <Nome>Alessandra Loira Bonita</Nome>
-      <Nome>22 Anos</Nome>
+      <ItemFicha>22 anos</ItemFicha>
 
       <TituloItem>Atendo:</TituloItem>
-      <ItemFicha><Icone nome="male" /> Homem</ItemFicha>
-      <ItemFicha><Icone nome="female" /> Mulher</ItemFicha>
-      <ItemFicha><Icone nome="wc" /> Casal</ItemFicha>
+      <ItemFicha><Icone nome="male" />Homem</ItemFicha>
+      <ItemFicha><Icone nome="female" />Mulher</ItemFicha>
+      <ItemFicha><Icone nome="wc" />Casal</ItemFicha>
+
+      <TituloItem>Horário:</TituloItem>
+      <ItemFicha><Icone nome="timer" />11:30 às 04:00</ItemFicha>
+
+      <TituloItem>Valor:</TituloItem>
+      <ItemFicha><Icone nome="attach_money" />R$200</ItemFicha>
+      <ItemFicha><Icone nome="attach_money" />A combinar</ItemFicha>
+      <ItemFicha><Icone nome="credit_card" />Aceito cartão</ItemFicha>
 
       <TituloItem>Locais que atendo:</TituloItem>
       <ItemFicha>Próprio</ItemFicha>
