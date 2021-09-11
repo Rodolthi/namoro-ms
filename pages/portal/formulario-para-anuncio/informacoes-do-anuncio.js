@@ -3,16 +3,18 @@ import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { salvarDadosDoFormulario } from "utils/storage";
+import Icone from "components/icone";
 
-const InformacoesDoAnuncio = () => {
+const InformacoesDoAnuncio = ({ avancarEtapa }) => {
   const { register, getValues, formState: { errors }, handleSubmit } = useForm();
 
-  const proximaEtapa = () => {
+  const validarForm = () => {
     salvarDadosDoFormulario(getValues())
+    avancarEtapa();
   }
 
   return (
-    <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(proximaEtapa)} >
+    <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(validarForm)} >
       <Titulo>Descrição do anúncio</Titulo>
       <TextField
         {...register("descricao", { required: "É obrigatório inserir a descrição" })}
@@ -26,7 +28,14 @@ const InformacoesDoAnuncio = () => {
         id="texto-descritivo"
       />
 
-      <Button color="primary" type="submit">Próxima</Button>
+      <div>
+        <Button variant="contained"
+          color="primary"
+          type="submit"
+          fullWidth
+          endIcon={<Icone nome="navigate_next" />}
+        >Avançar</Button>
+      </div>
     </Formulario>
   );
 };

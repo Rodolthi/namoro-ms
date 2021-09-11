@@ -62,11 +62,12 @@ const FormularioParaAnuncio = () => {
           setDadosDoFormulario={setDadosDoFormulario}
           dadosPessoais={dadosPessoais}
           setDadosPessoais={setDadosPessoais}
+          avancarEtapa={avancarEtapa}
         />
       }
 
       {etapaSelecionada === 1 &&
-        <InformacoesDoAnuncio />
+        <InformacoesDoAnuncio avancarEtapa={avancarEtapa} />
       }
 
       {etapaSelecionada === 2 &&
@@ -74,11 +75,13 @@ const FormularioParaAnuncio = () => {
           setImagemPrincipal={setImagemPrincipal}
           setImagensGaleria={setImagensGaleria}
           imagemPrincipal={imagemPrincipal}
+          avancarEtapa={avancarEtapa}
         />
       }
 
       {etapaSelecionada === 3 &&
-        <Checkout />
+        <Checkout imagensGaleria={imagensGaleria}
+          imagemPrincipal={imagemPrincipal} />
       }
 
       <ContainerBotoes>
@@ -87,21 +90,10 @@ const FormularioParaAnuncio = () => {
             onClick={avancarEtapa}
             variant="contained"
             size="large"
-            color="primary"
+            color="secondary"
             endIcon={<Icone nome="navigate_next" />}
           >
             Próximo
-          </Button>
-        )}
-        {etapaSelecionada === etapas?.length - 1 && (
-          <Button
-            onClick={finalizarCadastro}
-            variant="contained"
-            size="large"
-            color="primary"
-            endIcon={<Icone nome="navigate_next" />}
-          >
-            Finalizar cadastro
           </Button>
         )}
       </ContainerBotoes>

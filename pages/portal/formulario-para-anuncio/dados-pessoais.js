@@ -19,8 +19,9 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { obterCidades } from "api/cidades";
 import { salvarDadosDoFormulario } from "utils/storage";
+import Icone from "components/icone";
 
-const DadosPessoais = () => {
+const DadosPessoais = ({ avancarEtapa }) => {
   const [combinarValor, setCombinarValor] = useState(false)
   const { register, getValues, formState: { errors }, handleSubmit } = useForm();
   const [cidades, setCidades] = useState([]);
@@ -36,8 +37,9 @@ const DadosPessoais = () => {
     return novoValor;
   }
 
-  const avancarEtapa = () => {
+  const validarForm = () => {
     salvarDadosDoFormulario(getValues())
+    avancarEtapa()
   }
 
   const combinarValorDoPrograma = () => {
@@ -51,7 +53,7 @@ const DadosPessoais = () => {
   }, [])
 
   return (
-    <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(avancarEtapa)}>
+    <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(validarForm)}>
       <Titulo>Dados do anunciante</Titulo>
 
       <TextField
@@ -310,7 +312,14 @@ const DadosPessoais = () => {
         </RadioGroup>
       </FormControl>
 
-      <Button color="primary" type="submit">Próxima</Button>
+      <div>
+        <Button variant="contained"
+          color="primary"
+          type="submit"
+          fullWidth
+          endIcon={<Icone nome="navigate_next" />}
+        >Avançar</Button>
+      </div>
     </Formulario >
   );
 };

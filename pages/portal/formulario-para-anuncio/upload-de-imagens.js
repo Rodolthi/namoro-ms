@@ -2,10 +2,14 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Icone from "components/icone";
 import lerURI from "utils/lerURI";
-import { salvarDadosDoFormulario } from "utils/storage";
 import Button from "@material-ui/core/Button";
 
-const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, setImagemPrincipal }) => {
+const UploadDeImagens = ({
+  imagensGaleria,
+  imagemPrincipal,
+  setImagensGaleria,
+  setImagemPrincipal,
+  avancarEtapa }) => {
 
   const handleImages = (e) => {
     lerURI(e).then((images) => {
@@ -25,13 +29,15 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
     );
   };
 
-  const avancarEtapa = () => {
-    salvarDadosDoFormulario({ galeria: imagensGaleria })
-    salvarDadosDoFormulario({ imagemPrincipal: imagemPrincipal })
+  const validarForm = (e) => {
+    e.preventDefault();
+    if (imagensGaleria.length && imagemPrincipal.length) {
+      avancarEtapa()
+    } else alert("Insira as imagens para continuar")
   }
 
   return (
-    <Formulario>
+    <Formulario noValidate autoComplete="off" onSubmit={(e) => validarForm(e)}>
       <Titulo>Dados do anunciante</Titulo>
       <input
         accept="image/png, image/jpeg"
@@ -81,7 +87,14 @@ const UploadDeImagens = ({ imagensGaleria, imagemPrincipal, setImagensGaleria, s
         ""
       )}
 
-      <Button color="primary" type="button" onClick={avancarEtapa}>Avançar</Button>
+      <div>
+        <Button variant="contained"
+          color="primary"
+          type="submit"
+          fullWidth
+          endIcon={<Icone nome="navigate_next" />}
+        >Avançar</Button>
+      </div>
     </Formulario>
   );
 };
@@ -91,7 +104,6 @@ export default UploadDeImagens
 const Formulario = styled.form`
   background: #000;
   width: 100%;
-  margin-bottom: 24px;
 `;
 
 const Titulo = styled.h2`
