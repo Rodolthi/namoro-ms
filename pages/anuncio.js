@@ -1,4 +1,4 @@
-import Anuncio from "pages/site/anuncio"
+import Anuncio from "layout/site/anuncio"
 
 const PaginaAnuncio = () => {
   return (

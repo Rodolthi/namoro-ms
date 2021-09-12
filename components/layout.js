@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
-import Cabecalho from "pages/site/cabecalho"
-import CabecalhoPortal from "pages/portal/cabecalho"
-import Rodape from "pages/site/rodape"
+import Cabecalho from "layout/site/cabecalho"
+import CabecalhoPortal from "layout/portal/cabecalho"
+import Rodape from "layout/site/rodape"
 import { useRouter } from "next/dist/client/router"
 
 const Layout = ({ children }) => {

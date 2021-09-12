@@ -1,4 +1,4 @@
-import Login from "pages/portal/login"
+import Login from "layout/portal/login"
 
 const LoginPortal = () => {
   return (

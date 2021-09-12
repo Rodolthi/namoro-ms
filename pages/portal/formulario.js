@@ -1,4 +1,4 @@
-import FormularioParaAnuncio from "pages/portal/formulario-para-anuncio"
+import FormularioParaAnuncio from "layout/portal/formulario-para-anuncio"
 
 const FormularioAnuncio = () => {
   return (

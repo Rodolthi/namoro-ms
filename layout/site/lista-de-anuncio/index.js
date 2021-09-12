@@ -11,7 +11,7 @@ const ListaDeAnuncios = () => {
   const router = useRouter();
 
   const irParaOAnuncio = () => {
-    router.push("/site/anuncio/")
+    router.push("/anuncio/")
   }
 
   return (
