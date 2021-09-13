@@ -73,7 +73,6 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         error={errors.usuario?.type === "required"}
       />
 
-      {/* TODO: Validar se o e-mail já existe */}
       <TextField
         {...register("novoEmail",
           {
