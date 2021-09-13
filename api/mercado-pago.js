@@ -10,9 +10,9 @@ const obterDadosMP = (title, price) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:3000/portal/inicio",
-      failure: "http://localhost:3000/portal/inicio",
-      pending: "http://localhost:3000/portal/inicio"
+      success: "http://localhost:3000/portal/checkout",
+      failure: "http://localhost:3000/portal/checkout",
+      pending: "http://localhost:3000/portal/checkout"
     },
     auto_return: "approved",
   };

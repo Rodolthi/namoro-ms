@@ -13,6 +13,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const { register, getValues, formState: { errors }, handleSubmit } = useForm()
   const [deposito, setDeposito] = useState(false)
   const [comprovante, setComprovante] = useState([])
+  const [pagamentoAprovado, setPagamentoAprovado] = useState(true)
 
   //TODO: Fazer Checkout com mercado pago
   const finalizarCadastro = () => {
@@ -115,14 +116,14 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       </>
       }
 
-      {deposito &&
-        <Button variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth
-          startIcon={<Icone nome="check" />}
-        >Finalizar compra</Button>
-      }
+      <BotaoFinalizacao variant="contained"
+        color="primary"
+        type="submit"
+        fullWidth
+        startIcon={<Icone nome="check" />}
+      >
+        Finalizar compra
+      </BotaoFinalizacao>
     </Formulario >
   );
 };
@@ -192,3 +193,7 @@ const Imagem = styled.img`
   height: auto;
   border-radius: 8px;
 `;
+
+const BotaoFinalizacao = styled(Button)`
+  margin-top: 24px !important;
+`
