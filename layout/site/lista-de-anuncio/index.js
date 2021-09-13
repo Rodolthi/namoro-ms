@@ -1,11 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import Link from "next/link"
 import { useRouter } from "next/router"
-
-const divStyle = (src) => ({
-  backgroundImage: 'url(' + src + ')'
-})
 
 const ListaDeAnuncios = () => {
   const router = useRouter();

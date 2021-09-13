@@ -1,8 +1,8 @@
-import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, TextField } from "@material-ui/core";
+import { Button, Checkbox, FormControl, FormControlLabel, FormGroup } from "@material-ui/core";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { obterDadosDoFormulario, salvarDadosDoFormulario } from "utils/storage";
+import { obterDadosDoFormulario } from "utils/storage";
 import Icone from "components/icone";
 import lerURI from "utils/lerURI";
 import { useRouter } from "next/router";

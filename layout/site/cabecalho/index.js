@@ -1,5 +1,5 @@
 import { Button, FormControl, IconButton, InputLabel, MenuItem, Select } from "@material-ui/core"
-import React from "react"
+import React, { createRef } from "react"
 import styled from "styled-components"
 import Link from "next/link"
 import ModalDeSelecaoDeCidade from "../modal-de-selecao-de-cidade"
@@ -7,17 +7,16 @@ import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
 import Icone from "components/icone"
 import { useRouter } from "next/router"
-import {initializeStore} from 'store/configureStore';
+import { initializeStore } from 'store/configureStore';
 
 const Cabecalho = () => {
   const [cidadeSelecionada, setCidadeSelecionada] = useState("")
   const [acompanhante, setAcompanhante] = useState("mulher")
   const [menuAberto, setMenuAberto] = useState(false)
-
   const reduxStore = initializeStore()
   const { dispatch } = reduxStore
-
-  const router = useRouter();
+  const wraper = createRef()
+  const router = useRouter()
 
   useEffect(() => {
     sessionStorage.getItem('cidadeSelecionada') && setCidadeSelecionada(sessionStorage.getItem('cidadeSelecionada'))

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Icone from "components/icone";
 import lerURI from "utils/lerURI";
