@@ -1,12 +1,14 @@
 import { Button } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Icone from "components/icone";
 import BlankSlate from "../blank-slate";
 import Anuncios from "./anuncios";
+import { useRouter } from "next/router";
 
 const Home = () => {
+  const router = useRouter()
   const anuncios = [
     {
       titulo: "Morena Formosa 18",
@@ -27,6 +29,13 @@ const Home = () => {
       status: "pendente",
     },
   ];
+
+  useEffect(() => {
+    const pagamentoMercadoPago = router.query
+    if (pagamentoMercadoPago.collection_status === "approved") {
+      alert("Pagamento aprovado com sucesso")
+    }
+  }, [router.query])
 
   return (
     <Container>

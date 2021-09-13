@@ -6,6 +6,7 @@ import { obterDadosDoFormulario } from "utils/storage";
 import Icone from "components/icone";
 import lerURI from "utils/lerURI";
 import { useRouter } from "next/router";
+import obterDadosMP from "api/mercado-pago";
 
 const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const router = useRouter()
@@ -43,6 +44,17 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     setComprovante([])
   }
 
+  const pagarComCartao = () => {
+    const dados = obterDadosDoFormulario("dadosDoFormulario")
+    const tituloPlanoEscolhido = `Plano de ${dados.plano}`
+
+    obterDadosMP(tituloPlanoEscolhido, dados.preco).then(res => {
+      console.log(res)
+      router.push(res.init_point)
+    })
+
+  }
+
   return (
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(finalizarCadastro)} >
       <Titulo>Pagamento</Titulo>
@@ -57,13 +69,24 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
                 onChange={handleChangeDeposito}
               />
             }
-            label="Deseja fazer o pagamento por depósito"
+            label="Desejo fazer o pagamento por depósito"
           />
         </FormGroup>
       </FormControl>
 
       {!deposito &&
-        <p>Fazer pagamento </p>
+        <div>
+          <Button
+            color="primary"
+            fullWidth
+            variant="contained"
+            size="large"
+            type="button"
+            startIcon={<Icone nome="payment" />}
+            onClick={pagarComCartao}>
+            Pagar com cartão
+          </Button>
+        </div>
       }
 
       {deposito && <>
@@ -92,15 +115,15 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       </>
       }
 
-      <div>
+      {deposito &&
         <Button variant="contained"
           color="primary"
           type="submit"
           fullWidth
           startIcon={<Icone nome="check" />}
         >Finalizar compra</Button>
-      </div>
-    </Formulario>
+      }
+    </Formulario >
   );
 };
 
