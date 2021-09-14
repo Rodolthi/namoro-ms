@@ -9,6 +9,11 @@ const obterDadosMP = (title, price) => {
         unit_price: price,
       },
     ],
+    payment_methods: {
+      excluded_payment_methods: [{
+        id: "pix"
+      }]
+    },
     back_urls: {
       success: "http://localhost:3000/portal/inicio",
       failure: "http://localhost:3000/portal/inicio",
