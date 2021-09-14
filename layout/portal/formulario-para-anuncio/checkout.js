@@ -157,6 +157,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       <BotaoFinalizacao variant="contained"
         color="primary"
         type="submit"
+        disabled={!comprovante.length}
         fullWidth
         startIcon={<Icone nome="check" />}
       >
