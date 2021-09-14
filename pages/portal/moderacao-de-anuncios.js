@@ -1,4 +1,5 @@
 import { Button } from "@material-ui/core";
+import BlankSlate from "components/blank-slate";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -46,6 +47,12 @@ const ModeracaoDeAnuncios = () => {
               </footer>
             </Anuncio>
           ))}
+          {anuncios.length === 0 && (
+            <BlankSlate
+              icone="feedback"
+              texto="Ops... Não encontramos anúncios para serem moderados."
+            />
+          )}
         </Lista>
       )}
     </>
