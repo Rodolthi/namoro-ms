@@ -5,11 +5,11 @@ const postData = async (dataUser, token) => {
 
     const bodyParam = dataUser;
 
-    const config = {
-        headers: {"Authorization": `Bearer ${token}`}
-    };
-
-    const data = await axios.post('http://localhost:10004/wp-json/api/usuario', bodyParam, config)
+    const data = await axios.get(`http://localhost:10004/wp-json/api/anuncio`, {
+        params: {
+            slug
+        }
+    })
     return data;
 } 
 

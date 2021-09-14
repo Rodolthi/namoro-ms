@@ -1,31 +1,44 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { useRouter } from "next/router"
+import {getAnuncios} from 'api/controllers/pegar-anuncios';
+import { useSelector } from "react-redux";
 
 const ListaDeAnuncios = () => {
+
+  const filtros = useSelector((state) => state);
+
+  const [anuncios, setAnuncios] = useState([]);
   const router = useRouter();
 
   const irParaOAnuncio = () => {
     router.push("/anuncio/")
   }
 
+  useEffect(() => {
+    (async () => {
+      const resultAnuncios = await getAnuncios(filtros);
+      setAnuncios(resultAnuncios.data);
+    })()
+  },[filtros]);
+
   return (
     <Lista>
-      {itens?.map((item, index) => {
+      {anuncios.length > 0 && anuncios.map((item, index) => {
         return (
           <li key={index}>
             <Item onClick={irParaOAnuncio}>
               <Foto>
-                <img src={item.imagem} />
+                <img src={item.fotos[0].src} />
               </Foto>
               <span className="infos">
-                <p className="nome">{item.nome}</p>
+                <p className="nome">{item.tituloAnuncio}</p>
                 <p className="telefone">
                   <img src="whatsappp-logo.svg" />
                   {item.telefone}
                 </p>
-                {item.comLocal && <p className="descricao">Com local</p>}
-                <p className="descricao">{item.cidade}/{item.estado}</p>
+                {item.atendeEmLocalProprio && <p className="descricao">Com local</p>}                
+                <p className="descricao">{item.cidade}/MS</p>
               </span>
             </Item>
           </li>
