@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { visualizarPagina } from 'utils/analytics'
 import { useRouter } from 'next/router'
 import { Provider } from 'react-redux';
-import { useStore } from '../store/configureStore';
+import { useStore } from 'store/configureStore';
 
 function MyApp({ Component, pageProps }) {
 
