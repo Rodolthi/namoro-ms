@@ -6,7 +6,9 @@ import { Button } from "@material-ui/core";
 
 const Cabecalho = () => {
   const router = useRouter();
-  const deslogar = () => {};
+  const deslogar = () => {
+    router.push("/portal/login")
+  };
 
   return (
     <CabecalhoDoPortal>
