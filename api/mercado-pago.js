@@ -1,4 +1,3 @@
-
 const obterDadosMP = (title, price) => {
   let data = {
     items: [
@@ -10,18 +9,25 @@ const obterDadosMP = (title, price) => {
       },
     ],
     payment_methods: {
-      excluded_payment_methods: [{
-        id: "pix"
-      }]
+      excluded_payment_methods: [
+        {
+          id: "pix",
+        },
+        {
+          id: "pec",
+        },
+        {
+          id: "bolbradesco",
+        },
+      ],
     },
     back_urls: {
       success: "http://localhost:3000/portal/inicio",
       failure: "http://localhost:3000/portal/inicio",
-      pending: "http://localhost:3000/portal/inicio"
+      pending: "http://localhost:3000/portal/inicio",
     },
     auto_return: "approved",
   };
-
 
   const respostaDaAPI = () =>
     fetch(
@@ -37,6 +43,6 @@ const obterDadosMP = (title, price) => {
       });
 
   return respostaDaAPI();
-}
+};
 
-export default obterDadosMP
+export default obterDadosMP;
