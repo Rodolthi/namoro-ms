@@ -3,12 +3,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Icone from "components/icone";
-import BlankSlate from "../blank-slate";
+import BlankSlate from "components/blank-slate";
 import Anuncios from "./anuncios";
 import { useRouter } from "next/router";
 
 const Home = () => {
-  const router = useRouter()
+  const router = useRouter();
   const anuncios = [
     {
       titulo: "Morena Formosa 18",
@@ -31,11 +31,11 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    const pagamentoMercadoPago = router.query
+    const pagamentoMercadoPago = router.query;
     if (pagamentoMercadoPago.collection_status === "approved") {
-      alert("Pagamento aprovado com sucesso")
+      alert("Pagamento aprovado com sucesso");
     }
-  }, [router.query])
+  }, [router.query]);
 
   return (
     <Container>
@@ -46,8 +46,8 @@ const Home = () => {
           <Anuncios anuncios={anuncios} />
         ) : (
           <BlankSlate
-            iconeBotao={"add"}
-            texto={"Você ainda não possui anúncios ativos"}
+            icone="feed"
+            texto="Você ainda não possui anúncios ativos"
           />
         )}
         <Link href="/portal/planos/">
@@ -66,7 +66,7 @@ const Home = () => {
   );
 };
 
-export default Home
+export default Home;
 
 const Container = styled.section`
   background-color: var(--preta);

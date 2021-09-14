@@ -3,10 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import Icone from "components/icone";
 
-const BlankSlate = ({ texto, iconeBotao, textoBotao, acaoDoBotao }) => {
+const BlankSlate = ({ icone, texto, iconeBotao, textoBotao, acaoDoBotao }) => {
   return (
     <Container>
-      <Icone nome="feed" />
+      <Icone nome={icone} />
       <Texto>{texto}</Texto>
       {acaoDoBotao && textoBotao && (
         <Button
@@ -40,4 +40,4 @@ const Texto = styled.h2`
   font-weight: 600;
 `;
 
-export default BlankSlate
+export default BlankSlate;

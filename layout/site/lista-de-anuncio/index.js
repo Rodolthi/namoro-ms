@@ -1,54 +1,64 @@
-import React, { useEffect, useState } from "react"
-import styled from "styled-components"
-import { useRouter } from "next/router"
-import {getAnuncios} from 'api/controllers/pegar-anuncios';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useRouter } from "next/router";
+import { getAnuncios } from "api/controllers/pegar-anuncios";
 import { useSelector } from "react-redux";
+import BlankSlate from "components/blank-slate";
 
 const ListaDeAnuncios = () => {
-
   const filtros = useSelector((state) => state);
 
   const [anuncios, setAnuncios] = useState([]);
   const router = useRouter();
 
   const irParaOAnuncio = () => {
-    router.push("/anuncio/")
-  }
+    router.push("/anuncio/");
+  };
 
   useEffect(() => {
     (async () => {
       const resultAnuncios = await getAnuncios(filtros);
       setAnuncios(resultAnuncios.data);
-    })()
-  },[filtros]);
+    })();
+  }, [filtros]);
 
   return (
     <Lista>
-      {anuncios.length > 0 && anuncios.map((item, index) => {
-        return (
-          <li key={index}>
-            <Item onClick={irParaOAnuncio}>
-              <Foto>
-                <img src={item.fotos[0].src} />
-              </Foto>
-              <span className="infos">
-                <p className="nome">{item.tituloAnuncio}</p>
-                <p className="telefone">
-                  <img src="whatsappp-logo.svg" />
-                  {item.telefone}
-                </p>
-                {item.atendeEmLocalProprio && <p className="descricao">Com local</p>}                
-                <p className="descricao">{item.cidade}/MS</p>
-              </span>
-            </Item>
-          </li>
-        )
-      })}
-    </Lista>
-  )
-}
+      {anuncios.length > 0 &&
+        anuncios.map((item, index) => {
+          return (
+            <li key={index}>
+              <Item onClick={irParaOAnuncio}>
+                <Foto>
+                  <img src={item.fotos[0].src} />
+                </Foto>
+                <span className="infos">
+                  <p className="nome">{item.tituloAnuncio}</p>
+                  <p className="telefone">
+                    <img src="whatsappp-logo.svg" />
+                    {item.telefone}
+                  </p>
+                  {item.atendeEmLocalProprio && (
+                    <p className="descricao">Com local</p>
+                  )}
+                  <p className="descricao">{item.cidade}/MS</p>
+                </span>
+              </Item>
+            </li>
+          );
+        })}
 
-export default ListaDeAnuncios
+      {anuncios.length === 0 && (
+        <BlankSlate
+          icone="feedback"
+          texto="Ops... Não encontramos anúncios aqui por enquanto."
+        />
+      )}
+    </Lista>
+  );
+};
+
+export default ListaDeAnuncios;
 
 const Lista = styled.ul`
   display: flex;
@@ -60,7 +70,7 @@ const Lista = styled.ul`
   width: 100%;
   max-width: 1240px;
   flex-wrap: wrap;
-`
+`;
 
 const Item = styled.div`
   display: flex;
@@ -72,18 +82,19 @@ const Item = styled.div`
   width: 240px;
   height: 320px;
   border-radius: 8px;
-  transition: ease .2s;
+  transition: ease 0.2s;
   cursor: pointer;
   overflow: hidden;
   margin: 12px;
-  &:hover,&:focus{
+  &:hover,
+  &:focus {
     transform: translate(0, -3px);
     background-color: green;
   }
   .infos {
     position: relative;
     display: flex;
-    background-color: rgba(250,192,69, 0.9);
+    background-color: rgba(250, 192, 69, 0.9);
     flex-direction: column;
     text-align: center;
     margin: 8px;
@@ -121,7 +132,7 @@ const Item = styled.div`
       height: 20px;
     }
   }
-`
+`;
 
 const Foto = styled.div`
   position: absolute;
@@ -138,19 +149,14 @@ const Foto = styled.div`
     width: 100%;
     object-fit: cover;
   }
-`
-
-
-
-
-
+`;
 
 //Mock
-const foto1 = "exemple1.jpg"
-const foto2 = "exemple2.jpg"
-const foto3 = "exemple3.jpg"
-const foto4 = "exemple4.jpg"
-const foto5 = "exemple5.jpg"
+const foto1 = "exemple1.jpg";
+const foto2 = "exemple2.jpg";
+const foto3 = "exemple3.jpg";
+const foto4 = "exemple4.jpg";
+const foto5 = "exemple5.jpg";
 const itens = [
   {
     nome: "Bruninha",
@@ -158,7 +164,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto1
+    imagem: foto1,
   },
   {
     nome: "Gisele",
@@ -166,7 +172,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto2
+    imagem: foto2,
   },
   {
     nome: "Verônica",
@@ -174,7 +180,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto3
+    imagem: foto3,
   },
   {
     nome: "Letícia",
@@ -182,7 +188,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto4
+    imagem: foto4,
   },
   {
     nome: "Malu Maitê",
@@ -190,7 +196,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto5
+    imagem: foto5,
   },
   {
     nome: "Bruninha",
@@ -198,7 +204,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto1
+    imagem: foto1,
   },
   {
     nome: "Gisele",
@@ -206,7 +212,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto2
+    imagem: foto2,
   },
   {
     nome: "Verônica",
@@ -214,7 +220,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto3
+    imagem: foto3,
   },
   {
     nome: "Letícia",
@@ -222,7 +228,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto4
+    imagem: foto4,
   },
   {
     nome: "Malu Maitê",
@@ -230,7 +236,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto5
+    imagem: foto5,
   },
   {
     nome: "Bruninha",
@@ -238,7 +244,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto1
+    imagem: foto1,
   },
   {
     nome: "Gisele",
@@ -246,7 +252,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto2
+    imagem: foto2,
   },
   {
     nome: "Verônica",
@@ -254,7 +260,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto3
+    imagem: foto3,
   },
   {
     nome: "Letícia",
@@ -262,7 +268,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto4
+    imagem: foto4,
   },
   {
     nome: "Malu Maitê",
@@ -270,7 +276,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto5
+    imagem: foto5,
   },
   {
     nome: "Bruninha",
@@ -278,7 +284,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto1
+    imagem: foto1,
   },
   {
     nome: "Gisele",
@@ -286,7 +292,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto2
+    imagem: foto2,
   },
   {
     nome: "Verônica",
@@ -294,7 +300,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto3
+    imagem: foto3,
   },
   {
     nome: "Letícia",
@@ -302,7 +308,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto4
+    imagem: foto4,
   },
   {
     nome: "Malu Maitê",
@@ -310,7 +316,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto5
+    imagem: foto5,
   },
   {
     nome: "Bruninha",
@@ -318,7 +324,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto1
+    imagem: foto1,
   },
   {
     nome: "Gisele",
@@ -326,7 +332,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto2
+    imagem: foto2,
   },
   {
     nome: "Verônica",
@@ -334,7 +340,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto3
+    imagem: foto3,
   },
   {
     nome: "Letícia",
@@ -342,7 +348,7 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto4
+    imagem: foto4,
   },
   {
     nome: "Malu Maitê",
@@ -350,6 +356,6 @@ const itens = [
     comLocal: true,
     cidade: "Campo Grande",
     estado: "MS",
-    imagem: foto5
+    imagem: foto5,
   },
-]
+];
