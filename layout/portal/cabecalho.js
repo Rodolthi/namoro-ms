@@ -8,7 +8,7 @@ const Cabecalho = () => {
 
   return (
     <CabecalhoDoPortal>
-      <Logo onClick={() => router.push("/portal/inicio")} src="/logo.svg" />
+      <Logo src="/logo.svg" />
 
       <Icone nome="account_circle" />
     </CabecalhoDoPortal>
@@ -28,5 +28,4 @@ const CabecalhoDoPortal = styled.header`
 
 const Logo = styled.img`
   height: 100%;
-  cursor: pointer;
 `
