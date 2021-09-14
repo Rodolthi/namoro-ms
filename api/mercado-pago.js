@@ -10,9 +10,9 @@ const obterDadosMP = (title, price) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:3000/portal/checkout",
-      failure: "http://localhost:3000/portal/checkout",
-      pending: "http://localhost:3000/portal/checkout"
+      success: "http://localhost:3000/portal/inicio",
+      failure: "http://localhost:3000/portal/inicio",
+      pending: "http://localhost:3000/portal/inicio"
     },
     auto_return: "approved",
   };
@@ -20,7 +20,7 @@ const obterDadosMP = (title, price) => {
 
   const respostaDaAPI = () =>
     fetch(
-      `https://api.mercadopago.com/checkout/preferences?access_token=TEST-2148138877475807-090120-149eae5aa5df650f2360ea7371ff7436-130928739`,
+      `https://api.mercadopago.com/checkout/preferences?access_token=${process.env.NEXT_PUBLIC_ACCESS_TOKEN_MP}`,
       {
         method: "POST",
         body: JSON.stringify(data),

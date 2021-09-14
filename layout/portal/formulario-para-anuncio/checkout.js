@@ -49,6 +49,8 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     const dados = obterDadosDoFormulario("dadosDoFormulario")
     const tituloPlanoEscolhido = `Plano de ${dados.plano}`
 
+
+
     obterDadosMP(tituloPlanoEscolhido, dados.preco).then(res => {
       console.log(res)
       router.push(res.init_point)

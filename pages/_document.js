@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', ${process.env.ID_GA}, {
+            gtag('config', ${process.env.NEXT_PUBLIC_ID_GA}, {
               page_path: window.location.pathname,
             });
           `,
