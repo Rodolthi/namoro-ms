@@ -27,7 +27,12 @@ const ModeracaoDeAnuncios = () => {
             <Anuncio key={index}>
               <h2>{item.nome}</h2>
               <h3>Id do anunciante: {item.id}</h3>
-              <a title="Visualizar comprovante" target="_blank" rel="noreferrer" href={item.comprovante}>
+              <a
+                title="Visualizar comprovante"
+                target="_blank"
+                rel="noreferrer"
+                href={item.comprovante}
+              >
                 <img src={item.comprovante} />
               </a>
 
@@ -53,6 +58,8 @@ const Lista = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 0;
+  list-style: none;
 `;
 
 const Anuncio = styled.li`
@@ -67,7 +74,7 @@ const Anuncio = styled.li`
   padding: 16px;
   img {
     width: 100%;
-    margin-top: 24px;
+    margin: 24px 0;
   }
   h2,
   h3 {
