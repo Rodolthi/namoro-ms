@@ -37,6 +37,11 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
       regiao: cidade
     })
 
+    dispatch({
+      type: 'ACOMPANHANTE',
+      regiao: 'mulher'
+    })
+
     fecharModal();
   };
 

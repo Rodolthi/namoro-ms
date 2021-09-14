@@ -9,7 +9,7 @@ const postData = async (dataUser, token) => {
         headers: {"Authorization": `Bearer ${token}`}
     };
 
-    const data = await axios.post('http://localhost:10004/wp-json/api/usuario', bodyParam, config)
+    const data = await axios.post('http://localhost:10004/wp-json/api/anuncio', bodyParam, config)
     return data;
 } 
 
