@@ -1,11 +1,11 @@
 import axios from "axios";
-// axios.defaults.baseURL = 'http://localhost:10004/wp-json/api';
+// axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_WEBAPP_PORT}/wp-json/api`;
 
 const postData = async (filtros) => {
 
     const {regiao, acompanhante} = filtros;
 
-    const data = await axios.get(`http://localhost:10004/wp-json/api/anuncios`,{
+    const data = await axios.get(`${process.env.NEXT_PUBLIC_WEBAPP_PORT}/wp-json/api/anuncios`,{
         params: {
             cidade: regiao,
             acompanhante

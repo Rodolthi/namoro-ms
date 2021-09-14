@@ -22,9 +22,9 @@ const obterDadosMP = (title, price) => {
       ],
     },
     back_urls: {
-      success: "http://localhost:3000/portal/inicio",
-      failure: "http://localhost:3000/portal/inicio",
-      pending: "http://localhost:3000/portal/inicio",
+      success: `${process.env.NEXT_PUBLIC_WEBAPP_PORT}/portal/inicio`,
+      failure: `${process.env.NEXT_PUBLIC_WEBAPP_PORT}/portal/inicio`,
+      pending: `${process.env.NEXT_PUBLIC_WEBAPP_PORT}/portal/inicio`,
     },
     auto_return: "approved",
   };

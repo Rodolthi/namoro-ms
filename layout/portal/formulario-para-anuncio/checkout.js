@@ -129,6 +129,11 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
           <p><strong>Banco do Brasil: 001</strong></p>
           <p>Agência: 2916-5</p>
           <p>Conta: 40140-4</p>
+          
+          <hr />
+
+          <h2>PIX:</h2>
+          <p>namoroms67@gmail.com</p>
         </DadosParaDeposito>
 
         <input
