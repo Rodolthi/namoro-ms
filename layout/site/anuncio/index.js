@@ -15,17 +15,17 @@ const Anuncio = () => {
   useEffect(() => {
     (async() => {      
       const result = await getAnuncio(router.query.slug);
-      console.log(result.data);
-      setAnuncio(result);
+      console.log('index: ', result.data);
+      setAnuncio(result.data);
     })();
   },[])
 
   return (
     <ContainerAnuncio>
-      <Ficha />
+      <Ficha dados={anuncio}/>
       <Conteudo>
-        <Galeria />
-        <Descricao />
+        <Galeria dados={anuncio}/>
+        <Descricao dados={anuncio}/>
       </Conteudo>
     </ContainerAnuncio>
   )

@@ -2,33 +2,35 @@ import React from "react"
 import styled from "styled-components"
 import Icone from 'components/icone';
 
-const Ficha = () => {
+const Ficha = ({dados}) => {
+
+  if(!dados) return null;
   return (
     <ContainerFicha>
       <Foto>
-        <img src="/exemple1.jpg" />
+        <img src={dados.fotos[0].src} />
       </Foto>
-      <Nome>Alessandra Loira Bonita</Nome>
-      <ItemFicha>22 anos</ItemFicha>
+      <Nome>{dados.tituloAnuncio}</Nome>
+      <ItemFicha>{dados.idade} anos</ItemFicha>
 
       <TituloItem>Atendo:</TituloItem>
-      <ItemFicha><Icone nome="male" />Homem</ItemFicha>
-      <ItemFicha><Icone nome="female" />Mulher</ItemFicha>
-      <ItemFicha><Icone nome="wc" />Casal</ItemFicha>
+      {dados.atendeHomem === "true" && <ItemFicha><Icone nome="male" />Homem</ItemFicha>}
+      {dados.atendeMulher === "true" && <ItemFicha><Icone nome="female" />Mulher</ItemFicha>}
+      {dados.atendeCasal === "true" && <ItemFicha><Icone nome="wc" />Casal</ItemFicha>}
 
       <TituloItem>Horário:</TituloItem>
-      <ItemFicha><Icone nome="timer" />11:30 às 04:00</ItemFicha>
+      <ItemFicha><Icone nome="timer" />{dados.comecaAtender} às {dados.atendeAte}</ItemFicha>
 
       <TituloItem>Valor:</TituloItem>
-      <ItemFicha><Icone nome="attach_money" />R$200</ItemFicha>
-      <ItemFicha><Icone nome="attach_money" />A combinar</ItemFicha>
-      <ItemFicha><Icone nome="credit_card" />Aceito cartão</ItemFicha>
+      {!dados.valorACombinar && <ItemFicha><Icone nome="attach_money" />{dados.valorDoPrograma}</ItemFicha>}
+      {dados.valorACombinar === "true" && <ItemFicha><Icone nome="attach_money" />A combinar</ItemFicha>}
+      {dados.aceitaCartao === "sim" && <ItemFicha><Icone nome="credit_card" />Aceito cartão</ItemFicha>}
 
       <TituloItem>Locais que atendo:</TituloItem>
-      <ItemFicha>Próprio</ItemFicha>
-      <ItemFicha>Hotel</ItemFicha>
-      <ItemFicha>Motel</ItemFicha>
-      <ItemFicha>Casa do cliente</ItemFicha>
+      {dados.atendeEmLocalProprio === "true" && <ItemFicha>Próprio</ItemFicha>}
+      {dados.atendeEmHotel === "true" && <ItemFicha>Hotel</ItemFicha>}
+      {dados.atendeEmHotel === "true" && <ItemFicha>Motel</ItemFicha>}
+      {dados.casaDoCliente === "true" && <ItemFicha>Casa do cliente</ItemFicha>}
     </ContainerFicha >
   );
 }

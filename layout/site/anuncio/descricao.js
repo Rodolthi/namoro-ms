@@ -6,28 +6,35 @@ import styled from "styled-components"
 const telefone = "(67) 99999-8383"
 const descricaoDoAnuncio = "Descrição completa do anúncio aqui nessa.  completa do anúncio aqui nessa. página. Descrição completa do anúncio aqui nessa página. Descrição completa do anúncio aqui nessa página.Descrição completa do anúncio aqui nessa página."
 
-const Descricao = () => {
+const Descricao = ({dados}) => {
+
+  if(!dados) return null;
   return (
     <ContainerDescricao>
       <Texto>
-        {descricaoDoAnuncio}
+        {dados.descricao}
       </Texto>
 
       <Contato>
-        <Link style={{ width: '100%' }} href={`https://api.whatsapp.com/send?phone=${telefone}`}>
+        {
+          dados.esseNumeroEhWhatsapp === "true" &&
+          <Link style={{ width: '100%' }} href={`https://api.whatsapp.com/send?phone=${telefone}`}>
           <LinkWhats variant="contained" color="primary" size="large">
             <img src="/whatsappp-logo.svg" />
-            {telefone}
+            {dados.telefone}
           </LinkWhats>
         </Link>
-
-        <Link style={{ width: '100%' }} href={`tel:${telefone}`}>
+        }
+        {
+          dados.telefone &&
+          <Link style={{ width: '100%' }} href={`tel:${telefone}`}>
           <LinkTelefone variant="outlined" color="primary" size="large" startIcon={<Icone nome="call" />}>
-            {telefone}
+            {dados.telefone}
           </LinkTelefone>
         </Link>
-        <Detalhes>Com local</Detalhes>
-        <Detalhes>Campo Grande/MS</Detalhes>
+        }        
+        {dados.atendeEmLocalProprio === "true" && <Detalhes>Com local</Detalhes>}
+        <Detalhes>{dados.cidade}/MS</Detalhes>
       </Contato>
     </ContainerDescricao>
   )
@@ -56,6 +63,7 @@ const Texto = styled.p`
   line-height: 24px;
   margin-right: 16px;
   margin-bottom: 16px;
+  width: 100%;
 `
 
 const Contato = styled.div`
