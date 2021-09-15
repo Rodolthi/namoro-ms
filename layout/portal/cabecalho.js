@@ -19,10 +19,10 @@ const Cabecalho = () => {
 
       {estaNasRotasDoPortal && (
         <ContainerUsuario>
-          <Usuario>
+          {/* <Usuario>
             <Icone nome="account_circle" />
             Thiago Menezes
-          </Usuario>
+          </Usuario> */}
           <Button onClick={deslogar} type="button">
             <Icone nome="logout" />
           </Button>
