@@ -23,15 +23,19 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
     form.append('documentoFrente', documentoFrente[0].files);
     form.append('documentoVerso', documentoVerso[0].files);
     form.append('perfilComDocumento', perfilComDocumento[0].files);
-
     const data = await postUsuario(form);
-    
   }
+  
+  const [novaSenha, setNovaSenha] = useState("");
+  const [senhaRepetida, setSenhaRepetida] = useState("");
+  const [senhasIguais, setSenhasIguais] = useState(true)
+  const [senhaForte, setSenhaForte] = useState(true)
   const [ehMaiorDeIdade, setEhMaiorDeIdade] = useState(false);
   const [documentoFrente, setDocumentoFrente] = useState();
   const [documentoVerso, setDocumentoVerso] = useState();
   const [perfilComDocumento, setPerfilComDocumento] = useState();
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  const regexParaSenhaForte = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
 
   const formularioValido = () => ehMaiorDeIdade && documentoFrente && perfilComDocumento && perfilComDocumento;
 
@@ -57,6 +61,15 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
     lerURI(e).then((imagem) => {
       setPerfilComDocumento(imagem)
     })
+  }
+
+  const compararSenhas = (valor) => {
+    setSenhaRepetida(valor)
+    
+    if (novaSenha !== senhaRepetida) {
+      setSenhasIguais(false)
+    } else setSenhasIguais(true)
+
   }
 
   return (
@@ -92,10 +105,26 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         type="password"
         label="Senha"
         variant="outlined"
-        {...register("novaSenha", { required: "A nova senha é obrigatória" })}
-        helperText={errors.novaSenha?.message}
-        error={errors.novaSenha?.type === "required"}
+        {...register("novaSenha", { 
+          required: "A nova senha é obrigatória", 
+          pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
+        })}
+        onChange={(e) => {
+          setNovaSenha(e.target.value)
+          setSenhaForte(regexParaSenhaForte.test(e.target.value))
+        }}
+        helperText={errors.novaSenha?.message || !senhaForte && "Insira uma senha com os requisitos"}
+        error={errors.novaSenha?.type === "required" || !senhaForte}
       />
+
+      <ContainerRequisitos className={senhaForte && "sucesso"}>
+        <p><strong>A senha deve conter:</strong></p>
+        <p>No mínimo <strong>1 número</strong></p>
+        <p>No mínimo <strong>1 letra minúscula</strong></p>
+        <p>No mínimo <strong>1 letra maiúscula</strong></p>
+        <p>No mínimo <strong>1 caractere especial</strong></p>
+        <p>No mínimo <strong>8 caracteres</strong></p>
+      </ContainerRequisitos>
 
       <TextField
         fullWidth
@@ -103,8 +132,9 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         label="Repita sua senha"
         variant="outlined"
         {...register("novaSenhaRepetida", { required: "Repita a senha" })}
-        helperText={errors.novaSenhaRepetida?.message}
-        error={errors.novaSenhaRepetida?.type === "required"}
+        helperText={errors.novaSenhaRepetida?.message || !senhasIguais && "As senhas devem ser iguais" }
+        error={errors.novaSenhaRepetida?.type === "required"|| !senhasIguais}
+        onBlur={(e) => compararSenhas(e.target.value)}
       />
 
       <Documentos>
@@ -156,6 +186,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
               <Checkbox
                 checked={ehMaiorDeIdade}
                 name="maiorDeIdade"
+                color="primary"
                 onChange={handleIdade}
               />
             }
@@ -251,3 +282,15 @@ const Documentos = styled.div`
     opacity: 0.6;
   }
 `;
+
+const ContainerRequisitos = styled.div`
+  color: white;
+  opacity: 0.7;
+  margin-bottom: 16px;
+  p {
+    margin: 0;
+  }
+  & .sucesso {
+    color: var(--sucesso)
+  }
+`
