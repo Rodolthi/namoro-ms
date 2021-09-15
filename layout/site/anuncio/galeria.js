@@ -8,13 +8,22 @@ const Foto2 = "/exemple2.jpg"
 const Foto3 = "/exemple3.jpg"
 const Foto4 = "/exemple4.jpg"
 
-const Galeria = ({dados}) => {
-  const listaDeImagens = dados?.fotos.reduce((acc, item) => {
+const Galeria = ({ dados }) => {
+  console.log(dados)
+  let novaLista
+  let listaDeImagens = dados?.fotos.reduce((acc, item) => {
     return [
       ...acc,
       item.src
     ]
-  },[]);
+  }, []);
+
+  const posicaoFinalDasFotos = listaDeImagens?.length - 1
+
+  if (dados?.deposito && !novaLista) {
+    novaLista = listaDeImagens.splice(posicaoFinalDasFotos, 1)
+  }
+
 
   console.log('novaLista: ', listaDeImagens);
 
@@ -37,7 +46,7 @@ const Galeria = ({dados}) => {
     setModalAberto(true)
   }
 
-  if(!dados) return null;
+  if (!dados) return null;
   return (
     <GaleriaScroll>
       <ContainerGaleria>
