@@ -3,7 +3,7 @@ import axios from "axios";
 
 const postData = async () => {
 
-    const data = await axios.get(`http://localhost:10004/wp-json/api/cidades`)
+    const data = await axios.get(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/api/cidades`)
     return data;
 } 
 

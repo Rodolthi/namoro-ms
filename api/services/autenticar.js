@@ -5,7 +5,7 @@ const postData = async (dataUser) => {
 
     const bodyParam = dataUser;
 
-    const data = await axios.post('http://localhost:10004/wp-json/jwt-auth/v1/token', bodyParam)
+    const data = await axios.post(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/jwt-auth/v1/token`, bodyParam)
     return data;
 } 
 

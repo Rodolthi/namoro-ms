@@ -9,18 +9,23 @@ import { initializeStore } from 'store/configureStore';
 const ListaDeAnuncios = () => {
   const filtros = useSelector((state) => state);
   const reduxStore = initializeStore();
-  const { dispatch } = reduxStore;
 
   const [anuncios, setAnuncios] = useState([]);
   const router = useRouter();
 
-  const irParaOAnuncio = () => {
-    router.push("/anuncio/");
+  const irParaOAnuncio = (slug) => {
+    router.push({
+      pathname: "/anuncio/",
+      query: {
+        slug
+      }
+    });
   };
 
   useEffect(() => {
     (async () => {
       const resultAnuncios = await getAnuncios(filtros);
+      console.log('resultAnuncios: ', resultAnuncios);
       setAnuncios(resultAnuncios.data);
     })();
   }, [filtros]);
@@ -30,7 +35,7 @@ const ListaDeAnuncios = () => {
       {anuncios.length > 0 && anuncios.map((item, index) => {
         return (
           <li key={index}>
-            <Item onClick={() => irParaOAnuncio(item)}>
+            <Item onClick={() => irParaOAnuncio(item.id)}>
               <Foto>
                 <img src={item.fotos[0].src} />
               </Foto>

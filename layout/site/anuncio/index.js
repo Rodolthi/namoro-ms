@@ -1,10 +1,25 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import Galeria from "./galeria"
 import Ficha from "./ficha"
 import Descricao from "./descricao"
+import { getAnuncio } from 'api/controllers/pegar-anuncio';
+import { useRouter } from "next/router"
+
 
 const Anuncio = () => {
+  const [anuncio, setAnuncio] = useState(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    (async() => {      
+      const result = await getAnuncio(router.query.slug);
+      console.log(result.data);
+      setAnuncio(result);
+    })();
+  },[])
+
   return (
     <ContainerAnuncio>
       <Ficha />

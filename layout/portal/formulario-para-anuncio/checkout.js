@@ -62,6 +62,8 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
         form.append(`imageGaleria${index}`, item.files);
       });
 
+      form.append('comprovante', todosOsdados.comprovante[0].files);
+
       const anuncioCriado = await postAnuncio(form, token);
       router.push("/portal/inicio");
     }

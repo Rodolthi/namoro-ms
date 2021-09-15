@@ -5,11 +5,7 @@ const postData = async (dataUser, token) => {
 
     const bodyParam = dataUser;
 
-    const config = {
-        headers: {"Authorization": `Bearer ${token}`}
-    };
-
-    const data = await axios.post(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/api/anuncio`, bodyParam, config)
+    const data = await axios.get(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/api/anuncios/moderacao`);
     return data;
 } 
 

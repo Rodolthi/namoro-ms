@@ -3,6 +3,7 @@ import BlankSlate from "components/blank-slate";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import {getAnunciosModeracao} from 'api/controllers/pegar-anuncio-moderacao';
 
 const ModeracaoDeAnuncios = () => {
   const [autenticado, setAutenticado] = useState(false);
@@ -16,9 +17,14 @@ const ModeracaoDeAnuncios = () => {
       alert("Você não tem acesso à esta página");
       router.push("/portal/moderacao-login/");
     }
+    
+    (async() => {
+      const result = await getAnunciosModeracao();
+      setAnuncios(result.data);
+    })();
 
-    setAnuncios(anunciosMock);
   }, []);
+
 
   return (
     <>
@@ -26,7 +32,7 @@ const ModeracaoDeAnuncios = () => {
         <Lista>
           {anuncios.map((item, index) => (
             <Anuncio key={index}>
-              <h2>{item.nome}</h2>
+              <h2>{item.tituloAnuncio}</h2>
               <h3>Id do anunciante: {item.id}</h3>
               <a
                 title="Visualizar comprovante"
@@ -34,7 +40,7 @@ const ModeracaoDeAnuncios = () => {
                 rel="noreferrer"
                 href={item.comprovante}
               >
-                <img src={item.comprovante} />
+                <img src={item.fotos[item.fotos.length-1].src} />
               </a>
 
               <footer>
