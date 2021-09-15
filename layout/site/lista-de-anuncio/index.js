@@ -25,7 +25,6 @@ const ListaDeAnuncios = () => {
   useEffect(() => {
     (async () => {
       const resultAnuncios = await getAnuncios(filtros);
-      console.log('resultAnuncios: ', resultAnuncios);
       setAnuncios(resultAnuncios.data);
     })();
   }, [filtros]);

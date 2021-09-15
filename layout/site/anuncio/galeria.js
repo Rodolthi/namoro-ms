@@ -8,17 +8,15 @@ const Foto2 = "/exemple2.jpg"
 const Foto3 = "/exemple3.jpg"
 const Foto4 = "/exemple4.jpg"
 
-const Galeria = () => {
-  const listaDeImagens = [
-    Foto1, Foto2,
-    Foto3, Foto4,
-    Foto1, Foto2,
-    Foto3, Foto4,
-    Foto3, Foto4,
-    Foto1, Foto2,
-    Foto3, Foto4,
-    Foto4,
-  ]
+const Galeria = ({dados}) => {
+  const listaDeImagens = dados?.fotos.reduce((acc, item) => {
+    return [
+      ...acc,
+      item.src
+    ]
+  },[]);
+
+  console.log('novaLista: ', listaDeImagens);
 
   const quantidadeDeFotos = listaDeImagens?.length
 
@@ -39,6 +37,7 @@ const Galeria = () => {
     setModalAberto(true)
   }
 
+  if(!dados) return null;
   return (
     <GaleriaScroll>
       <ContainerGaleria>
@@ -75,7 +74,7 @@ const ContainerGaleria = styled.div`
 `
 
 const GaleriaScroll = styled.div`
-  height: 480px;
+  max-height: 480px;
   overflow-y: auto;
 `
 
