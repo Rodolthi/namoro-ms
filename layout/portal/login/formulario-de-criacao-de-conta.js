@@ -12,7 +12,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
 import lerURI from "utils/lerURI";
 import { useForm } from "react-hook-form";
-import {postUsuario} from 'api/controllers/criacao-conta';
+import { postUsuario } from 'api/controllers/criacao-conta';
 import { useRouter } from "next/router";
 
 const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
@@ -27,13 +27,13 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
     form.append('perfilComDocumento', perfilComDocumento[0].files);
     const data = await postUsuario(form);
 
-    if(data.status === 200) {
+    if (data.status === 200) {
       alert("Conta criado com sucesso. Faça login para continuar.");
       irParaLogin();
     }
-    
+
   }
-  
+
   const [novaSenha, setNovaSenha] = useState("");
   const [senhaRepetida, setSenhaRepetida] = useState("");
   const [senhasIguais, setSenhasIguais] = useState(true)
@@ -55,7 +55,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
 
   const handleDocumentoFrente = (e) => {
     lerURI(e).then((imagem) => {
-      setDocumentoFrente(imagem);      
+      setDocumentoFrente(imagem);
     })
   }
 
@@ -73,7 +73,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
 
   const compararSenhas = (valor) => {
     setSenhaRepetida(valor)
-    
+
     if (novaSenha !== senhaRepetida) {
       setSenhasIguais(false)
     } else setSenhasIguais(true)
@@ -113,16 +113,16 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         type="password"
         label="Senha"
         variant="outlined"
-        {...register("novaSenha", { 
-          required: "A nova senha é obrigatória", 
-          // pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
+        {...register("novaSenha", {
+          required: "A nova senha é obrigatória",
+          pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
         })}
-        // onChange={(e) => {
-          // setNovaSenha(e.target.value)
-          // setSenhaForte(regexParaSenhaForte.test(e.target.value))
-        // }}
-        // helperText={errors.novaSenha?.message || !senhaForte && "Insira uma senha com os requisitos"}
-        // error={errors.novaSenha?.type === "required" || !senhaForte}
+        onChange={(e) => {
+          setNovaSenha(e.target.value)
+          setSenhaForte(regexParaSenhaForte.test(e.target.value))
+        }}
+        helperText={errors.novaSenha?.message || !senhaForte && "Insira uma senha com os requisitos"}
+        error={errors.novaSenha?.type === "required" || !senhaForte}
       />
 
       <ContainerRequisitos className={senhaForte && "sucesso"}>
@@ -140,8 +140,8 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         label="Repita sua senha"
         variant="outlined"
         {...register("novaSenhaRepetida", { required: "Repita a senha" })}
-        helperText={errors.novaSenhaRepetida?.message || !senhasIguais && "As senhas devem ser iguais" }
-        error={errors.novaSenhaRepetida?.type === "required"|| !senhasIguais}
+        helperText={errors.novaSenhaRepetida?.message || !senhasIguais && "As senhas devem ser iguais"}
+        error={errors.novaSenhaRepetida?.type === "required" || !senhasIguais}
         onBlur={(e) => compararSenhas(e.target.value)}
       />
 
