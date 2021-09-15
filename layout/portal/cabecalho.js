@@ -4,25 +4,30 @@ import Icone from "components/icone";
 import { useRouter } from "next/router";
 import { Button } from "@material-ui/core";
 
+const rotasDoPortal = ["/portal/inicio", "/portal/planos", "/portal/formulario"];
+
 const Cabecalho = () => {
   const router = useRouter();
+  const estaNasRotasDoPortal = rotasDoPortal.some(rota => router.pathname === rota)
   const deslogar = () => {
-    router.push("/portal/login")
+    router.push("/portal/login");
   };
 
   return (
     <CabecalhoDoPortal>
       <Logo src="/logo.svg" />
 
-      <ContainerUsuario>
-        <Usuario>
-          <Icone nome="account_circle" />
-          Thiago Menezes
-        </Usuario>
-        <Button onClick={deslogar} type="button">
-          <Icone nome="logout" />
-        </Button>
-      </ContainerUsuario>
+      {estaNasRotasDoPortal && (
+        <ContainerUsuario>
+          <Usuario>
+            <Icone nome="account_circle" />
+            Thiago Menezes
+          </Usuario>
+          <Button onClick={deslogar} type="button">
+            <Icone nome="logout" />
+          </Button>
+        </ContainerUsuario>
+      )}
     </CabecalhoDoPortal>
   );
 };
