@@ -3,11 +3,11 @@ const lerURI = (e) => {
     const files = Array.from(e.target.files);
 
     return Promise.all(
-      files.map((file) => {
+      files.map((file, index) => {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.addEventListener("load", (ev) => {
-            resolve({result: ev.target.result, files: e.target.files[0]});
+            resolve({result: ev.target.result, files: e.target.files[index]});
           });
           reader.addEventListener("error", reject);
           reader.readAsDataURL(file);
