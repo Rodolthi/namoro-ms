@@ -8,6 +8,7 @@ import lerURI from "utils/lerURI";
 import { useRouter } from "next/router";
 import obterDadosMP from "api/mercado-pago";
 import { postAnuncio } from "api/controllers/criar-anuncio";
+import { useSelector } from "react-redux";
 
 const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const router = useRouter()
@@ -15,6 +16,8 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const [deposito, setDeposito] = useState(false)
   const [comprovante, setComprovante] = useState([])
   const [pagamentoAprovado, setPagamentoAprovado] = useState(true)
+
+  const token = useSelector(state => state.token);
 
   //TODO: Fazer Checkout com mercado pago
   const finalizarCadastro = async () => {
@@ -31,7 +34,6 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       alert("Insira o seu comprovante de depósito!")
     } else {
       const form = new FormData();
-      console.log(todosOsdados);
       form.append('aceitaCartao', todosOsdados.aceitaCartao);
       form.append('atendeAte', todosOsdados.atendeAte);
       form.append('atendeCasal', todosOsdados.atendeCasal);
@@ -60,7 +62,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
         form.append(`imageGaleria${index}`, item.files);
       });
 
-      const anuncioCriado = await postAnuncio(form);
+      const anuncioCriado = await postAnuncio(form, token);
       router.push("/portal/inicio");
     }
   }
@@ -83,7 +85,6 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
 
 
     obterDadosMP(tituloPlanoEscolhido, dados.preco).then(res => {
-      console.log(res)
       router.push(res.init_point)
     })
 

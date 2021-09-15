@@ -4,10 +4,12 @@ import { Button } from '@material-ui/core';
 import React from "react"
 import styled from "styled-components"
 import { eventoGA } from 'utils/analytics';
+import {getCidades} from 'api/controllers/cidades';
 import {initializeStore} from 'store/configureStore';
 
 const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   const [open, setOpen] = useState(false);
+  const [cidades, setCidades] = useState([]);
 
   const abrirModal = () => {
     setOpen(true);
@@ -49,9 +51,12 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
     <CorpoModal>
       <Logo src="/logo.svg" />
       <Label>Escolha a cidade:</Label>
-      <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade("campogrande")}>Campo Grande</Button>
-      <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade("sidrolandia")}>Sidrolândia</Button>
-      <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade("terenos")}>Terenos</Button>
+      {
+        cidades.length > 0 && 
+        cidades.map((cidade) => (          
+          <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade(cidade)}>{cidade}</Button>
+            ))
+      }
     </CorpoModal>
   );
 
@@ -62,6 +67,13 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
       elementoRaiz.style.filter = "blur(16px)"
     }
   }, []);
+
+  useEffect(() => {
+    (async() => {
+      const result = await getCidades();
+      setCidades(result);
+    })()
+  },[])
 
   return (
     <Modal

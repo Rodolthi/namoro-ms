@@ -4,9 +4,12 @@ import { useRouter } from "next/router";
 import { getAnuncios } from "api/controllers/pegar-anuncios";
 import { useSelector } from "react-redux";
 import BlankSlate from "components/blank-slate";
+import { initializeStore } from 'store/configureStore';
 
 const ListaDeAnuncios = () => {
   const filtros = useSelector((state) => state);
+  const reduxStore = initializeStore();
+  const { dispatch } = reduxStore;
 
   const [anuncios, setAnuncios] = useState([]);
   const router = useRouter();
@@ -24,29 +27,26 @@ const ListaDeAnuncios = () => {
 
   return (
     <Lista>
-      {anuncios.length > 0 &&
-        anuncios.map((item, index) => {
-          return (
-            <li key={index}>
-              <Item onClick={irParaOAnuncio}>
-                <Foto>
-                  <img src={item.fotos[0].src} />
-                </Foto>
-                <span className="infos">
-                  <p className="nome">{item.tituloAnuncio}</p>
-                  <p className="telefone">
-                    <img src="whatsappp-logo.svg" />
-                    {item.telefone}
-                  </p>
-                  {item.atendeEmLocalProprio && (
-                    <p className="descricao">Com local</p>
-                  )}
-                  <p className="descricao">{item.cidade}/MS</p>
-                </span>
-              </Item>
-            </li>
-          );
-        })}
+      {anuncios.length > 0 && anuncios.map((item, index) => {
+        return (
+          <li key={index}>
+            <Item onClick={() => irParaOAnuncio(item)}>
+              <Foto>
+                <img src={item.fotos[0].src} />
+              </Foto>
+              <span className="infos">
+                <p className="nome">{item.tituloAnuncio}</p>
+                <p className="telefone">
+                  <img src="whatsappp-logo.svg" />
+                  {item.telefone}
+                </p>
+                {item.atendeEmLocalProprio && <p className="descricao">Com local</p>}                
+                <p className="descricao">{item.cidade}/MS</p>
+              </span>
+            </Item>
+          </li>
+        )
+      })}
 
       {anuncios.length === 0 && (
         <BlankSlate

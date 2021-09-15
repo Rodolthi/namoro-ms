@@ -5,22 +5,33 @@ import Icone from "components/icone";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import {autenticar} from 'api/controllers/autenticar';
+import {initializeStore} from 'store/configureStore';
 
 const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
 
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-  const router = useRouter()
+  const router = useRouter();
+  const reduxStore = initializeStore();
+  const {dispatch} = reduxStore;
 
-  const logar = (user) => {
-    router.push("/portal/inicio")
+  const logar = async (user) => {
+
+    const {data, status} = await autenticar({"username":user.email, "password":user.senha})
+    if(status === 200) {
+      dispatch({
+        type: 'TOKEN',
+        token: data.data.token
+      })
+      router.push("/portal/inicio");
+    }
   };
 
   const { register, formState: { errors }, handleSubmit } = useForm();
 
   useEffect(() => {
     document.getElementById("email").focus();
-    console.log(errors.email)
   }, [errors]);
 
 

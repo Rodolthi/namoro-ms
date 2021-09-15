@@ -3,8 +3,6 @@ export const base64 = (files) => {
   const fileReader = new FileReader();
   let base64;
 
-  console.log(files)
-
   fileReader.onload = function (fileLoadedEvent) {
     base64 = fileLoadedEvent.target.result; // <--- data: base64
   }

@@ -7,9 +7,11 @@ import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
 import Icone from "components/icone"
 import { useRouter } from "next/router"
+import {getCidades} from 'api/controllers/cidades';
 import { initializeStore } from 'store/configureStore';
 
 const Cabecalho = () => {
+  const [cidades, setCidades] = useState([]);
   const [cidadeSelecionada, setCidadeSelecionada] = useState("")
   const [acompanhante, setAcompanhante] = useState("mulher")
   const [menuAberto, setMenuAberto] = useState(false)
@@ -21,6 +23,13 @@ const Cabecalho = () => {
   useEffect(() => {
     sessionStorage.getItem('cidadeSelecionada') && setCidadeSelecionada(sessionStorage.getItem('cidadeSelecionada'))
   }, [])
+
+  useEffect(() => {
+    (async() => {
+      const result = await getCidades();
+      setCidades(result);
+    })()
+  },[])
 
   const handleMudarCidade = (e) => {
     setCidadeSelecionada(e.target.value)
@@ -60,9 +69,12 @@ const Cabecalho = () => {
           value={cidadeSelecionada}
           onChange={handleMudarCidade}
         >
-          <MenuItem selected value="campogrande">Campo Grande</MenuItem>
-          <MenuItem value="sidrolandia">Sidrolândia</MenuItem>
-          <MenuItem value="terenos">Terenos</MenuItem>
+          {
+            cidades.length > 0 && 
+            cidades.map((cidade) => (
+              <MenuItem selected value={cidade}>{cidade}</MenuItem>
+            ))
+          }
         </Select>
       </FormControl>
 
