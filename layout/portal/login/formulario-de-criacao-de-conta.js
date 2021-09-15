@@ -115,15 +115,16 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         variant="outlined"
         {...register("novaSenha", {
           required: "A nova senha é obrigatória",
-          pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
+          // pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
         })}
         onChange={(e) => {
           setNovaSenha(e.target.value)
           setSenhaForte(regexParaSenhaForte.test(e.target.value))
         }}
         helperText={errors.novaSenha?.message || !senhaForte && "Insira uma senha com os requisitos"}
-        error={errors.novaSenha?.type === "required" || !senhaForte}
-      />
+        // error={errors.novaSenha?.type === "required" || !senhaForte}
+        error={errors.novaSenha?.type === "required"}
+        />
 
       <ContainerRequisitos className={senhaForte && "sucesso"}>
         <p><strong>A senha deve conter:</strong></p>
@@ -142,7 +143,8 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         {...register("novaSenhaRepetida", { required: "Repita a senha" })}
         helperText={errors.novaSenhaRepetida?.message || !senhasIguais && "As senhas devem ser iguais"}
         error={errors.novaSenhaRepetida?.type === "required" || !senhasIguais}
-        onBlur={(e) => compararSenhas(e.target.value)}
+        // onChange={(e) => compararSenhas(e.target.value)}
+        // onBlur={(e) => compararSenhas(e.target.value)}
       />
 
       <Documentos>

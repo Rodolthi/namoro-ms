@@ -38,7 +38,7 @@ const ModeracaoDeAnuncios = () => {
                 title="Visualizar comprovante"
                 target="_blank"
                 rel="noreferrer"
-                href={item.comprovante}
+                href={item.fotos[item.fotos.length-1].src}
               >
                 <img src={item.fotos[item.fotos.length-1].src} />
               </a>
