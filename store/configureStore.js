@@ -6,7 +6,9 @@ let store
 
 const initialState = {
   regiao: '',
-  acompanhante: ''
+  acompanhante: '',
+  token: '',
+  anuncio: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +22,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         acompanhante: action.acompanhante,
+      }
+    case 'TOKEN':
+      return {
+        ...state,
+        token: action.token,
+      }
+    case 'ANUNCIO':
+      return {
+        ...state,
+        anuncio: action.anuncio,
       }
     default:
       return state

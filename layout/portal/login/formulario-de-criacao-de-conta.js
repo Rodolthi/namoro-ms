@@ -13,8 +13,10 @@ import { useState } from "react";
 import lerURI from "utils/lerURI";
 import { useForm } from "react-hook-form";
 import {postUsuario} from 'api/controllers/criacao-conta';
+import { useRouter } from "next/router";
 
 const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
+
   const criarConta = async (e) => {
     const form = new FormData();
     form.append('nome', e.usuario);
@@ -25,6 +27,11 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
     form.append('perfilComDocumento', perfilComDocumento[0].files);
 
     const data = await postUsuario(form);
+
+    if(data.status === 200) {
+      alert("Conta criado com sucesso. Faça login para continuar.");
+      irParaLogin();
+    }
     
   }
   const [ehMaiorDeIdade, setEhMaiorDeIdade] = useState(false);

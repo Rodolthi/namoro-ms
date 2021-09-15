@@ -3,16 +3,23 @@ import styled from "styled-components"
 import { useRouter } from "next/router"
 import {getAnuncios} from 'api/controllers/pegar-anuncios';
 import { useSelector } from "react-redux";
+import { initializeStore } from 'store/configureStore';
 
 const ListaDeAnuncios = () => {
 
   const filtros = useSelector((state) => state);
+  const reduxStore = initializeStore();
+  const { dispatch } = reduxStore;
 
   const [anuncios, setAnuncios] = useState([]);
   const router = useRouter();
 
-  const irParaOAnuncio = () => {
-    router.push("/anuncio/")
+  const irParaOAnuncio = (item) => {
+    router.push("/anuncio/");
+    dispatch({
+      type: 'ANUNCIO',
+      anuncio: item
+    })
   }
 
   useEffect(() => {
@@ -27,7 +34,7 @@ const ListaDeAnuncios = () => {
       {anuncios.length > 0 && anuncios.map((item, index) => {
         return (
           <li key={index}>
-            <Item onClick={irParaOAnuncio}>
+            <Item onClick={() => irParaOAnuncio(item)}>
               <Foto>
                 <img src={item.fotos[0].src} />
               </Foto>
