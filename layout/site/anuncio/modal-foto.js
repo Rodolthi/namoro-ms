@@ -9,7 +9,9 @@ const ModalFoto = ({ setAberto, imagem, setImagem, aberto, galeria }) => {
     const indexDaImagem = galeria.indexOf(imagem)
 
     e.stopPropagation()
-    setImagem(galeria[indexDaImagem + 1])
+    if (indexDaImagem === (galeria.length - 1)) {
+      setImagem(galeria[0])
+    } else setImagem(galeria[indexDaImagem + 1])
   }
 
   const voltarFoto = (e, imagem) => {
@@ -61,7 +63,6 @@ const Imagem = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: hidden;
-  background-color: red;
   height: 90vh;
   max-width: 90vw;
   width: auto;

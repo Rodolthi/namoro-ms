@@ -93,7 +93,6 @@ const Item = styled.div`
   &:hover,
   &:focus {
     transform: translate(0, -3px);
-    background-color: green;
   }
   .infos {
     position: relative;
