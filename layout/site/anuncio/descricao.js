@@ -56,6 +56,7 @@ const Texto = styled.p`
   line-height: 24px;
   margin-right: 16px;
   margin-bottom: 16px;
+  width: 100%;
 `
 
 const Contato = styled.div`

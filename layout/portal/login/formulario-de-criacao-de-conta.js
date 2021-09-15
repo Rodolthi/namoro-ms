@@ -115,14 +115,14 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         variant="outlined"
         {...register("novaSenha", { 
           required: "A nova senha é obrigatória", 
-          pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
+          // pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
         })}
-        onChange={(e) => {
-          setNovaSenha(e.target.value)
-          setSenhaForte(regexParaSenhaForte.test(e.target.value))
-        }}
-        helperText={errors.novaSenha?.message || !senhaForte && "Insira uma senha com os requisitos"}
-        error={errors.novaSenha?.type === "required" || !senhaForte}
+        // onChange={(e) => {
+          // setNovaSenha(e.target.value)
+          // setSenhaForte(regexParaSenhaForte.test(e.target.value))
+        // }}
+        // helperText={errors.novaSenha?.message || !senhaForte && "Insira uma senha com os requisitos"}
+        // error={errors.novaSenha?.type === "required" || !senhaForte}
       />
 
       <ContainerRequisitos className={senhaForte && "sucesso"}>
