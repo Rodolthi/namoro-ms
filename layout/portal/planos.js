@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import { salvarDadosDoFormulario } from "utils/storage";
+import { salvarDadosDoFormulario } from "utils/storage-portal";
 import { useRouter } from "next/router";
 
 const Planos = () => {

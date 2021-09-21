@@ -5,12 +5,11 @@ import { getAnuncios } from "api/controllers/pegar-anuncios";
 import { useSelector } from "react-redux";
 import BlankSlate from "components/blank-slate";
 import { initializeStore } from 'store/configureStore';
+import { obterDados } from "utils/storage-site";
 
 const ListaDeAnuncios = () => {
-  const filtros = useSelector((state) => state);
-  const reduxStore = initializeStore();
-
   const [anuncios, setAnuncios] = useState([]);
+  const [filtros, setFiltros] = useState({})
   const router = useRouter();
 
   const irParaOAnuncio = (slug) => {
@@ -24,16 +23,18 @@ const ListaDeAnuncios = () => {
 
   useEffect(() => {
     (async () => {
-      const resultAnuncios = await getAnuncios(filtros);
+      setFiltros(obterDados())
+      console.log("filtros", filtros)
+      const resultAnuncios = await getAnuncios(obterDados());
       setAnuncios(resultAnuncios.data);
     })();
-  }, [filtros]);
+  }, []);
 
   return (
     <Lista>
       {anuncios.length > 0 && anuncios.map((item, index) => {
         return (
-          <li key={index}>
+          <li key={`${index}anuncios`}>
             <Item onClick={() => irParaOAnuncio(item.id)}>
               <Foto>
                 <img src={item.fotos[0].src} />
@@ -44,7 +45,7 @@ const ListaDeAnuncios = () => {
                   <img src="whatsappp-logo.svg" />
                   {item.telefone}
                 </p>
-                {item.atendeEmLocalProprio && <p className="descricao">Com local</p>}                
+                {item.atendeEmLocalProprio && <p className="descricao">Com local</p>}
                 <p className="descricao">{item.cidade}/MS</p>
               </span>
             </Item>

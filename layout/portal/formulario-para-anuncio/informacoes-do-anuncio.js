@@ -2,7 +2,7 @@ import { Button, TextField } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { salvarDadosDoFormulario } from "utils/storage";
+import { salvarDadosDoFormulario } from "utils/storage-portal";
 import Icone from "components/icone";
 
 const InformacoesDoAnuncio = ({ avancarEtapa }) => {

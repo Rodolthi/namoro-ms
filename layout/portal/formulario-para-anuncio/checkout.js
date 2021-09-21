@@ -2,7 +2,7 @@ import { Button, Checkbox, FormControl, FormControlLabel, FormGroup } from "@mat
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { obterDadosDoFormulario } from "utils/storage";
+import { obterDadosDoFormulario } from "utils/storage-portal";
 import Icone from "components/icone";
 import lerURI from "utils/lerURI";
 import { useRouter } from "next/router";

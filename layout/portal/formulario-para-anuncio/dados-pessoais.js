@@ -18,7 +18,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { obterCidades } from "api/cidades";
-import { salvarDadosDoFormulario } from "utils/storage";
+import { salvarDadosDoFormulario } from "utils/storage-portal";
 import Icone from "components/icone";
 
 const DadosPessoais = ({ avancarEtapa }) => {

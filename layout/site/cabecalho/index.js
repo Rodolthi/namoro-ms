@@ -7,8 +7,9 @@ import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
 import Icone from "components/icone"
 import { useRouter } from "next/router"
-import {getCidades} from 'api/controllers/cidades';
+import { getCidades } from 'api/controllers/cidades';
 import { initializeStore } from 'store/configureStore';
+import { obterDados, salvarDados } from "utils/storage-site"
 
 const Cabecalho = () => {
   const [cidades, setCidades] = useState([]);
@@ -17,36 +18,27 @@ const Cabecalho = () => {
   const [menuAberto, setMenuAberto] = useState(false)
   const reduxStore = initializeStore()
   const { dispatch } = reduxStore
-  const wraper = createRef()
   const router = useRouter()
 
   useEffect(() => {
-    sessionStorage.getItem('cidadeSelecionada') && setCidadeSelecionada(sessionStorage.getItem('cidadeSelecionada'))
+    obterDados()?.cidade && setCidadeSelecionada(obterDados().cidade)
   }, [])
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       const result = await getCidades();
       setCidades(result);
     })()
-  },[])
+  }, [])
 
   const handleMudarCidade = (e) => {
     setCidadeSelecionada(e.target.value)
-
-    dispatch({
-      type: 'REGIAO',
-      regiao: e.target.value
-    })
+    salvarDados({ cidade: e.target.value })
   }
 
   const handleMudarAcompanhante = (e) => {
     setAcompanhante(e.target.value)
-
-    dispatch({
-      type: 'ACOMPANHANTE',
-      acompanhante: e.target.value
-    })
+    salvarDados({ acompanhante: e.target.value })
   }
 
   const ConteudoMenu = () => (
@@ -70,9 +62,9 @@ const Cabecalho = () => {
           onChange={handleMudarCidade}
         >
           {
-            cidades.length > 0 && 
-            cidades.map((cidade) => (
-              <MenuItem selected value={cidade}>{cidade}</MenuItem>
+            cidades.length > 0 &&
+            cidades.map((cidade, index) => (
+              <MenuItem key={`${index}cidades`} selected value={cidade}>{cidade}</MenuItem>
             ))
           }
         </Select>
