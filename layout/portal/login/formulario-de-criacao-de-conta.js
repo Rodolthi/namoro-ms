@@ -21,7 +21,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
     const form = new FormData();
     form.append('nome', e.usuario);
     form.append('email', e.novoEmail);
-    form.append('senha', e.senha);
+    form.append('senha', e.novaSenha);
     form.append('documentoFrente', documentoFrente[0].files);
     form.append('documentoVerso', documentoVerso[0].files);
     form.append('perfilComDocumento', perfilComDocumento[0].files);
@@ -43,7 +43,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
   const [documentoVerso, setDocumentoVerso] = useState();
   const [perfilComDocumento, setPerfilComDocumento] = useState();
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-  const regexParaSenhaForte = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+  const regexParaSenhaForte = /^[0-9a-zA-Z$*&@#]{6,}$/;
 
   const formularioValido = () => ehMaiorDeIdade && documentoFrente && perfilComDocumento && perfilComDocumento;
 
@@ -115,24 +115,20 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         variant="outlined"
         {...register("novaSenha", {
           required: "A nova senha é obrigatória",
-          // pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
+          pattern: { value: regexParaSenhaForte, message: "Insira uma senha com os requisitos" }
         })}
         onChange={(e) => {
           setNovaSenha(e.target.value)
           setSenhaForte(regexParaSenhaForte.test(e.target.value))
         }}
         helperText={errors.novaSenha?.message || !senhaForte && "Insira uma senha com os requisitos"}
-        // error={errors.novaSenha?.type === "required" || !senhaForte}
-        error={errors.novaSenha?.type === "required"}
+        error={errors.novaSenha?.type === "required" || !senhaForte}
         />
 
       <ContainerRequisitos className={senhaForte && "sucesso"}>
         <p><strong>A senha deve conter:</strong></p>
         <p>No mínimo <strong>1 número</strong></p>
-        <p>No mínimo <strong>1 letra minúscula</strong></p>
-        <p>No mínimo <strong>1 letra maiúscula</strong></p>
-        <p>No mínimo <strong>1 caractere especial</strong></p>
-        <p>No mínimo <strong>8 caracteres</strong></p>
+        <p>No mínimo <strong>6 caracteres</strong></p>
       </ContainerRequisitos>
 
       <TextField
@@ -143,8 +139,8 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         {...register("novaSenhaRepetida", { required: "Repita a senha" })}
         helperText={errors.novaSenhaRepetida?.message || !senhasIguais && "As senhas devem ser iguais"}
         error={errors.novaSenhaRepetida?.type === "required" || !senhasIguais}
-        // onChange={(e) => compararSenhas(e.target.value)}
-        // onBlur={(e) => compararSenhas(e.target.value)}
+        onChange={(e) => compararSenhas(e.target.value)}
+        onBlur={(e) => compararSenhas(e.target.value)}
       />
 
       <Documentos>
