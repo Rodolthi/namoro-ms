@@ -1,34 +1,30 @@
 import { Button } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Icone from "components/icone";
 import BlankSlate from "components/blank-slate";
 import Anuncios from "./anuncios";
 import { useRouter } from "next/router";
+import {getAnunciosUsuario} from 'api/controllers/usuario-anuncios';
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const [anuncios, setAnuncios] = useState([]);
+
+  const {token} = useSelector((state) => state);
+  console.log('token: ', token);
   const router = useRouter();
-  const anuncios = [
-    {
-      titulo: "Morena Formosa 18",
-      data: "2021-08-16 23:57:58",
-      plano: "30 dias",
-      status: "pendente",
-    },
-    {
-      titulo: "Loira massagista",
-      data: "2021-08-16 23:57:58",
-      plano: "30 dias",
-      status: "ativo",
-    },
-    {
-      titulo: "Morena Formosa",
-      data: "2021-08-16 23:57:58",
-      plano: "60 dias",
-      status: "pendente",
-    },
-  ];
+
+  const form = new FormData();
+  form.append("usuario_id", "conta1@gmail.com");
+
+  useEffect(() => {
+    (async() => {      
+      const result = await getAnunciosUsuario("conta1@gmail.com", token);
+      setAnuncios(result.data);
+    })();
+  },[token])
 
   useEffect(() => {
     const pagamentoMercadoPago = router.query;

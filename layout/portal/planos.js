@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 const Planos = () => {
   const router = useRouter();
 
-  const escolherPlano = (plano, preco) => {
-    salvarDadosDoFormulario({ plano, preco })
+  const escolherPlano = (plano) => {
+    salvarDadosDoFormulario({plano})
     router.push("/portal/formulario/")
   }
 
@@ -30,7 +30,7 @@ const Planos = () => {
                   variant="contained"
                   color="primary"
                   type="button"
-                  onClick={() => escolherPlano(plano.nome, plano.preco)}
+                  onClick={() => escolherPlano(plano.nome)}
                 >
                   Escolher
                 </Button>

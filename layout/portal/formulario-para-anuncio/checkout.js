@@ -29,6 +29,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       ...{ imagensGaleria },
       ...{ comprovante }
     }
+    console.log('todosOsdados: ', todosOsdados);
 
     if (deposito && !comprovante.length) {
       alert("Insira o seu comprovante de depósito!")
@@ -49,7 +50,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       form.append('descricao', todosOsdados.descricao);
       form.append('esseNumeroEhWhatsapp', todosOsdados.esseNumeroEhWhatsapp);
       form.append('idade', todosOsdados.idade);
-      form.append('planoEscolhido', todosOsdados.planoEscolhido);
+      form.append('planoEscolhido', todosOsdados.plano);
       form.append('sexo', todosOsdados.sexo);
       form.append('telefone', todosOsdados.telefone);
       form.append('tituloAnuncio', todosOsdados.tituloAnuncio);
