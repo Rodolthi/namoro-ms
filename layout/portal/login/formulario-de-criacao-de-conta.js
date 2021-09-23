@@ -139,7 +139,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         {...register("novaSenhaRepetida", { required: "Repita a senha" })}
         helperText={errors.novaSenhaRepetida?.message || !senhasIguais && "As senhas devem ser iguais"}
         error={errors.novaSenhaRepetida?.type === "required" || !senhasIguais}
-        onChange={(e) => compararSenhas(e.target.value)}
+        // onChange={(e) => compararSenhas(e.target.value)}
         onBlur={(e) => compararSenhas(e.target.value)}
       />
 

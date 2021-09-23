@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Icone from "components/icone";
 import { useRouter } from "next/router";
 import { Button } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const rotasDoPortal = ["/portal/inicio", "/portal/planos", "/portal/formulario"];
 
 const Cabecalho = () => {
   const router = useRouter();
-  const estaNasRotasDoPortal = rotasDoPortal.some(rota => router.pathname === rota)
+  const [nomeUsuarioLogado, setNomeUsuario] = useState('');
+  const estaNasRotasDoPortal = rotasDoPortal.some(rota => router.pathname === rota);
+  const {nomeUsuario} = useSelector((state) => state);
+  
   const deslogar = () => {
     router.push("/portal/login");
   };
+
+  useEffect(() => {    
+      estaNasRotasDoPortal && !nomeUsuario ? setNomeUsuario(localStorage.getItem("nomeUsuario")) : setNomeUsuario(nomeUsuario);
+  },[nomeUsuario]);
 
   return (
     <CabecalhoDoPortal>
@@ -19,10 +27,10 @@ const Cabecalho = () => {
 
       {estaNasRotasDoPortal && (
         <ContainerUsuario>
-          {/* <Usuario>
+          <Usuario>
             <Icone nome="account_circle" />
-            Thiago Menezes
-          </Usuario> */}
+            {nomeUsuarioLogado}
+          </Usuario>
           <Button onClick={deslogar} type="button">
             <Icone nome="logout" />
           </Button>

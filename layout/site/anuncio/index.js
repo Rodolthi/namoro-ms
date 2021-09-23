@@ -15,7 +15,6 @@ const Anuncio = () => {
   useEffect(() => {
     (async() => {      
       const result = await getAnuncio(router.query.slug);
-      console.log('index: ', result.data);
       setAnuncio(result.data);
     })();
   },[])

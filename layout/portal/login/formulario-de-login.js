@@ -24,6 +24,11 @@ const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
         type: 'TOKEN',
         token: data.data.token
       })
+      dispatch({
+        type: 'NOME_USUARIO',
+        nomeUsuario: data.data.displayName
+      })
+      localStorage.setItem("nomeUsuario", data.data.displayName);
       router.push("/portal/inicio");
     }
   };

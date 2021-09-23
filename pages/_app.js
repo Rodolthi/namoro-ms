@@ -28,11 +28,11 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={configuracaoDoTema}>
-      <Layout>
         <Provider store={store}>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </Provider>
-      </Layout>
     </ThemeProvider>
   )
 }
