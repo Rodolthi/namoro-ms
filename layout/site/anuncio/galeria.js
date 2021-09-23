@@ -9,7 +9,6 @@ const Foto3 = "/exemple3.jpg"
 const Foto4 = "/exemple4.jpg"
 
 const Galeria = ({ dados }) => {
-  console.log(dados)
   let novaLista
   let listaDeImagens = dados?.fotos.reduce((acc, item) => {
     return [
@@ -23,9 +22,6 @@ const Galeria = ({ dados }) => {
   if (dados?.deposito && !novaLista) {
     novaLista = listaDeImagens.splice(posicaoFinalDasFotos, 1)
   }
-
-
-  console.log('novaLista: ', listaDeImagens);
 
   const quantidadeDeFotos = listaDeImagens?.length
 

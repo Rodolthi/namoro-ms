@@ -8,7 +8,8 @@ const initialState = {
   regiao: '',
   acompanhante: '',
   token: '',
-  anuncio: {}
+  anuncio: {},
+  nomeUsuario: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         anuncio: action.anuncio,
+      }
+    case 'NOME_USUARIO':
+      return {
+        ...state,
+        nomeUsuario: action.nomeUsuario,
       }
     default:
       return state
