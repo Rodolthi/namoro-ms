@@ -8,20 +8,20 @@ const Anuncios = ({ anuncios }) => {
         <Item className="lista" key={index}>
           <div>
             <Label>TÍTULO DO ANÚNCIO:</Label>
-            <Texto>{anuncio.titulo}</Texto>
+            <Texto>{anuncio.tituloAnuncio}</Texto>
           </div>
           <div>
             <Label>STATUS:</Label>
             <Texto>
-              {anuncio.status !== "pendente" ?
-                <Tag sucesso>{anuncio.status}</Tag>
-                : <Tag alerta>{anuncio.status}</Tag>
+              {anuncio.pendente === "false" ?
+                <Tag sucesso>Publicado</Tag>
+                : <Tag alerta>Pendente</Tag>
               }
             </Texto>
           </div>
           <div>
             <Label>PLANO:</Label>
-            <Texto>{anuncio.plano}</Texto>
+            <Texto>{anuncio.planoEscolhido}</Texto>
           </div>
         </Item>
       ))}

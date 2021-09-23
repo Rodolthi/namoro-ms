@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Etapas from "./etapas";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import InformacoesDoAnuncio from "./informacoes-do-anuncio";
 import UploadDeImagens from "./upload-de-imagens";
 import { useRouter } from "next/router";
 import Checkout from "./checkout";
+import { obterDadosDoFormulario } from "utils/storage";
 
 const etapas = [
   {
@@ -46,6 +47,10 @@ const FormularioParaAnuncio = () => {
     alert("Cadastro Finalizado com sucesso");
     router.push("/portal/inicio/");
   };
+
+  useEffect(() => {
+    console.log(obterDadosDoFormulario());
+  },[])
 
   return (
     <ContainerFormulario>
