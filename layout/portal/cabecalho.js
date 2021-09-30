@@ -4,12 +4,14 @@ import Icone from "components/icone";
 import { useRouter } from "next/router";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import {useLocalStorage} from 'utils/useLocalStorage';
 
 const rotasDoPortal = ["/portal/inicio", "/portal/planos", "/portal/formulario"];
 
 const Cabecalho = () => {
   const router = useRouter();
-  const [nomeUsuarioLogado, setNomeUsuario] = useState('');
+  const [usuarioState, setUsuarioState] = useLocalStorage('nomeUsuario');
+  const [usuarioLogado, setUsuarioLogado] = useState('');    
   const estaNasRotasDoPortal = rotasDoPortal.some(rota => router.pathname === rota);
   const {nomeUsuario} = useSelector((state) => state);
   
@@ -17,19 +19,18 @@ const Cabecalho = () => {
     router.push("/portal/login");
   };
 
-  useEffect(() => {    
-      estaNasRotasDoPortal && !nomeUsuario ? setNomeUsuario(localStorage.getItem("nomeUsuario")) : setNomeUsuario(nomeUsuario);
+  useEffect(() => {
+      estaNasRotasDoPortal && !nomeUsuario ? setUsuarioLogado(usuarioState) : setUsuarioState(nomeUsuario);
   },[nomeUsuario]);
 
   return (
     <CabecalhoDoPortal>
       <Logo src="/logo.svg" />
-
       {estaNasRotasDoPortal && (
         <ContainerUsuario>
           <Usuario>
             <Icone nome="account_circle" />
-            {nomeUsuarioLogado}
+            {usuarioLogado || usuarioState}
           </Usuario>
           <Button onClick={deslogar} type="button">
             <Icone nome="logout" />

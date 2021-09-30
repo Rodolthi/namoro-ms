@@ -8,20 +8,24 @@ import Anuncios from "./anuncios";
 import { useRouter } from "next/router";
 import {getAnunciosUsuario} from 'api/controllers/usuario-anuncios';
 import { useSelector } from "react-redux";
+import { useLocalStorage } from "utils/useLocalStorage";
 
 const Home = () => {
   const [anuncios, setAnuncios] = useState([]);
+  const [tokenLogado] = useLocalStorage('token');
+  const [usuarioId] = useLocalStorage('usuarioId');
 
   const {token} = useSelector((state) => state);
-  console.log('token: ', token);
   const router = useRouter();
-
-  const form = new FormData();
-  form.append("usuario_id", "conta1@gmail.com");
-
+  
   useEffect(() => {
-    (async() => {      
-      const result = await getAnunciosUsuario("conta1@gmail.com", token);
+
+    function getToken() {
+      return !token ? tokenLogado : token;
+    }
+
+    (async() => {   
+      const result = await getAnunciosUsuario(usuarioId, getToken());
       setAnuncios(result.data);
     })();
   },[token])

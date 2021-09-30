@@ -14,27 +14,27 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'REGIAO':
+    case 'regiao':
       return {
         ...state,
         regiao: action.regiao,
       }
-    case 'ACOMPANHANTE':
+    case 'acompanhante':
       return {
         ...state,
-        acompanhante: action.acompanhante,
+        acompanhante: action.acompanhante
       }
-    case 'TOKEN':
+    case 'token':
       return {
         ...state,
         token: action.token,
       }
-    case 'ANUNCIO':
+    case 'anuncio':
       return {
         ...state,
         anuncio: action.anuncio,
       }
-    case 'NOME_USUARIO':
+    case 'nomeUsuario':
       return {
         ...state,
         nomeUsuario: action.nomeUsuario,
@@ -44,11 +44,35 @@ const reducer = (state = initialState, action) => {
   }
 }
 
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if(serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (e) {
+    return undefined;
+  }
+};
+
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (e) {
+    // Ignore write errors;
+  }
+};
+
+const persistedState = loadState();
+
 function initStore(preloadedState = initialState) {
   return createStore(
     reducer,
     preloadedState,
-    composeWithDevTools(applyMiddleware())
+    composeWithDevTools(applyMiddleware()),
+    persistedState,
   )
 }
 
@@ -67,6 +91,10 @@ export const initializeStore = (preloadedState) => {
   if (typeof window === 'undefined') return _store
   
   if (!store) store = _store
+
+  store.subscribe(() => {
+    saveState(store.getState());
+  });
 
   return _store
 }

@@ -35,7 +35,7 @@ const Cabecalho = () => {
     setCidadeSelecionada(e.target.value)
 
     dispatch({
-      type: 'REGIAO',
+      type: 'regiao',
       regiao: e.target.value
     })
   }
@@ -44,7 +44,7 @@ const Cabecalho = () => {
     setAcompanhante(e.target.value)
 
     dispatch({
-      type: 'ACOMPANHANTE',
+      type: 'acompanhante',
       acompanhante: e.target.value
     })
   }
