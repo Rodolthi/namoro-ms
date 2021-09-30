@@ -38,6 +38,7 @@ const DadosPessoais = ({ avancarEtapa }) => {
   }
 
   const validarForm = () => {
+    alert(getValues().termo)
     salvarDadosDoFormulario(getValues())
     avancarEtapa()
   }
@@ -51,6 +52,15 @@ const DadosPessoais = ({ avancarEtapa }) => {
   useEffect(() => {
     obterCidades().then(resposta => setCidades(resposta))
   }, [])
+
+  const Termos = () => {
+    return (
+      <>
+        Declaro que li e aceito os termos de uso.
+        <a target="_blank" style={{ color: "var(--primaria)", textDecoration: "underline" }} rel="noreferrer" href="https://google.com"> Ler termo</a>.
+      </>
+    )
+  }
 
   return (
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(validarForm)}>
@@ -310,6 +320,22 @@ const DadosPessoais = ({ avancarEtapa }) => {
             {...register("aceitaCartao", { required: true })}
           />
         </RadioGroup>
+      </FormControl>
+
+      <FormControl fullWidth component="fieldset" error={errors?.termo}>
+        <FormLabel component="legend">Declaração de termo</FormLabel>
+
+        <FormGroup row style={{ color: "white" }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                color="primary"
+                {...register("termo", { required: true })}
+              />
+            }
+            label={<Termos />}
+          />
+        </FormGroup>
       </FormControl>
 
       <div>
