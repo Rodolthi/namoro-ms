@@ -23,11 +23,13 @@ const ListaDeAnuncios = () => {
   };
 
   useEffect(() => {
+    console.log('filtros.regiao: ', filtros.regiao);
+    console.log('filtros.acompanhante: ', filtros.acompanhante);
     (async () => {
       const resultAnuncios = await getAnuncios(filtros);
       setAnuncios(resultAnuncios.data);
     })();
-  }, [filtros]);
+  }, [filtros.regiao, filtros.acompanhante]);
 
   return (
     <Lista>

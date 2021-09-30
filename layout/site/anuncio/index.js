@@ -17,7 +17,7 @@ const Anuncio = () => {
       const result = await getAnuncio(router.query.slug);
       setAnuncio(result.data);
     })();
-  },[])
+  },[]);
 
   return (
     <ContainerAnuncio>

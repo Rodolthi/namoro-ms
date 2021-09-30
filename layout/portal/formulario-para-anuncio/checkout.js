@@ -29,8 +29,6 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       ...{ imagensGaleria },
       ...{ comprovante }
     }
-    console.log('todosOsdados: ', todosOsdados);
-
     if (deposito && !comprovante.length) {
       alert("Insira o seu comprovante de depósito!")
     } else {

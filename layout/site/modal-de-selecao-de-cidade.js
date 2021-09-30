@@ -35,12 +35,12 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
     })
 
     dispatch({
-      type: 'REGIAO',
+      type: 'regiao',
       regiao: cidade
     })
 
     dispatch({
-      type: 'ACOMPANHANTE',
+      type: 'acompanhante',
       regiao: 'mulher'
     })
 

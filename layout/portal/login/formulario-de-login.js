@@ -7,8 +7,13 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import {autenticar} from 'api/controllers/autenticar';
 import {initializeStore} from 'store/configureStore';
+import { useLocalStorage } from "utils/useLocalStorage";
 
 const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
+
+  const [,setNomeUsuario] = useLocalStorage("nomeUsuario", '');
+  const [,setToken] = useLocalStorage("token", '');
+  const [,setUsuarioId] = useLocalStorage("usuarioId", '');
 
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
@@ -19,16 +24,19 @@ const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
   const logar = async (user) => {
 
     const {data, status} = await autenticar({"username":user.email, "password":user.senha})
+    console.log(data);
     if(status === 200) {
       dispatch({
-        type: 'TOKEN',
+        type: 'token',
         token: data.data.token
       })
       dispatch({
-        type: 'NOME_USUARIO',
+        type: 'nomeUsuario',
         nomeUsuario: data.data.displayName
       })
-      localStorage.setItem("nomeUsuario", data.data.displayName);
+      setNomeUsuario(data.data.displayName);
+      setToken(data.data.token);
+      setUsuarioId(data.data.email);
       router.push("/portal/inicio");
     }
   };
