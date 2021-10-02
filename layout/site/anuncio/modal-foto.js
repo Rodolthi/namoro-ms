@@ -67,14 +67,18 @@ const Imagem = styled.div`
   max-width: 90vw;
   width: auto;
   border-radius: 8px;
-  @media screen and (max-width: 1366px) {
-    height: 70vh;
+  @media screen and (max-width: 800px) {
+    width: 90vw;
+    max-height: 90vh; 
   }
   img {
+    border-radius: 8px;
     height: 100%;
     object-fit: cover;
-    @media screen and (max-width: 1366px) {
+    @media screen and (max-width: 800px) {
+      height: auto;
       object-fit: cover;
+      width: 100%;
     }
   }
 `
