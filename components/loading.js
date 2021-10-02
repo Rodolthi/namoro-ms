@@ -1,9 +1,9 @@
 import styled, { keyframes } from "styled-components";
 import Icone from "./icone"
 
-const Loading = ({ carregando }) => {
+const Loading = ({ ativo }) => {
   return (
-    <Container className={carregando && "carregamentoAtivo"}>
+    <Container className={ativo && "carregamentoAtivo"}>
       <Icone nome="autorenew" />
     </Container>
   )
@@ -26,7 +26,7 @@ const rotate = keyframes`
 `;
 
 const Container = styled.div`
-  z-index: 1000;
+  z-index: 1400;
   display: none;
   align-items: center;
   justify-content: center;

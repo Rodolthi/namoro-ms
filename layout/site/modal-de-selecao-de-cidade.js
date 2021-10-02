@@ -4,8 +4,9 @@ import { Button } from '@material-ui/core';
 import React from "react"
 import styled from "styled-components"
 import { eventoGA } from 'utils/analytics';
-import {getCidades} from 'api/controllers/cidades';
-import {initializeStore} from 'store/configureStore';
+import { getCidades } from 'api/controllers/cidades';
+import { initializeStore } from 'store/configureStore';
+import Loading from 'components/loading';
 
 const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   const [open, setOpen] = useState(false);
@@ -49,13 +50,14 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
 
   const body = (
     <CorpoModal>
+      <Loading ativo={!cidades.length} />
       <Logo src="/logo.svg" />
       <Label>Escolha a cidade:</Label>
       {
-        cidades.length > 0 && 
-        cidades.map((cidade) => (          
+        cidades.length > 0 &&
+        cidades.map((cidade) => (
           <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade(cidade)}>{cidade}</Button>
-            ))
+        ))
       }
     </CorpoModal>
   );
@@ -69,11 +71,11 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   }, []);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       const result = await getCidades();
       setCidades(result);
     })()
-  },[])
+  }, [])
 
   return (
     <Modal
