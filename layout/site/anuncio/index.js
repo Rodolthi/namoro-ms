@@ -6,18 +6,19 @@ import Descricao from "./descricao"
 import { getAnuncio } from 'api/controllers/pegar-anuncio';
 import { useRouter } from "next/router"
 
-
 const Anuncio = () => {
+  
   const [anuncio, setAnuncio] = useState(null);
 
   const router = useRouter();
 
   useEffect(() => {
+    if(!router.isReady) return;
     (async() => {      
       const result = await getAnuncio(router.query.slug);
       setAnuncio(result.data);
     })();
-  },[]);
+  },[router.isReady]);
 
   return (
     <ContainerAnuncio>
