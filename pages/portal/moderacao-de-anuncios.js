@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getAnunciosModeracao } from 'api/controllers/pegar-anuncio-moderacao';
+import { postAprovarAnuncio } from 'api/controllers/aprovar-anuncio';
 import ModalFoto from "layout/site/anuncio/modal-foto";
 import ModalDeDadosDoAnuncio from "layout/portal/moderacao/modal-de-dados-do-anuncio";
 
@@ -35,6 +36,11 @@ const ModeracaoDeAnuncios = () => {
     }
 
     return listaDeImagens
+  }
+
+  const aprovarAnuncio = async (slug) => {
+    const aprovado = await postAprovarAnuncio(slug);
+    aprovado.status === 200 && location.reload();
   }
 
 
@@ -82,7 +88,7 @@ const ModeracaoDeAnuncios = () => {
                 
 
                 <footer>
-                  <Button size="large" variante="contained" color="primary">
+                  <Button size="large" variante="contained" color="primary" onClick={() => aprovarAnuncio(item.id)}>
                     Aprovar anúncio
                   </Button>
                 </footer>

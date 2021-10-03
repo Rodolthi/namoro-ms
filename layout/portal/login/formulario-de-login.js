@@ -23,8 +23,7 @@ const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
 
   const logar = async (user) => {
 
-    const {data, status} = await autenticar({"username":user.email, "password":user.senha})
-    console.log(data);
+    const {data, status} = await autenticar({"username":user.email, "password":user.senha});
     if(status === 200) {
       dispatch({
         type: 'token',

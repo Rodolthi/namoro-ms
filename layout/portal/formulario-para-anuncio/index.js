@@ -48,10 +48,6 @@ const FormularioParaAnuncio = () => {
     router.push("/portal/inicio/");
   };
 
-  useEffect(() => {
-    console.log(obterDadosDoFormulario());
-  },[])
-
   return (
     <ContainerFormulario>
 
