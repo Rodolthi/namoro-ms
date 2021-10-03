@@ -3,12 +3,40 @@ import BlankSlate from "components/blank-slate";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import {getAnunciosModeracao} from 'api/controllers/pegar-anuncio-moderacao';
+import { getAnunciosModeracao } from 'api/controllers/pegar-anuncio-moderacao';
+import ModalFoto from "layout/site/anuncio/modal-foto";
+import ModalDeDadosDoAnuncio from "layout/portal/moderacao/modal-de-dados-do-anuncio";
 
 const ModeracaoDeAnuncios = () => {
   const [autenticado, setAutenticado] = useState(false);
   const [anuncios, setAnuncios] = useState([]);
   const router = useRouter();
+  const [imagemNoModal, setImagemNoModal] = useState()
+  const [modalAberto, setModalAberto] = useState(false)
+  const [imagens, setImagens] = useState()
+  const [modalDeDadosAberto, setModalDeDadosAberto] = useState(false)
+
+  const abrirModal = (anuncio) => {
+    setImagens(fotosDaGaleria(anuncio))
+    setImagemNoModal(anuncio.fotos[0].src)
+    setModalAberto(true)
+  }
+
+  const fotosDaGaleria = (anuncio) => {
+    let listaDeImagens = anuncio?.fotos.reduce((acc, item) => {
+      return [
+        ...acc,
+        item.src
+      ]
+    }, []);
+
+    if (anuncio?.deposito) {
+      listaDeImagens.pop()
+    }
+
+    return listaDeImagens
+  }
+
 
   useEffect(() => {
     setAutenticado(localStorage.getItem("podeModerar"));
@@ -17,8 +45,8 @@ const ModeracaoDeAnuncios = () => {
       alert("Você não tem acesso à esta página");
       router.push("/portal/moderacao-login/");
     }
-    
-    (async() => {
+
+    (async () => {
       const result = await getAnunciosModeracao();
       setAnuncios(result.data);
     })();
@@ -30,29 +58,40 @@ const ModeracaoDeAnuncios = () => {
     <>
       {autenticado && (
         <Lista>
-          {anuncios.map((item, index) => (
-            <Anuncio key={index}>
-              <h2>{item.tituloAnuncio}</h2>
-              <h3>Id do anunciante: {item.id}</h3>
-              <a
-                title="Visualizar comprovante"
-                target="_blank"
-                rel="noreferrer"
-                href={item.fotos[item.fotos.length-1].src}
-              >
-                <img src={item.fotos[item.fotos.length-1].src} />
-              </a>
+          {anuncios.map((item, index) => {
+            return (
+              <Anuncio key={index}>
+                <h2>{item.tituloAnuncio}</h2>
+                <h3>Id do anunciante: {item.id}</h3>
+                <a
+                  title="Visualizar comprovante"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={item.fotos[item.fotos.length - 1].src}
+                >
+                  <img src={item.fotos[item.fotos.length - 1].src} />
+                </a>
 
-              <footer>
-                <Button size="large" variante="contained" color="primary">
-                  Aprovar anúncio
+                <Button size="large" onClick={() => abrirModal(item)} variante="contained">
+                  Ver fotos do anúncio
                 </Button>
-                {/* <Button size="large" variante="contained">
-                  Reprovar anúncio
-                </Button> */}
-              </footer>
-            </Anuncio>
-          ))}
+               
+                <Button size="large" onClick={() => setModalDeDadosAberto(true)} variante="contained">
+                  Ver informações
+                </Button>
+                
+
+                <footer>
+                  <Button size="large" variante="contained" color="primary">
+                    Aprovar anúncio
+                  </Button>
+                </footer>
+                <ModalFoto galeria={imagens} setImagem={setImagemNoModal} imagem={imagemNoModal} aberto={modalAberto} setAberto={setModalAberto} />
+                <ModalDeDadosDoAnuncio dados={item} aberto={modalDeDadosAberto} setAberto={setModalDeDadosAberto} />
+
+              </Anuncio>
+            )
+          })}
           {anuncios.length === 0 && (
             <BlankSlate
               icone="feedback"

@@ -44,7 +44,7 @@ const ListaDeAnuncios = () => {
                   <img src="whatsappp-logo.svg" />
                   {item.telefone}
                 </p>
-                {item.atendeEmLocalProprio && <p className="descricao">Com local</p>}                
+                {item.atendeEmLocalProprio && <p className="descricao">Com local</p>}
                 <p className="descricao">{item.cidade}/MS</p>
               </span>
             </Item>
