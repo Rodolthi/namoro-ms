@@ -24,7 +24,8 @@ const ListaDeAnuncios = () => {
 
   useEffect(() => {
     (async () => {
-      const resultAnuncios = await getAnuncios(filtros);
+      const _filtros = filtros ? filtros : JSON.parse(localStorage.getItem("state"));
+      const resultAnuncios = await getAnuncios(_filtros);
       setAnuncios(resultAnuncios.data);
     })();
   }, [filtros.regiao, filtros.acompanhante]);

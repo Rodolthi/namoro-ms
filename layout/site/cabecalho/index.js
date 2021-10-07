@@ -9,20 +9,19 @@ import Icone from "components/icone"
 import { useRouter } from "next/router"
 import {getCidades} from 'api/controllers/cidades';
 import { initializeStore } from 'store/configureStore';
+import { useSelector } from "react-redux"
 
 const Cabecalho = () => {
   const [cidades, setCidades] = useState([]);
   const [cidadeSelecionada, setCidadeSelecionada] = useState("")
-  const [acompanhante, setAcompanhante] = useState("mulher")
+  const [acompanhante, setAcompanhante] = useState("")
   const [menuAberto, setMenuAberto] = useState(false)
   const reduxStore = initializeStore()
   const { dispatch } = reduxStore
+  const state = useSelector(state => state.filtros);
+
   const wraper = createRef()
   const router = useRouter()
-
-  useEffect(() => {
-    sessionStorage.getItem('cidadeSelecionada') && setCidadeSelecionada(sessionStorage.getItem('cidadeSelecionada'))
-  }, [])
 
   useEffect(() => {
     (async() => {
@@ -31,22 +30,36 @@ const Cabecalho = () => {
     })()
   },[])
 
-  const handleMudarCidade = (e) => {
-    setCidadeSelecionada(e.target.value)
+  useEffect(() => {
+    const stateLocal = JSON.parse(localStorage.getItem("state"));
+    const regiao = stateLocal?.regiao ? stateLocal.regiao : '';
+    const acompanhante = stateLocal?.acompanhante ? stateLocal.acompanhante : state?.acompanhante ? state.acompanhante : '';
+    stateLocal?.regiao && mudarCidade(regiao);
+    stateLocal?.acompanhante ? mudarAcompanhante(acompanhante) : mudarAcompanhante("mulher");
+  },[]);
 
+  const mudarCidade = (value) => {
+    setCidadeSelecionada(value)
     dispatch({
       type: 'regiao',
-      regiao: e.target.value
+      regiao: value
     })
   }
 
-  const handleMudarAcompanhante = (e) => {
-    setAcompanhante(e.target.value)
+  const handleMudarCidade = ({target}) => {
+    mudarCidade(target.value);
+  }
 
+  const mudarAcompanhante = (value) => {
+    setAcompanhante(value)
     dispatch({
       type: 'acompanhante',
-      acompanhante: e.target.value
+      acompanhante: value
     })
+  }
+
+  const handleMudarAcompanhante = ({target}) => {
+    mudarAcompanhante(target.value)
   }
 
   const ConteudoMenu = () => (
@@ -72,7 +85,7 @@ const Cabecalho = () => {
           {
             cidades.length > 0 && 
             cidades.map((cidade) => (
-              <MenuItem selected value={cidade}>{cidade}</MenuItem>
+              <MenuItem value={cidade}>{cidade}</MenuItem>
             ))
           }
         </Select>
