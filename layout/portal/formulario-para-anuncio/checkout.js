@@ -15,7 +15,6 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const { register, getValues, formState: { errors }, handleSubmit } = useForm()
   const [deposito, setDeposito] = useState(false)
   const [comprovante, setComprovante] = useState([])
-  const [pagamentoAprovado, setPagamentoAprovado] = useState(true)
 
   const token = useSelector(state => state.token);
 
@@ -54,16 +53,18 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       form.append('tituloAnuncio', todosOsdados.tituloAnuncio);
       form.append('valorACombinar', todosOsdados.valorACombinar);
       form.append('valorDoPrograma', todosOsdados.valorDoPrograma);
-
       form.append('imagemPrincipal', todosOsdados.imagemPrincipal[0].files);
-
       todosOsdados.imagensGaleria.map((item, index) => {
         form.append(`imageGaleria${index}`, item.files);
       });
 
-      form.append('comprovante', todosOsdados.comprovante[0].files);
+      if (deposito) {
+        todosOsdados.comprovante && form.append('comprovante', todosOsdados.comprovante[0].files);
+      }
 
       const anuncioCriado = await postAnuncio(form, token);
+      sessionStorage.setItem('anuncioCriado', JSON.stringify(anuncioCriado))
+      console.log("Anuncio criado: ", JSON.stringify(anuncioCriado))
       router.push("/portal/inicio");
     }
   }
@@ -83,12 +84,11 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     const dados = obterDadosDoFormulario("dadosDoFormulario")
     const tituloPlanoEscolhido = `Plano de ${dados.plano}`
 
-
-
+    finalizarCadastro();
     obterDadosMP(tituloPlanoEscolhido, dados.preco).then(res => {
+      console.log('res MP: ', res);
       router.push(res.init_point)
     })
-
   }
 
   return (
