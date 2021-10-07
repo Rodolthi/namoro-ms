@@ -6,6 +6,7 @@ import styled from "styled-components"
 import { eventoGA } from 'utils/analytics';
 import { getCidades } from 'api/controllers/cidades';
 import { initializeStore } from 'store/configureStore';
+import {useLocalStorage} from 'utils/useLocalStorage';
 import Loading from 'components/loading';
 
 const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
@@ -26,7 +27,6 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   }
 
   const escolherCidade = (cidade) => {
-    sessionStorage.setItem("cidadeSelecionada", cidade)
     setCidadeSelecionada(cidade)
     eventoGA({
       action: "Selecionar cidade",
@@ -38,11 +38,6 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
     dispatch({
       type: 'regiao',
       regiao: cidade
-    })
-
-    dispatch({
-      type: 'acompanhante',
-      regiao: 'mulher'
     })
 
     fecharModal();
@@ -63,8 +58,10 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   );
 
   useEffect(() => {
-    const elementoRaiz = document.getElementById("__next")
-    if (!sessionStorage.getItem("cidadeSelecionada")) {
+    const elementoRaiz = document.getElementById("__next");
+    const state = JSON.parse(localStorage.getItem("state"));
+    const regiao = state?.regiao ? state.regiao : '';
+    if (!regiao) {
       abrirModal();
       elementoRaiz.style.filter = "blur(16px)"
     }
