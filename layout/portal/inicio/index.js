@@ -9,17 +9,17 @@ import { useRouter } from "next/router";
 import {getAnunciosUsuario} from 'api/controllers/usuario-anuncios';
 import { useSelector } from "react-redux";
 import { useLocalStorage } from "utils/useLocalStorage";
+import { obterDadosDoFormulario } from "utils/storage";
+import { putAprovarCartao } from "api/controllers/pagamento_cartao_aprovado";
 
 const Home = () => {
   const [anuncios, setAnuncios] = useState([]);
   const [tokenLogado] = useLocalStorage('token');
   const [usuarioId] = useLocalStorage('usuarioId');
-
   const {token} = useSelector((state) => state);
   const router = useRouter();
   
   useEffect(() => {
-
     function getToken() {
       return !token ? tokenLogado : token;
     }
@@ -33,9 +33,16 @@ const Home = () => {
   useEffect(() => {
     const pagamentoMercadoPago = router.query;
     if (pagamentoMercadoPago.collection_status === "approved") {
+      aprovarAnuncioParaModeracao()
       alert("Pagamento aprovado com sucesso");
     }
   }, [router.query]);
+
+  const aprovarAnuncioParaModeracao = () => { 
+    let anuncio = JSON.parse(sessionStorage.getItem('anuncioCriado'))
+    console.log(anuncio.data.id)
+    putAprovarCartao(anuncio.data.id)
+  }
 
   return (
     <Container>
