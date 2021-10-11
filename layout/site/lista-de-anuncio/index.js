@@ -5,13 +5,14 @@ import { getAnuncios } from "api/controllers/pegar-anuncios";
 import { useSelector } from "react-redux";
 import BlankSlate from "components/blank-slate";
 import { initializeStore } from 'store/configureStore';
+import Loading from "components/loading";
 
 const ListaDeAnuncios = () => {
   const filtros = useSelector((state) => state);
   const reduxStore = initializeStore();
-
   const [anuncios, setAnuncios] = useState([]);
   const router = useRouter();
+  const [loadingAtivo, setLoadingAtivo] = useState(true)
 
   const irParaOAnuncio = (slug) => {
     router.push({
@@ -24,14 +25,17 @@ const ListaDeAnuncios = () => {
 
   useEffect(() => {
     (async () => {
+      setLoadingAtivo(true)
       const _filtros = filtros ? filtros : JSON.parse(localStorage.getItem("state"));
       const resultAnuncios = await getAnuncios(_filtros);
       setAnuncios(resultAnuncios.data);
+      setLoadingAtivo(false)
     })();
   }, [filtros.regiao, filtros.acompanhante]);
 
-  return (
+  return (<>
     <Lista>
+      <Loading ativo={loadingAtivo} />
       {anuncios.length > 0 && anuncios.map((item, index) => {
         return (
           <li key={index}>
@@ -59,7 +63,7 @@ const ListaDeAnuncios = () => {
           texto="Ops... Não encontramos anúncios aqui por enquanto."
         />
       )}
-    </Lista>
+    </Lista></>
   );
 };
 

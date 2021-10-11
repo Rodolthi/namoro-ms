@@ -7,6 +7,7 @@ import { getAnunciosModeracao } from 'api/controllers/pegar-anuncio-moderacao';
 import { postAprovarAnuncio } from 'api/controllers/aprovar-anuncio';
 import ModalFoto from "layout/site/anuncio/modal-foto";
 import ModalDeDadosDoAnuncio from "layout/portal/moderacao/modal-de-dados-do-anuncio";
+import Loading from "components/loading";
 
 const ModeracaoDeAnuncios = () => {
   const [autenticado, setAutenticado] = useState(false);
@@ -16,6 +17,7 @@ const ModeracaoDeAnuncios = () => {
   const [modalAberto, setModalAberto] = useState(false)
   const [imagens, setImagens] = useState()
   const [modalDeDadosAberto, setModalDeDadosAberto] = useState(false)
+  const [loadingAtivo, setLoadingAtivo] = useState(false)
 
   const abrirModal = (anuncio) => {
     setImagens(fotosDaGaleria(anuncio))
@@ -45,6 +47,7 @@ const ModeracaoDeAnuncios = () => {
 
 
   useEffect(() => {
+    setLoadingAtivo(true)
     setAutenticado(localStorage.getItem("podeModerar"));
 
     if (!localStorage.getItem("podeModerar")) {
@@ -55,13 +58,14 @@ const ModeracaoDeAnuncios = () => {
     (async () => {
       const result = await getAnunciosModeracao();
       setAnuncios(result.data);
+      setLoadingAtivo(false)
     })();
-
   }, []);
 
 
   return (
     <>
+      <Loading ativo={loadingAtivo} />
       {autenticado && (
         <Lista>
           {anuncios.map((item, index) => {
@@ -81,11 +85,11 @@ const ModeracaoDeAnuncios = () => {
                 <Button size="large" onClick={() => abrirModal(item)} variante="contained">
                   Ver fotos do anúncio
                 </Button>
-               
+
                 <Button size="large" onClick={() => setModalDeDadosAberto(true)} variante="contained">
                   Ver informações
                 </Button>
-                
+
 
                 <footer>
                   <Button size="large" variante="contained" color="primary" onClick={() => aprovarAnuncio(item.id)}>

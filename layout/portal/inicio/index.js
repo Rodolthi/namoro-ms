@@ -6,29 +6,32 @@ import Icone from "components/icone";
 import BlankSlate from "components/blank-slate";
 import Anuncios from "./anuncios";
 import { useRouter } from "next/router";
-import {getAnunciosUsuario} from 'api/controllers/usuario-anuncios';
+import { getAnunciosUsuario } from 'api/controllers/usuario-anuncios';
 import { useSelector } from "react-redux";
 import { useLocalStorage } from "utils/useLocalStorage";
-import { obterDadosDoFormulario } from "utils/storage";
 import { putAprovarCartao } from "api/controllers/pagamento_cartao_aprovado";
+import Loading from "components/loading";
 
 const Home = () => {
   const [anuncios, setAnuncios] = useState([]);
   const [tokenLogado] = useLocalStorage('token');
   const [usuarioId] = useLocalStorage('usuarioId');
-  const {token} = useSelector((state) => state);
+  const { token } = useSelector((state) => state);
   const router = useRouter();
-  
+  const [loadingAtivo, setLoadingAtivo] = useState(false)
+
   useEffect(() => {
+    setLoadingAtivo(true)
     function getToken() {
       return !token ? tokenLogado : token;
     }
 
-    (async() => {   
+    (async () => {
       const result = await getAnunciosUsuario(usuarioId, getToken());
       setAnuncios(result.data);
+      setLoadingAtivo(false)
     })();
-  },[token])
+  }, [token])
 
   useEffect(() => {
     const pagamentoMercadoPago = router.query;
@@ -38,7 +41,7 @@ const Home = () => {
     }
   }, [router.query]);
 
-  const aprovarAnuncioParaModeracao = () => { 
+  const aprovarAnuncioParaModeracao = () => {
     let anuncio = JSON.parse(sessionStorage.getItem('anuncioCriado'))
     console.log(anuncio.data.id)
     putAprovarCartao(anuncio.data.id)
@@ -46,6 +49,7 @@ const Home = () => {
 
   return (
     <Container>
+      <Loading ativo={loadingAtivo} />
       <Titulo>Meus anúncios</Titulo>
 
       <Content>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   TextField,
@@ -84,6 +84,10 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
 
   }
 
+  useEffect(() => {
+    compararSenhas(senhaRepetida)
+  }, [senhaRepetida])
+
   return (
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(criarConta)}>
       <Loading ativo={loadingAtivo} />
@@ -145,8 +149,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         {...register("novaSenhaRepetida", { required: "Repita a senha" })}
         helperText={errors.novaSenhaRepetida?.message || !senhasIguais && "As senhas devem ser iguais"}
         error={errors.novaSenhaRepetida?.type === "required" || !senhasIguais}
-        // onChange={(e) => compararSenhas(e.target.value)}
-        onBlur={(e) => compararSenhas(e.target.value)}
+        onChange={(e) => setSenhaRepetida(e.target.value)}
       />
 
       <Documentos>
