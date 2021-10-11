@@ -14,10 +14,13 @@ import lerURI from "utils/lerURI";
 import { useForm } from "react-hook-form";
 import { postUsuario } from 'api/controllers/criacao-conta';
 import { useRouter } from "next/router";
+import Loading from "components/loading";
 
 const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
+  const [loadingAtivo, setLoadingAtivo] = useState(false)
 
   const criarConta = async (e) => {
+    setLoadingAtivo(true)
     const form = new FormData();
     form.append('nome', e.usuario);
     form.append('email', e.novoEmail);
@@ -32,6 +35,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
       irParaLogin();
     }
 
+    setLoadingAtivo(false)
   }
 
   const [novaSenha, setNovaSenha] = useState("");
@@ -82,6 +86,8 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
 
   return (
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(criarConta)}>
+      <Loading ativo={loadingAtivo} />
+
       <Title>Crie uma nova conta</Title>
 
       <TextField
@@ -123,7 +129,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
         }}
         helperText={errors.novaSenha?.message || !senhaForte && "Insira uma senha com os requisitos"}
         error={errors.novaSenha?.type === "required" || !senhaForte}
-        />
+      />
 
       <ContainerRequisitos className={senhaForte && "sucesso"}>
         <p><strong>A senha deve conter:</strong></p>
