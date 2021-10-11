@@ -7,6 +7,8 @@ export const postUsuario = async (dataUser) => {
         "username": "thiago.uxbr@gmail.com",
         "password": "admin"
     });
+    console.log(data.data.token)
+    debugger
     const result = await postData(dataUser, data.data.token);
     return result;
 }
