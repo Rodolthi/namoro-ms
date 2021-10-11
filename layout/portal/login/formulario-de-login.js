@@ -1,30 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { TextField, Button } from "@material-ui/core";
 import Icone from "components/icone";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import {autenticar} from 'api/controllers/autenticar';
-import {initializeStore} from 'store/configureStore';
+import { autenticar } from 'api/controllers/autenticar';
+import { initializeStore } from 'store/configureStore';
 import { useLocalStorage } from "utils/useLocalStorage";
+import Loading from "components/loading";
 
 const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
+  const [loadingAtivo, setLoadingAtivo] = useState(false)
 
-  const [,setNomeUsuario] = useLocalStorage("nomeUsuario", '');
-  const [,setToken] = useLocalStorage("token", '');
-  const [,setUsuarioId] = useLocalStorage("usuarioId", '');
+  const [, setNomeUsuario] = useLocalStorage("nomeUsuario", '');
+  const [, setToken] = useLocalStorage("token", '');
+  const [, setUsuarioId] = useLocalStorage("usuarioId", '');
 
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   const router = useRouter();
   const reduxStore = initializeStore();
-  const {dispatch} = reduxStore;
+  const { dispatch } = reduxStore;
 
   const logar = async (user) => {
+    setLoadingAtivo(true)
 
-    const {data, status} = await autenticar({"username":user.email, "password":user.senha});
-    if(status === 200) {
+    const { data, status } = await autenticar({ "username": user.email, "password": user.senha });
+
+    if (status === 200) {
       dispatch({
         type: 'token',
         token: data.data.token
@@ -37,7 +41,10 @@ const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
       setToken(data.data.token);
       setUsuarioId(data.data.email);
       router.push("/portal/inicio");
+    } else if (status === 403) {
+      alert("Senha ou e-mail incorretos. Digite novamente.")
     }
+    setLoadingAtivo(false)
   };
 
   const { register, formState: { errors }, handleSubmit } = useForm();
@@ -49,6 +56,8 @@ const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
 
   return (
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(logar)}>
+      <Loading ativo={loadingAtivo} />
+
       <Title>Entre na sua conta</Title>
       <TextField
         {...register("email",

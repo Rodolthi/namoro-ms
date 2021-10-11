@@ -9,17 +9,20 @@ import { useRouter } from "next/router";
 import obterDadosMP from "api/mercado-pago";
 import { postAnuncio } from "api/controllers/criar-anuncio";
 import { useSelector } from "react-redux";
+import Loading from "components/loading";
 
 const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const router = useRouter()
   const { register, getValues, formState: { errors }, handleSubmit } = useForm()
   const [deposito, setDeposito] = useState(false)
   const [comprovante, setComprovante] = useState([])
+  const [loadingAtivo, setLoadingAtivo] = useState(false)
 
   const token = useSelector(state => state.token);
 
   //TODO: Fazer Checkout com mercado pago
   const finalizarCadastro = async () => {
+    setLoadingAtivo(true)
     const dados = obterDadosDoFormulario("dadosDoFormulario")
     const todosOsdados = {
       ...dados,
@@ -67,6 +70,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       console.log("Anuncio criado: ", JSON.stringify(anuncioCriado))
       router.push("/portal/inicio");
     }
+    setLoadingAtivo(false)
   }
 
   const handleComprovante = (e) => {
@@ -92,7 +96,9 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   }
 
   return (
-    <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(finalizarCadastro)} >
+    <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(finalizarCadastro)}>
+      <Loading ativo={loadingAtivo} />
+
       <Titulo>Pagamento</Titulo>
       <FormControl fullWidth component="fieldset">
         <FormGroup row style={{ color: "white" }}>

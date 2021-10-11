@@ -6,8 +6,6 @@ import styled from "styled-components"
 import { eventoGA } from 'utils/analytics';
 import { getCidades } from 'api/controllers/cidades';
 import { initializeStore } from 'store/configureStore';
-import {useLocalStorage} from 'utils/useLocalStorage';
-import Loading from 'components/loading';
 
 const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   const [open, setOpen] = useState(false);
@@ -45,7 +43,6 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
 
   const body = (
     <CorpoModal>
-      <Loading ativo={!cidades.length} />
       <Logo src="/logo.svg" />
       <Label>Escolha a cidade:</Label>
       {
