@@ -5,27 +5,30 @@ import Ficha from "./ficha"
 import Descricao from "./descricao"
 import { getAnuncio } from 'api/controllers/pegar-anuncio';
 import { useRouter } from "next/router"
+import Loading from "components/loading"
 
 const Anuncio = () => {
-  
-  const [anuncio, setAnuncio] = useState(null);
 
+  const [anuncio, setAnuncio] = useState(null);
+  const [loadingAtivo, setLoadingAtivo] = useState(true)
   const router = useRouter();
 
   useEffect(() => {
-    if(!router.isReady) return;
-    (async() => {      
+    if (!router.isReady) return;
+    (async () => {
       const result = await getAnuncio(router.query.slug);
       setAnuncio(result.data);
+      setLoadingAtivo(false)
     })();
-  },[router.isReady]);
+  }, [router.isReady]);
 
   return (
     <ContainerAnuncio>
-      <Ficha dados={anuncio}/>
+      <Loading ativo={loadingAtivo} />
+      <Ficha dados={anuncio} />
       <Conteudo>
-        <Galeria dados={anuncio}/>
-        <Descricao dados={anuncio}/>
+        <Galeria dados={anuncio} />
+        <Descricao dados={anuncio} />
       </Conteudo>
     </ContainerAnuncio>
   )
