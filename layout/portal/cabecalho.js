@@ -10,7 +10,7 @@ const rotasDoPortal = ["/portal/inicio", "/portal/planos", "/portal/formulario"]
 
 const Cabecalho = () => {
   const router = useRouter();
-  const [usuarioState, setUsuarioState] = useLocalStorage('nomeUsuario');
+  const [usuarioState] = useLocalStorage('nomeUsuario');
   const [usuarioLogado, setUsuarioLogado] = useState('');    
   const estaNasRotasDoPortal = rotasDoPortal.some(rota => router.pathname === rota);
   const {nomeUsuario} = useSelector((state) => state);
@@ -20,7 +20,8 @@ const Cabecalho = () => {
   };
 
   useEffect(() => {
-      estaNasRotasDoPortal && !nomeUsuario ? setUsuarioLogado(usuarioState) : setUsuarioState(nomeUsuario);
+    const state = JSON.parse(localStorage.getItem("state"));
+    estaNasRotasDoPortal && !nomeUsuario ? setUsuarioLogado(state.nomeUsuario) : setUsuarioLogado(nomeUsuario);
   },[nomeUsuario]);
 
   return (
@@ -30,7 +31,7 @@ const Cabecalho = () => {
         <ContainerUsuario>
           <Usuario>
             <Icone nome="account_circle" />
-            {usuarioLogado || usuarioState}
+            {usuarioLogado}
           </Usuario>
           <Button onClick={deslogar} type="button">
             <Icone nome="logout" />
