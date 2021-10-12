@@ -4,7 +4,7 @@ import autenticar from 'api/services/autenticar';
 export const postUsuario = async (dataUser) => {
 
     const { data } = await autenticar({
-        "username": "thiago.uxbr@gmail.com",
+        "username": "rodolfoaldrovandip@gmail.com",
         "password": "admin"
     });
     console.log(data.data.token)
