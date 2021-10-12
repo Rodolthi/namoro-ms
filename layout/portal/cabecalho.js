@@ -11,15 +11,29 @@ const rotasDoPortal = ["/portal/inicio", "/portal/planos", "/portal/formulario"]
 const Cabecalho = () => {
   const router = useRouter();
   const [usuarioLogado, setUsuarioLogado] = useState('');
+  const token = useSelector(state => state.token);
   const estaNasRotasDoPortal = rotasDoPortal.some(rota => router.pathname === rota);
   const { nomeUsuario } = useSelector((state) => state);
+  const [tokenLogado, setTokenLogado] = useState("")
 
   const deslogar = () => {
     router.push("/portal/login");
   };
 
   useEffect(() => {
-    estaNasRotasDoPortal && !nomeUsuario ? setUsuarioLogado(getState().nomeUsuario) : setUsuarioLogado(nomeUsuario);
+    (async () => {
+      try {
+        const tokenLS = await getState().token;
+        estaNasRotasDoPortal && !token && setTokenLogado(tokenLS)
+        estaNasRotasDoPortal && !nomeUsuario ? setUsuarioLogado(getState().nomeUsuario) : setUsuarioLogado(nomeUsuario);
+      } catch (error) {
+        if (estaNasRotasDoPortal) {
+          alert("Faça o login novamente")
+          router.push("/portal/login")
+        }
+      }
+    })()
+
   }, [nomeUsuario]);
 
   return (
