@@ -29,8 +29,7 @@ const Home = () => {
         const result = await getAnunciosUsuario(getState().usuarioId, getToken());
         console.log("Data: ", result)
       } catch (error) {
-        alert("Você não está logado. Tente logar novamente.")
-        router.push("/portal/login")
+        console.log(error)
       }
       setLoadingAtivo(false)
     })();
