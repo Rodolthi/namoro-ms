@@ -26,24 +26,27 @@ const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
   const logar = async (user) => {
     setLoadingAtivo(true)
 
-    const { data, status } = await autenticar({ "username": user.email, "password": user.senha });
-
-    if (status === 200) {
-      dispatch({
-        type: 'token',
-        token: data.data.token
-      })
-      dispatch({
-        type: 'nomeUsuario',
-        nomeUsuario: data.data.displayName
-      })
-      setNomeUsuario(data.data.displayName);
-      setToken(data.data.token);
-      setUsuarioId(data.data.email);
-      router.push("/portal/inicio");
-    } else if (status === 403) {
-      alert("Senha ou e-mail incorretos. Digite novamente.")
+    try {
+      const { data, status } = await autenticar({ "username": user.email, "password": user.senha });
+      if (status === 200) {
+        dispatch({
+          type: 'token',
+          token: data.data.token
+        })
+        dispatch({
+          type: 'nomeUsuario',
+          nomeUsuario: data.data.displayName
+        })
+        setNomeUsuario(data.data.displayName);
+        setToken(data.data.token);
+        setUsuarioId(data.data.email);
+        router.push("/portal/inicio");
+      } 
+    } catch (error) {
+      console.log("data: ", error)
+      alert("E-mail ou senha incorretos!")
     }
+
     setLoadingAtivo(false)
   };
 
