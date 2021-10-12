@@ -9,7 +9,8 @@ const initialState = {
   acompanhante: '',
   token: '',
   anuncio: {},
-  nomeUsuario: ''
+  nomeUsuario: '',
+  usuarioId: '',
 }
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +40,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         nomeUsuario: action.nomeUsuario,
       }
+    case 'usuarioId':
+      return {
+        ...state,
+        usuarioId: action.usuarioId,
+      }
     default:
       return state
   }
@@ -47,7 +53,7 @@ const reducer = (state = initialState, action) => {
 const loadState = () => {
   try {
     const serializedState = localStorage.getItem('state');
-    if(serializedState === null) {
+    if (serializedState === null) {
       return undefined;
     }
     return JSON.parse(serializedState);
@@ -89,7 +95,7 @@ export const initializeStore = (preloadedState) => {
   }
 
   if (typeof window === 'undefined') return _store
-  
+
   if (!store) store = _store
 
   store.subscribe(() => {

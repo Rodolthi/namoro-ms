@@ -6,6 +6,7 @@ import styled from "styled-components"
 import { eventoGA } from 'utils/analytics';
 import { getCidades } from 'api/controllers/cidades';
 import { initializeStore } from 'store/configureStore';
+import { getState } from 'utils/useLocalStorage';
 
 const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
   const [open, setOpen] = useState(false);
@@ -56,7 +57,7 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
 
   useEffect(() => {
     const elementoRaiz = document.getElementById("__next");
-    const state = JSON.parse(localStorage.getItem("state"));
+    const state = getState();
     const regiao = state?.regiao ? state.regiao : '';
     if (!regiao) {
       abrirModal();

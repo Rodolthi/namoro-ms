@@ -47,7 +47,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
   const [documentoVerso, setDocumentoVerso] = useState();
   const [perfilComDocumento, setPerfilComDocumento] = useState();
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-  const regexParaSenhaForte = /^[0-9a-zA-Z$*&@#]{6,}$/;
+  const regexParaSenhaForte = /^.{6,}$/;
 
   const formularioValido = () => ehMaiorDeIdade && documentoFrente && perfilComDocumento && perfilComDocumento;
 
@@ -137,7 +137,6 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
 
       <ContainerRequisitos className={senhaForte && "sucesso"}>
         <p><strong>A senha deve conter:</strong></p>
-        <p>No mínimo <strong>1 número</strong></p>
         <p>No mínimo <strong>6 caracteres</strong></p>
       </ContainerRequisitos>
 

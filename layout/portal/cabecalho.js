@@ -4,25 +4,23 @@ import Icone from "components/icone";
 import { useRouter } from "next/router";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import {useLocalStorage} from 'utils/useLocalStorage';
+import { getState } from "utils/useLocalStorage";
 
 const rotasDoPortal = ["/portal/inicio", "/portal/planos", "/portal/formulario"];
 
 const Cabecalho = () => {
   const router = useRouter();
-  const [usuarioState] = useLocalStorage('nomeUsuario');
-  const [usuarioLogado, setUsuarioLogado] = useState('');    
+  const [usuarioLogado, setUsuarioLogado] = useState('');
   const estaNasRotasDoPortal = rotasDoPortal.some(rota => router.pathname === rota);
-  const {nomeUsuario} = useSelector((state) => state);
-  
+  const { nomeUsuario } = useSelector((state) => state);
+
   const deslogar = () => {
     router.push("/portal/login");
   };
 
   useEffect(() => {
-    const state = JSON.parse(localStorage.getItem("state"));
-    estaNasRotasDoPortal && !nomeUsuario ? setUsuarioLogado(state.nomeUsuario) : setUsuarioLogado(nomeUsuario);
-  },[nomeUsuario]);
+    estaNasRotasDoPortal && !nomeUsuario ? setUsuarioLogado(getState().nomeUsuario) : setUsuarioLogado(nomeUsuario);
+  }, [nomeUsuario]);
 
   return (
     <CabecalhoDoPortal>

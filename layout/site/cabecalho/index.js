@@ -7,9 +7,10 @@ import { useState, useEffect } from "react"
 import ModalMenu from "./modal-menu"
 import Icone from "components/icone"
 import { useRouter } from "next/router"
-import {getCidades} from 'api/controllers/cidades';
+import { getCidades } from 'api/controllers/cidades';
 import { initializeStore } from 'store/configureStore';
 import { useSelector } from "react-redux"
+import { getState } from "utils/useLocalStorage"
 
 const Cabecalho = () => {
   const [cidades, setCidades] = useState([]);
@@ -24,19 +25,19 @@ const Cabecalho = () => {
   const router = useRouter()
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       const result = await getCidades();
       setCidades(result);
     })()
-  },[])
+  }, [])
 
   useEffect(() => {
-    const stateLocal = JSON.parse(localStorage.getItem("state"));
+    const stateLocal = getState();
     const regiao = stateLocal?.regiao ? stateLocal.regiao : '';
     const acompanhante = stateLocal?.acompanhante ? stateLocal.acompanhante : state?.acompanhante ? state.acompanhante : '';
     stateLocal?.regiao && mudarCidade(regiao);
     stateLocal?.acompanhante ? mudarAcompanhante(acompanhante) : mudarAcompanhante("mulher");
-  },[]);
+  }, []);
 
   const mudarCidade = (value) => {
     setCidadeSelecionada(value)
@@ -46,7 +47,7 @@ const Cabecalho = () => {
     })
   }
 
-  const handleMudarCidade = ({target}) => {
+  const handleMudarCidade = ({ target }) => {
     mudarCidade(target.value);
   }
 
@@ -58,7 +59,7 @@ const Cabecalho = () => {
     })
   }
 
-  const handleMudarAcompanhante = ({target}) => {
+  const handleMudarAcompanhante = ({ target }) => {
     mudarAcompanhante(target.value)
   }
 
@@ -83,7 +84,7 @@ const Cabecalho = () => {
           onChange={handleMudarCidade}
         >
           {
-            cidades.length > 0 && 
+            cidades.length > 0 &&
             cidades.map((cidade) => (
               <MenuItem value={cidade}>{cidade}</MenuItem>
             ))

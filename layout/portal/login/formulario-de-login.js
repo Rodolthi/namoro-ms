@@ -7,18 +7,11 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { autenticar } from 'api/controllers/autenticar';
 import { initializeStore } from 'store/configureStore';
-import { useLocalStorage } from "utils/useLocalStorage";
 import Loading from "components/loading";
 
 const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
   const [loadingAtivo, setLoadingAtivo] = useState(false)
-
-  const [, setNomeUsuario] = useLocalStorage("nomeUsuario", '');
-  const [, setToken] = useLocalStorage("token", '');
-  const [, setUsuarioId] = useLocalStorage("usuarioId", '');
-
   const regexParaEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
   const router = useRouter();
   const reduxStore = initializeStore();
   const { dispatch } = reduxStore;
@@ -37,13 +30,16 @@ const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
           type: 'nomeUsuario',
           nomeUsuario: data.data.displayName
         })
-        setNomeUsuario(data.data.displayName);
-        setToken(data.data.token);
-        setUsuarioId(data.data.email);
+        dispatch({
+          type: 'usuarioId',
+          usuarioId: data.data.email
+        })
+        localStorage.setItem("nomeUsuario", data.data.displayName);
+        localStorage.setItem("token", data.data.token);
+        localStorage.setItem("usuarioId", data.data.email);
         router.push("/portal/inicio");
-      } 
+      }
     } catch (error) {
-      console.log("data: ", error)
       alert("E-mail ou senha incorretos!")
     }
 

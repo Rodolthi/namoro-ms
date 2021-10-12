@@ -8,14 +8,12 @@ import Anuncios from "./anuncios";
 import { useRouter } from "next/router";
 import { getAnunciosUsuario } from 'api/controllers/usuario-anuncios';
 import { useSelector } from "react-redux";
-import { useLocalStorage } from "utils/useLocalStorage";
+import { getState } from "utils/useLocalStorage";
 import { putAprovarCartao } from "api/controllers/pagamento_cartao_aprovado";
 import Loading from "components/loading";
 
 const Home = () => {
   const [anuncios, setAnuncios] = useState([]);
-  const [tokenLogado] = useLocalStorage('token');
-  const [usuarioId] = useLocalStorage('usuarioId');
   const { token } = useSelector((state) => state);
   const router = useRouter();
   const [loadingAtivo, setLoadingAtivo] = useState(false)
@@ -23,12 +21,17 @@ const Home = () => {
   useEffect(() => {
     setLoadingAtivo(true)
     function getToken() {
-      return !token ? tokenLogado : token;
+      return !token ? getState().token : token;
     }
 
     (async () => {
-      const result = await getAnunciosUsuario(usuarioId, getToken());
-      setAnuncios(result.data);
+      try {
+        const result = await getAnunciosUsuario(getState().usuarioId, getToken());
+        console.log("Data: ", result)
+      } catch (error) {
+        alert("Você não está logado. Tente logar novamente.")
+        router.push("/portal/login")
+      }
       setLoadingAtivo(false)
     })();
   }, [token])
@@ -43,7 +46,6 @@ const Home = () => {
 
   const aprovarAnuncioParaModeracao = () => {
     let anuncio = JSON.parse(sessionStorage.getItem('anuncioCriado'))
-    console.log(anuncio.data.id)
     putAprovarCartao(anuncio.data.id)
   }
 
