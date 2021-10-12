@@ -136,6 +136,7 @@ const Anuncio = styled.li`
   padding: 16px;
   img {
     width: 100%;
+    max-height: 400px;
     margin: 24px 0;
   }
   h2,

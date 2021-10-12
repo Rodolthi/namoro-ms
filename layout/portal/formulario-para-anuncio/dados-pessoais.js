@@ -88,7 +88,7 @@ const DadosPessoais = ({ avancarEtapa }) => {
           id="sexo"
         >
           <MenuItem value="mulher">Mulher</MenuItem>
-          <MenuItem value="homen">Homem</MenuItem>
+          <MenuItem value="homem">Homem</MenuItem>
           <MenuItem value="travesti">Travesti</MenuItem>
         </Select>
       </FormControl>

@@ -1,5 +1,5 @@
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { obterDadosDoFormulario } from "utils/storage";
@@ -17,8 +17,13 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const [deposito, setDeposito] = useState(false)
   const [comprovante, setComprovante] = useState([])
   const [loadingAtivo, setLoadingAtivo] = useState(false)
+  const [tokenLS, setTokenST] = useState("")
 
   const token = useSelector(state => state.token);
+
+  useEffect(() => {
+    !token && setTokenST(localStorage.getItem("token"))
+  }, [])
 
   //TODO: Fazer Checkout com mercado pago
   const finalizarCadastro = async () => {
@@ -31,6 +36,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       ...{ imagensGaleria },
       ...{ comprovante }
     }
+
     if (deposito && !comprovante.length) {
       alert("Insira o seu comprovante de depósito!")
     } else {
@@ -65,7 +71,9 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
         todosOsdados.comprovante && form.append('comprovante', todosOsdados.comprovante[0].files);
       }
 
-      const anuncioCriado = await postAnuncio(form, token);
+      console.log("token: ",todosOsdados.comprovante, token ? token : tokenLS)
+      
+      const anuncioCriado = await postAnuncio(form, token ? token : tokenLS);
       sessionStorage.setItem('anuncioCriado', JSON.stringify(anuncioCriado))
       console.log("Anuncio criado: ", JSON.stringify(anuncioCriado))
       router.push("/portal/inicio");
