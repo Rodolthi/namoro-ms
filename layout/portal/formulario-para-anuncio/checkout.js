@@ -10,6 +10,7 @@ import obterDadosMP from "api/mercado-pago";
 import { postAnuncio } from "api/controllers/criar-anuncio";
 import { useSelector } from "react-redux";
 import Loading from "components/loading";
+import { getState } from "utils/useLocalStorage";
 
 const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const router = useRouter()
@@ -22,7 +23,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const token = useSelector(state => state.token);
 
   useEffect(() => {
-    !token && setTokenST(localStorage.getItem("token"))
+    !token && setTokenST(getState().token)
   }, [])
 
   //TODO: Fazer Checkout com mercado pago
@@ -71,11 +72,8 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
         todosOsdados.comprovante && form.append('comprovante', todosOsdados.comprovante[0].files);
       }
 
-      console.log("token: ",todosOsdados.comprovante, token ? token : tokenLS)
-      
       const anuncioCriado = await postAnuncio(form, token ? token : tokenLS);
       sessionStorage.setItem('anuncioCriado', JSON.stringify(anuncioCriado))
-      console.log("Anuncio criado: ", JSON.stringify(anuncioCriado))
       router.push("/portal/inicio");
     }
     setLoadingAtivo(false)
@@ -98,7 +96,6 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
 
     finalizarCadastro();
     obterDadosMP(tituloPlanoEscolhido, dados.preco).then(res => {
-      console.log('res MP: ', res);
       router.push(res.init_point)
     })
   }
