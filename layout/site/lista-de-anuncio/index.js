@@ -36,7 +36,7 @@ const ListaDeAnuncios = () => {
   return (<>
     <Lista>
       <Loading ativo={loadingAtivo} />
-      {anuncios.length > 0 && anuncios.map((item, index) => {
+      {anuncios.length > 0 && filtros.regiao && anuncios.map((item, index) => {
         return (
           <li key={index}>
             <Item onClick={() => irParaOAnuncio(item.id)}>
