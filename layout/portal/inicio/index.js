@@ -27,7 +27,6 @@ const Home = () => {
     (async () => {
       try {
         const result = await getAnunciosUsuario(getState().usuarioId, getToken());
-        console.log("Data: ", result)
         setAnuncios(result.data);
       } catch (error) {
         console.log(error)
