@@ -6,9 +6,9 @@ import styled from "styled-components"
 const telefone = "(67) 99999-8383"
 const descricaoDoAnuncio = "Descrição completa do anúncio aqui nessa.  completa do anúncio aqui nessa. página. Descrição completa do anúncio aqui nessa página. Descrição completa do anúncio aqui nessa página.Descrição completa do anúncio aqui nessa página."
 
-const Descricao = ({dados}) => {
+const Descricao = ({ dados }) => {
 
-  if(!dados) return null;
+  if (!dados) return null;
   return (
     <ContainerDescricao>
       <Texto>
@@ -19,20 +19,20 @@ const Descricao = ({dados}) => {
         {
           dados.esseNumeroEhWhatsapp === "true" &&
           <Link style={{ width: '100%' }} href={`https://api.whatsapp.com/send?phone=${dados.telefone}`}>
-          <LinkWhats variant="contained" color="primary" size="large">
-            <img src="/whatsappp-logo.svg" />
-            {dados.telefone}
-          </LinkWhats>
-        </Link>
+            <LinkWhats variant="contained" color="primary" size="large">
+              <img src="/whatsappp-logo.svg" />
+              {dados.telefone}
+            </LinkWhats>
+          </Link>
         }
         {
           dados.telefone &&
           <Link style={{ width: '100%' }} href={`tel:${dados.telefone}`}>
-          <LinkTelefone variant="outlined" color="primary" size="large" startIcon={<Icone nome="call" />}>
-            {dados.telefone}
-          </LinkTelefone>
-        </Link>
-        }        
+            <LinkTelefone variant="outlined" color="primary" size="large" startIcon={<Icone nome="call" />}>
+              {dados.telefone}
+            </LinkTelefone>
+          </Link>
+        }
         {dados.atendeEmLocalProprio === "true" && <Detalhes>Com local</Detalhes>}
         <Detalhes>{dados.cidade}/MS</Detalhes>
       </Contato>
@@ -71,6 +71,9 @@ const Contato = styled.div`
   align-items: center;
   flex-direction: column;
   min-width: 320px;
+  @media screen and (max-width: 520px) {
+    min-width: auto;
+  }
 `
 
 const Detalhes = styled.p`
@@ -89,6 +92,13 @@ const LinkWhats = styled(Button)`
     height: 32px;
     margin-right: 8px;
   }
+  @media screen and (max-width: 520px) {
+    font-size: 18px !important;
+    img {
+      height: 24px;
+      margin-right: 8px;
+    }
+  }
 `
 
 const LinkTelefone = styled(Button)`
@@ -98,4 +108,7 @@ const LinkTelefone = styled(Button)`
   margin-bottom: 16px !important;
   color: var(--primaria) !important;
   width: 100% !important;
+  @media screen and (max-width: 520px) {
+    font-size: 18px !important;
+  }
 `
