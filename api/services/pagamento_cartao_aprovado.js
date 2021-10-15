@@ -3,7 +3,7 @@ import axios from "axios";
 
 const postData = async (slug) => {
 
-    const data = await axios.put(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/api/pagamento_cartao_aprovado`,{
+    const data = await axios.post(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/api/pagamento_cartao_aprovado`,{
         params: {
             slug
         }
