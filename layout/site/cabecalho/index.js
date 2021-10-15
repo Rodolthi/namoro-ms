@@ -75,7 +75,7 @@ const Cabecalho = () => {
   const acoesParaUsuario = () => (
     <>
       <FormControl style={{ width: 240 }} variant="filled">
-        <InputLabel id="cidade-label">Selecione sua região</InputLabel>
+        <InputLabel id="cidade-label">Selecione sua cidade</InputLabel>
 
         <Select
           labelId="cidade-label"
