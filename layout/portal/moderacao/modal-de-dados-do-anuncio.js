@@ -59,6 +59,8 @@ const Conteudo = styled.div`
   position: relative;
   padding: 24px;
   margin: 16px auto;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
   * {
     color: white;
     padding: 0;
