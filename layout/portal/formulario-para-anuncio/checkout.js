@@ -26,9 +26,9 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     !token && setTokenST(getState().token)
   }, [])
 
-  //TODO: Fazer Checkout com mercado pago
   const finalizarCadastro = async () => {
     setLoadingAtivo(true)
+
     const dados = obterDadosDoFormulario("dadosDoFormulario")
     const todosOsdados = {
       ...dados,
@@ -38,45 +38,50 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       ...{ comprovante }
     }
 
+
+    const form = new FormData();
+    form.append('aceitaCartao', todosOsdados.aceitaCartao);
+    form.append('atendeAte', todosOsdados.atendeAte);
+    form.append('atendeCasal', todosOsdados.atendeCasal);
+    form.append('atendeEmHotel', todosOsdados.atendeEmHotel);
+    form.append('atendeEmLocalProprio', todosOsdados.atendeEmLocalProprio);
+    form.append('atendeEmMotel', todosOsdados.atendeEmMotel);
+    form.append('atendeHomem', todosOsdados.atendeHomem);
+    form.append('atendeMulher', todosOsdados.atendeMulher);
+    form.append('casaDoCliente', todosOsdados.casaDoCliente);
+    form.append('cidade', todosOsdados.cidade);
+    form.append('comecaAtender', todosOsdados.comecaAtender);
+    form.append('descricao', todosOsdados.descricao);
+    form.append('esseNumeroEhWhatsapp', todosOsdados.esseNumeroEhWhatsapp);
+    form.append('idade', todosOsdados.idade);
+    form.append('planoEscolhido', todosOsdados.plano);
+    form.append('sexo', todosOsdados.sexo);
+    form.append('telefone', todosOsdados.telefone);
+    form.append('tituloAnuncio', todosOsdados.tituloAnuncio);
+    form.append('valorACombinar', todosOsdados.valorACombinar);
+    form.append('valorDoPrograma', todosOsdados.valorDoPrograma);
+    form.append('imagemPrincipal', todosOsdados.imagemPrincipal[0].files);
+    form.append('deposito', todosOsdados.deposito ? todosOsdados.deposito : "false");
+    form.append('comprovante', todosOsdados.comprovante.length ? todosOsdados.comprovante[0].files : "");
+    todosOsdados.imagensGaleria.map((item, index) => {
+      form.append(`imageGaleria${index}`, item.files);
+    });
+    if (!deposito) {
+      publicarAnuncio(form)
+    }
+
     if (deposito && !comprovante.length) {
       alert("Insira o seu comprovante de depósito!")
-    } else {
-      const form = new FormData();
-      form.append('aceitaCartao', todosOsdados.aceitaCartao);
-      form.append('atendeAte', todosOsdados.atendeAte);
-      form.append('atendeCasal', todosOsdados.atendeCasal);
-      form.append('atendeEmHotel', todosOsdados.atendeEmHotel);
-      form.append('atendeEmLocalProprio', todosOsdados.atendeEmLocalProprio);
-      form.append('atendeEmMotel', todosOsdados.atendeEmMotel);
-      form.append('atendeHomem', todosOsdados.atendeHomem);
-      form.append('atendeMulher', todosOsdados.atendeMulher);
-      form.append('casaDoCliente', todosOsdados.casaDoCliente);
-      form.append('cidade', todosOsdados.cidade);
-      form.append('comecaAtender', todosOsdados.comecaAtender);
-      form.append('deposito', todosOsdados.deposito);
-      form.append('descricao', todosOsdados.descricao);
-      form.append('esseNumeroEhWhatsapp', todosOsdados.esseNumeroEhWhatsapp);
-      form.append('idade', todosOsdados.idade);
-      form.append('planoEscolhido', todosOsdados.plano);
-      form.append('sexo', todosOsdados.sexo);
-      form.append('telefone', todosOsdados.telefone);
-      form.append('tituloAnuncio', todosOsdados.tituloAnuncio);
-      form.append('valorACombinar', todosOsdados.valorACombinar);
-      form.append('valorDoPrograma', todosOsdados.valorDoPrograma);
-      form.append('imagemPrincipal', todosOsdados.imagemPrincipal[0].files);
-      todosOsdados.imagensGaleria.map((item, index) => {
-        form.append(`imageGaleria${index}`, item.files);
-      });
-
-      if (deposito) {
-        todosOsdados.comprovante && form.append('comprovante', todosOsdados.comprovante[0].files);
-      }
-
-      const anuncioCriado = await postAnuncio(form, token ? token : tokenLS);
-      sessionStorage.setItem('anuncioCriado', JSON.stringify(anuncioCriado))
+    } else if (deposito) {
+      publicarAnuncio(form)
       router.push("/portal/inicio");
     }
     setLoadingAtivo(false)
+  }
+
+  const publicarAnuncio = async (form) => {
+    const anuncioCriado = await postAnuncio(form, token ? token : tokenLS);
+    localStorage.setItem('idDoAnuncioCriado', JSON.stringify(anuncioCriado.data.id))
   }
 
   const handleComprovante = (e) => {
@@ -91,11 +96,10 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   }
 
   const pagarComCartao = () => {
-    const dados = obterDadosDoFormulario("dadosDoFormulario")
-    const tituloPlanoEscolhido = `Plano de ${dados.plano}`
+    const anuncio = obterDadosDoFormulario("dadosDoFormulario")
 
     finalizarCadastro();
-    obterDadosMP(tituloPlanoEscolhido, dados.preco).then(res => {
+    obterDadosMP(`Plano de ${anuncio.plano}`, anuncio.preco).then(res => {
       router.push(res.init_point)
     })
   }

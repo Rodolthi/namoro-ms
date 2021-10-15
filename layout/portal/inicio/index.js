@@ -44,8 +44,8 @@ const Home = () => {
   }, [router.query]);
 
   const aprovarAnuncioParaModeracao = () => {
-    let anuncio = JSON.parse(sessionStorage.getItem('anuncioCriado'))
-    putAprovarCartao(anuncio.data.id)
+    let anuncioID = JSON.parse(localStorage.getItem('idDoAnuncioCriado'))
+    putAprovarCartao(anuncioID)
   }
 
   return (
