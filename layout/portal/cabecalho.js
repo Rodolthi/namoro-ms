@@ -69,7 +69,8 @@ const CabecalhoDoPortal = styled.header`
 `;
 
 const Logo = styled.img`
-  height: 100%;
+  width: 120px;
+  max-height: 100%;
 `;
 
 const ContainerUsuario = styled.div`
