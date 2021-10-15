@@ -38,7 +38,6 @@ const DadosPessoais = ({ avancarEtapa }) => {
   }
 
   const validarForm = () => {
-    alert(getValues().termo)
     salvarDadosDoFormulario(getValues())
     avancarEtapa()
   }
