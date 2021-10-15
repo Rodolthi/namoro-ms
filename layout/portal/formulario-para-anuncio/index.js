@@ -84,20 +84,6 @@ const FormularioParaAnuncio = () => {
         <Checkout imagensGaleria={imagensGaleria}
           imagemPrincipal={imagemPrincipal} />
       }
-
-      <ContainerBotoes>
-        {etapaSelecionada <= etapas?.length - 2 && (
-          <Button
-            onClick={avancarEtapa}
-            variant="contained"
-            size="large"
-            color="secondary"
-            endIcon={<Icone nome="navigate_next" />}
-          >
-            Próximo
-          </Button>
-        )}
-      </ContainerBotoes>
     </ContainerFormulario>
   );
 };
@@ -112,15 +98,6 @@ const ContainerFormulario = styled.div`
   background-color: var(--preta);
   padding: 24px;
   border-radius: 16px;
-`;
-
-const ContainerBotoes = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  .MuiButton--root {
-    margin: 12px;
-  }
 `;
 
 export default FormularioParaAnuncio
