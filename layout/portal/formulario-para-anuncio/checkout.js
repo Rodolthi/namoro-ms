@@ -62,10 +62,10 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     form.append('valorDoPrograma', todosOsdados.valorDoPrograma);
     form.append('imagemPrincipal', todosOsdados.imagemPrincipal[0].files);
     form.append('deposito', todosOsdados.deposito ? todosOsdados.deposito : "false");
-    form.append('comprovante', todosOsdados.comprovante.length ? todosOsdados.comprovante[0].files : "");
     todosOsdados.imagensGaleria.map((item, index) => {
       form.append(`imageGaleria${index}`, item.files);
     });
+    form.append('comprovante', todosOsdados.comprovante.length ? todosOsdados.comprovante[0].files : "");
     if (!deposito) {
       publicarAnuncio(form)
     }
@@ -74,7 +74,9 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       alert("Insira o seu comprovante de depósito!")
     } else if (deposito) {
       publicarAnuncio(form)
-      router.push("/portal/inicio");
+      setTimeout(() => {
+        router.push("/portal/inicio");
+      }, 1000);
     }
     setLoadingAtivo(false)
   }

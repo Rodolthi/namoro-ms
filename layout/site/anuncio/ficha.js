@@ -60,12 +60,6 @@ const Nome = styled.h2`
   font-weight: 800;
 `
 
-const Descricao = styled.p`
-  margin: 0;
-  color: #ddd;
-  margin-top: 16px;
-`
-
 const Foto = styled.div`
   display: flex;
   width: 180px;
@@ -75,6 +69,8 @@ const Foto = styled.div`
   justify-content: center;
   margin-bottom: 16px;
   img {
+    object-fit: cover;
+    width: 100%;
     height: 100%;
   }
 `
