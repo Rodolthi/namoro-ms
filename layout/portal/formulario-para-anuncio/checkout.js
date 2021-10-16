@@ -73,17 +73,20 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     if (deposito && !comprovante.length) {
       alert("Insira o seu comprovante de depósito!")
     } else if (deposito) {
-      publicarAnuncio(form)
-      setTimeout(() => {
-        router.push("/portal/inicio");
-      }, 1000);
+      publicarAnuncio(form).then(res => {
+        if (res.status == 200) {
+          router.push("/portal/inicio");
+        }
+      })
     }
+
     setLoadingAtivo(false)
   }
 
   const publicarAnuncio = async (form) => {
     const anuncioCriado = await postAnuncio(form, token ? token : tokenLS);
     localStorage.setItem('idDoAnuncioCriado', JSON.stringify(anuncioCriado.data.id))
+    return anuncioCriado
   }
 
   const handleComprovante = (e) => {

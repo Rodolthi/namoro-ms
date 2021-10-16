@@ -41,8 +41,10 @@ const ModeracaoDeAnuncios = () => {
   }
 
   const aprovarAnuncio = async (slug) => {
-    const aprovado = await postAprovarAnuncio(slug);
-    aprovado.status === 200 && location.reload();
+    postAprovarAnuncio(slug).then(res => console.log(res));
+    // const res = await aprovado
+    // console.log(res)
+    //  aprovado.status === 200 && location.reload();
   }
 
 

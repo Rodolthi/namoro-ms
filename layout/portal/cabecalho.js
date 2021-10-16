@@ -38,7 +38,7 @@ const Cabecalho = () => {
 
   return (
     <CabecalhoDoPortal>
-      <Logo src="/logo.svg" />
+      <Logo onClick={() => estaNasRotasDoPortal && router.push("/portal/inicio")} src="/logo.svg" />
       {estaNasRotasDoPortal && (
         <ContainerUsuario>
           <Usuario>
@@ -69,8 +69,12 @@ const CabecalhoDoPortal = styled.header`
 `;
 
 const Logo = styled.img`
-  width: 120px;
+  width: 160px;
   max-height: 100%;
+  cursor: pointer;
+  &:hover, &:focus {
+    opacity: 0.7;
+  }
 `;
 
 const ContainerUsuario = styled.div`
