@@ -24,7 +24,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
 
   useEffect(() => {
     !token && setTokenST(getState().token)
-  }, [])
+  }, [loadingAtivo])
 
   const finalizarCadastro = async () => {
     setLoadingAtivo(true)

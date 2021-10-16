@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { postUsuario } from 'api/controllers/criacao-conta';
 import Loading from "components/loading";
 import { autenticar } from "api/controllers/autenticar";
+import { postDocumentos } from "api/controllers/subir-documentos";
 
 const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
   const [loadingAtivo, setLoadingAtivo] = useState(false)
@@ -22,23 +23,33 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
   const criarConta = async (e) => {
     setLoadingAtivo(true)
     const form = new FormData();
+    const documentos = new FormData();
     form.append('nome', e.usuario);
     form.append('email', e.novoEmail);
     form.append('senha', e.novaSenha);
-    form.append('documentoFrente', documentoFrente[0].files);
-    form.append('documentoVerso', documentoVerso[0].files);
-    form.append('perfilComDocumento', perfilComDocumento[0].files);
-    const data = await postUsuario(form);
+    documentos.append('documentoFrente', documentoFrente[0].files);
+    documentos.append('documentoVerso', documentoVerso[0].files);
+    documentos.append('perfilComDocumento', perfilComDocumento[0].files);
+    const dataForm = await postUsuario(form);
 
-    if (data.status === 200) {
+    if (dataForm.status === 200) {
       alert("Conta criado com sucesso. Faça login para continuar.");
-      const { data, status } = await autenticar({ "username": e.novoEmail, "password": e.novaSenha });
-      if (status === 200) {
-        localStorage.setItem("nomeUsuario", data.data.displayName);
-        localStorage.setItem("token", data.data.token);
-        localStorage.setItem("usuarioId", data.data.email);
-      }
-      irParaLogin();
+      autenticar({ "username": e.novoEmail, "password": e.novaSenha }).then(res => {
+        if (res.status === 200) {
+          autenticar({ "username": e.novoEmail, "password": e.novaSenha }).then(response => {
+            if (response.status === 200) {
+              postDocumentos(documentos, response.data.data.token).then(res => {
+                if (res.status === 200) {
+                  localStorage.setItem("nomeUsuario", response.data.data.displayName);
+                  localStorage.setItem("token", response.data.data.token);
+                  localStorage.setItem("usuarioId", response.data.data.email);
+                  irParaLogin();
+                }
+              })
+            }
+          });
+        }
+      });
     }
 
     setLoadingAtivo(false)
