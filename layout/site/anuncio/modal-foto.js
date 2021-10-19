@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
 import Icone from 'components/icone';
 
-const ModalFoto = ({ setAberto, imagem, setImagem, aberto, galeria }) => {
+const ModalFoto = ({ preservarLarguraDasImagens, setAberto, imagem, setImagem, aberto, galeria }) => {
   const avancarFoto = (e, imagem) => {
     const indexDaImagem = galeria.indexOf(imagem)
 
@@ -31,7 +31,7 @@ const ModalFoto = ({ setAberto, imagem, setImagem, aberto, galeria }) => {
       aria-describedby="simple-modal-description"
     >
       <div>
-        <Imagem onClick={() => setAberto(false)}>
+        <Imagem className={`${preservarLarguraDasImagens && 'preservarLargura'}`} onClick={() => setAberto(false)}>
           <img src={imagem} />
         </Imagem>
 
@@ -77,8 +77,22 @@ const Imagem = styled.div`
     object-fit: cover;
     @media screen and (max-width: 800px) {
       height: auto;
-      object-fit: cover;
       width: 100%;
+    }
+  }
+  &.preservarLargura {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    max-width: auto;
+    img {
+      width: 100%;
+      object-fit: initial;
+      @media screen and (max-width: 800px) {
+        height: auto;
+        object-fit: initial;
+        width: 100%;
+      }
     }
   }
 `

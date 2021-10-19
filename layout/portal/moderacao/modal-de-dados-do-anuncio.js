@@ -54,15 +54,18 @@ const ModalDeDadosDoAnuncio = ({ dados, aberto, setAberto }) => {
 export default ModalDeDadosDoAnuncio
 
 const Conteudo = styled.div`
-  background-color: var(--preta);
+  background-color: var(--cinza-200);
   max-width:480px;
   position: relative;
   padding: 24px;
   margin: 16px auto;
   max-height: calc(100vh - 32px);
   overflow-y: auto;
+  margin-top:50%;
+  transform: translate(0, -50%);
+  border-radius: 16px;
   * {
-    color: white;
+    color: var(--preta);
     padding: 0;
     margin: 0;
   }

@@ -8,6 +8,7 @@ import { postAprovarAnuncio } from 'api/controllers/aprovar-anuncio';
 import ModalFoto from "layout/site/anuncio/modal-foto";
 import ModalDeDadosDoAnuncio from "layout/portal/moderacao/modal-de-dados-do-anuncio";
 import Loading from "components/loading";
+import { getDocumentos } from "api/controllers/pegar-documentos";
 
 const ModeracaoDeAnuncios = () => {
   const [autenticado, setAutenticado] = useState(false);
@@ -17,12 +18,36 @@ const ModeracaoDeAnuncios = () => {
   const [modalAberto, setModalAberto] = useState(false)
   const [imagens, setImagens] = useState()
   const [modalDeDadosAberto, setModalDeDadosAberto] = useState(false)
+
+  const [documento, setDocumentoNoModal] = useState()
+  const [modalDocumentosAberto, setModalDocumentosAberto] = useState(false)
+  const [documentos, setDocumentos] = useState()
   const [loadingAtivo, setLoadingAtivo] = useState(false)
 
   const abrirModal = (anuncio) => {
     setImagens(fotosDaGaleria(anuncio))
     setImagemNoModal(anuncio.fotos[0].src)
     setModalAberto(true)
+  }
+
+  const abrirModalDeDocumentos = async (anuncio) => {
+    const res = await getDocumentos(anuncio.usuario_id)
+    const data = await res.data
+    console.log(data);
+    setDocumentos(fotosDosDocumentos(data))
+    setDocumentoNoModal(data[0].src)
+    setModalDocumentosAberto(true)
+  }
+
+  const fotosDosDocumentos = (fotos) => {
+    let listaDeImagens = fotos.reduce((acc, item) => {
+      return [
+        ...acc,
+        item.src
+      ]
+    }, []);
+
+    return listaDeImagens
   }
 
   const fotosDaGaleria = (anuncio) => {
@@ -44,7 +69,6 @@ const ModeracaoDeAnuncios = () => {
     const aprovado = await postAprovarAnuncio(slug);
     aprovado.status === 200 && location.reload();
   }
-
 
   useEffect(() => {
     setLoadingAtivo(true)
@@ -82,6 +106,10 @@ const ModeracaoDeAnuncios = () => {
                   <img src={item.fotos[item.fotos.length - 1].src} />
                 </a>
 
+                <Button size="large" onClick={() => abrirModalDeDocumentos(item)} variante="contained">
+                  Documentos do autor
+                </Button>
+
                 <Button size="large" onClick={() => abrirModal(item)} variante="contained">
                   Ver fotos do anúncio
                 </Button>
@@ -90,15 +118,16 @@ const ModeracaoDeAnuncios = () => {
                   Ver informações
                 </Button>
 
-
                 <footer>
                   <Button size="large" variante="contained" color="primary" onClick={() => aprovarAnuncio(item.id)}>
                     Aprovar anúncio
                   </Button>
                 </footer>
-                <ModalFoto galeria={imagens} setImagem={setImagemNoModal} imagem={imagemNoModal} aberto={modalAberto} setAberto={setModalAberto} />
-                <ModalDeDadosDoAnuncio dados={item} aberto={modalDeDadosAberto} setAberto={setModalDeDadosAberto} />
+                <ModalFoto preservarLarguraDasImagens galeria={documentos} setImagem={setDocumentoNoModal} imagem={documento} aberto={modalDocumentosAberto} setAberto={setModalDocumentosAberto} />
 
+                <ModalFoto galeria={imagens} setImagem={setImagemNoModal} imagem={imagemNoModal} aberto={modalAberto} setAberto={setModalAberto} />
+
+                <ModalDeDadosDoAnuncio dados={item} aberto={modalDeDadosAberto} setAberto={setModalDeDadosAberto} />
               </Anuncio>
             )
           })}

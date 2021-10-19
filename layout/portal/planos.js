@@ -8,7 +8,7 @@ const Planos = () => {
   const router = useRouter();
 
   const escolherPlano = (plano, preco) => {
-    salvarDadosDoFormulario({plano, preco})
+    salvarDadosDoFormulario({ plano, preco })
     router.push("/portal/formulario/")
   }
 
@@ -39,6 +39,21 @@ const Planos = () => {
           );
         })}
       </ListaDePlanos>
+
+      <DadosParaDeposito>
+        <h2>Dados para depósito:</h2>
+        <p><small>Se você fizer por depósito, terá que anexar o comprovante para finalizar sua compra.
+          <br /> Para adiantar o processo e não perder tempo, você pode depositar antes de contratar o plano.</small> </p>
+        <br />
+        <p><strong>Banco do Brasil: 001</strong></p>
+        <p>Agência: 2916-5</p>
+        <p>Conta: 40140-4</p>
+
+        <hr />
+
+        <h2>PIX:</h2>
+        <p>namoroms67@gmail.com</p>
+      </DadosParaDeposito>
     </ContainerFormulario>
   );
 };
@@ -113,6 +128,20 @@ const ListaDePlanos = styled.div`
     flex-direction: column;
   }
 `;
+
+const DadosParaDeposito = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  color: var(--branca);
+  padding: 24px 24px;
+  border: 1px solid var(--branca);
+  border-radius: 16px;
+  margin-bottom: 24px;
+  & p, h2 {
+    margin: 0;
+  }
+`;
+
 
 const planos = [
   {
