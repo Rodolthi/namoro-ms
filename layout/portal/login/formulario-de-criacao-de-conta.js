@@ -30,26 +30,30 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
     documentos.append('documentoFrente', documentoFrente[0].files);
     documentos.append('documentoVerso', documentoVerso[0].files);
     documentos.append('perfilComDocumento', perfilComDocumento[0].files);
-    const dataForm = await postUsuario(form);
 
-    if (dataForm.status === 200) {
-      alert("Conta criado com sucesso. Faça login para continuar.");
-      autenticar({ "username": e.novoEmail, "password": e.novaSenha }).then(res => {
-        if (res.status === 200) {
-          autenticar({ "username": e.novoEmail, "password": e.novaSenha }).then(response => {
-            if (response.status === 200) {
-              postDocumentos(documentos, response.data.data.token).then(res => {
-                if (res.status === 200) {
-                  localStorage.setItem("nomeUsuario", response.data.data.displayName);
-                  localStorage.setItem("token", response.data.data.token);
-                  localStorage.setItem("usuarioId", response.data.data.email);
-                  irParaLogin();
-                }
-              })
-            }
-          });
-        }
-      });
+    try {
+      const dataForm = await postUsuario(form);
+      if (dataForm.status === 200) {
+        alert("Conta criado com sucesso. Faça login para continuar.");
+        autenticar({ "username": e.novoEmail, "password": e.novaSenha }).then(res => {
+          if (res.status === 200) {
+            autenticar({ "username": e.novoEmail, "password": e.novaSenha }).then(response => {
+              if (response.status === 200) {
+                postDocumentos(documentos, response.data.data.token).then(res => {
+                  if (res.status === 200) {
+                    localStorage.setItem("nomeUsuario", response.data.data.displayName);
+                    localStorage.setItem("token", response.data.data.token);
+                    localStorage.setItem("usuarioId", response.data.data.email);
+                    irParaLogin();
+                  }
+                })
+              }
+            });
+          }
+        });
+      }
+    } catch (error) {
+      alert("O e-mail já existe")
     }
 
     setLoadingAtivo(false)

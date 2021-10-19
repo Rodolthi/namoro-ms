@@ -58,11 +58,9 @@ const Conteudo = styled.div`
   max-width:480px;
   position: relative;
   padding: 24px;
-  margin: 16px auto;
+  margin: 40px auto;
   max-height: calc(100vh - 32px);
   overflow-y: auto;
-  margin-top:50%;
-  transform: translate(0, -50%);
   border-radius: 16px;
   * {
     color: var(--preta);
