@@ -109,9 +109,9 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     })
   }
 
-  return (
+  return (<>
+    <Loading ativo={loadingAtivo} />
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(finalizarCadastro)}>
-      <Loading ativo={loadingAtivo} />
 
       <Titulo>Pagamento</Titulo>
       <FormControl fullWidth component="fieldset">
@@ -189,6 +189,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
         Finalizar compra
       </BotaoFinalizacao>
     </Formulario >
+  </>
   );
 };
 

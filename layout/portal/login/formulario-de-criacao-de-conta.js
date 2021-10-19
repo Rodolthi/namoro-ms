@@ -105,9 +105,9 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
     compararSenhas(senhaRepetida)
   }, [senhaRepetida])
 
-  return (
+  return (<>
+    <Loading ativo={loadingAtivo} />
     <Formulario noValidate autoComplete="off" onSubmit={handleSubmit(criarConta)}>
-      <Loading ativo={loadingAtivo} />
 
       <Title>Crie uma nova conta</Title>
 
@@ -244,7 +244,8 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
       >
         Voltar para login
       </Button>
-    </Formulario >
+    </Formulario>
+  </>
   );
 };
 

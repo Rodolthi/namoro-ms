@@ -33,7 +33,6 @@ const ModeracaoDeAnuncios = () => {
   const abrirModalDeDocumentos = async (anuncio) => {
     const res = await getDocumentos(anuncio.usuario_id)
     const data = await res.data
-    console.log(data);
     setDocumentos(fotosDosDocumentos(data))
     setDocumentoNoModal(data[0].src)
     setModalDocumentosAberto(true)

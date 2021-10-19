@@ -7,8 +7,6 @@ const postData = async (slug, token) => {
         headers: { "Authorization": `Bearer ${token}` }
     };
 
-    console.log(token)
-
     const bodyParam = { slug: slug.toString() };
 
     const data = await axios.post(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/api/anuncio-aprovar`, bodyParam, config)
