@@ -31,7 +31,7 @@ const obterDadosMP = (title, price) => {
 
   const respostaDaAPI = () =>
     fetch(
-      `https://api.mercadopago.com/checkout/preferences?access_token=${process.env.NEXT_PUBLIC_ACCESS_TOKEN_MP}`,
+      `https://api.mercadopago.com/checkout/preferences?access_token=${process.env.ACCESS_TOKEN_MP}`,
       {
         method: "POST",
         body: JSON.stringify(data),
