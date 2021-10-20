@@ -24,13 +24,13 @@ const ListaDeAnuncios = () => {
   };
 
   useEffect(() => {
+    setLoadingAtivo(true)
     (async () => {
-      setLoadingAtivo(true)
       const _filtros = filtros ? filtros : JSON.parse(localStorage.getItem("state"));
       const resultAnuncios = await getAnuncios(_filtros);
       setAnuncios(resultAnuncios.data);
-      setLoadingAtivo(false)
     })();
+    setLoadingAtivo(false)
   }, [filtros.regiao, filtros.acompanhante]);
 
   return (<>
