@@ -12,7 +12,7 @@ const ListaDeAnuncios = () => {
   const reduxStore = initializeStore();
   const [anuncios, setAnuncios] = useState([]);
   const router = useRouter();
-  const [loadingAtivo, setLoadingAtivo] = useState(true)
+  const [loadingAtivo, setLoadingAtivo] = useState(false)
 
   const irParaOAnuncio = (slug) => {
     router.push({
@@ -24,13 +24,11 @@ const ListaDeAnuncios = () => {
   };
 
   useEffect(() => {
-    setLoadingAtivo(true)
     (async () => {
       const _filtros = filtros ? filtros : JSON.parse(localStorage.getItem("state"));
       const resultAnuncios = await getAnuncios(_filtros);
       setAnuncios(resultAnuncios.data);
     })();
-    setLoadingAtivo(false)
   }, [filtros.regiao, filtros.acompanhante]);
 
   return (<>
