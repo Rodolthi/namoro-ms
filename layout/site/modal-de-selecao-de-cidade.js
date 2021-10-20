@@ -47,10 +47,10 @@ const ModalDeSelecaoDeCidade = ({ setCidadeSelecionada }) => {
       <Logo src="/logo.svg" />
       <Label>Escolha a cidade:</Label>
       {
-        cidades.length > 0 &&
-        cidades.map((cidade) => (
-          <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade(cidade)}>{cidade}</Button>
-        ))
+        cidades.length > 0 ?
+          cidades.map((cidade) => (
+            <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade(cidade)}>{cidade}</Button>
+          )) : <Button color="primary" variant="contained" fullWidth size="large" onClick={() => escolherCidade("Campo Grande")}>Campo Grande</Button>
       }
     </CorpoModal>
   );
