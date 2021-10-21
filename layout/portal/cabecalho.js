@@ -17,7 +17,7 @@ const Cabecalho = () => {
   const [tokenLogado, setTokenLogado] = useState("")
 
   const deslogar = () => {
-    router.push("/portal/login.html");
+    router.push("/portal/login");
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Cabecalho = () => {
       } catch (error) {
         if (estaNasRotasDoPortal) {
           alert("Faça o login novamente")
-          router.push("/portal/login.html")
+          router.push("/portal/login")
         }
       }
     })()
@@ -38,7 +38,7 @@ const Cabecalho = () => {
 
   return (
     <CabecalhoDoPortal>
-      <Logo onClick={() => estaNasRotasDoPortal && router.push("/portal/inicio.html")} src="/logo.svg" />
+      <Logo onClick={() => estaNasRotasDoPortal && router.push("/portal/inicio")} src="/logo.svg" />
       {estaNasRotasDoPortal && (
         <ContainerUsuario>
           <Usuario>

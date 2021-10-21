@@ -119,7 +119,7 @@ const Cabecalho = () => {
         <ModalDeSelecaoDeCidade setCidadeSelecionada={setCidadeSelecionada} />
 
         <Container>
-          <Logo onClick={() => router.push("/index.html")} src="/logo.svg" tabIndex="0" />
+          <Logo onClick={() => router.push("/")} src="/logo.svg" tabIndex="0" />
 
           <Acoes>
             {acoesParaUsuario()}

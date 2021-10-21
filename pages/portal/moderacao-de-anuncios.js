@@ -66,7 +66,7 @@ const ModeracaoDeAnuncios = () => {
 
   const aprovarAnuncio = async (slug) => {
     const aprovado = await postAprovarAnuncio(slug);
-    aprovado.status === 200 && router.push("/portal/moderacao-de-anuncios.html");
+    aprovado.status === 200 && router.push("/portal/moderacao-de-anuncios");
   }
 
   useEffect(() => {

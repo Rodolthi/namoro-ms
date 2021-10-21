@@ -75,7 +75,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     } else if (deposito) {
       publicarAnuncio(form).then(res => {
         if (res.status == 200) {
-          router.push("/portal/inicio.html");
+          router.push("/portal/inicio");
         }
       })
     }
