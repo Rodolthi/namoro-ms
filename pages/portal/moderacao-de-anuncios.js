@@ -66,7 +66,7 @@ const ModeracaoDeAnuncios = () => {
 
   const aprovarAnuncio = async (slug) => {
     const aprovado = await postAprovarAnuncio(slug);
-    aprovado.status === 200 && location.reload();
+    aprovado.status === 200 && router.push("/portal/moderacao-de-anuncios");
   }
 
   useEffect(() => {
@@ -178,71 +178,3 @@ const Anuncio = styled.li`
     flex-direction: column;
   }
 `;
-
-const anunciosMock = [
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-  {
-    nome: "Thiago Menezes de Oliveira",
-    id: "thiago-1",
-    comprovante: "/exemple2.jpg",
-  },
-];
