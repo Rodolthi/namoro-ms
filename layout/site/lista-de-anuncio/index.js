@@ -16,7 +16,7 @@ const ListaDeAnuncios = () => {
 
   const irParaOAnuncio = (slug) => {
     router.push({
-      pathname: "/anuncio/",
+      pathname: "/anuncio.html/",
       query: {
         slug
       }

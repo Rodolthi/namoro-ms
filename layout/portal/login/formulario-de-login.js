@@ -37,7 +37,7 @@ const FormularioDeLogin = ({ irParaCriacaoDeConta, state }) => {
         localStorage.setItem("nomeUsuario", data.data.displayName);
         localStorage.setItem("token", data.data.token);
         localStorage.setItem("usuarioId", data.data.email);
-        router.push("/portal/inicio");
+        router.push("/portal/inicio.html");
       }
     } catch (error) {
       alert("E-mail ou senha incorretos!")
