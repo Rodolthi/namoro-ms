@@ -8,7 +8,7 @@ const postData = async (files, token) => {
         headers: { "Authorization": `Bearer ${token}` }
     };
 
-    const data = await axios.post(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/api/documentos`, bodyParam, config)
+    const data = await axios.post(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/?rest_route=/api/documentos`, bodyParam, config)
     return data;
 }
 
