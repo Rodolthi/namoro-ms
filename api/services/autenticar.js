@@ -1,5 +1,5 @@
 import axios from "axios";
-// axios.defaults.baseURL = 'http://localhost:10004/wp-json/api';
+// axios.defaults.baseURL = 'http://localhost:10004';
 
 const postData = async (dataUser) => {
 

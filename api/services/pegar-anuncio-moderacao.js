@@ -1,11 +1,11 @@
 import axios from "axios";
-// axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_WEBAPP_PORT}/wp-json/api`;
+// axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_WEBAPP_PORT}`;
 
 const postData = async (dataUser, token) => {
 
     const bodyParam = dataUser;
 
-    const data = await axios.get(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/wp-json/api/anuncios/moderacao`);
+    const data = await axios.get(`${process.env.NEXT_PUBLIC_WEBAPI_PORT}/anuncios/moderacao`);
     return data;
 } 
 
