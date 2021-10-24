@@ -1,5 +1,5 @@
 import postData from '../services/aprovar-anuncio';
-import autenticar from 'api/services/autenticar';
+import autenticar from 'interface/services/autenticar';
 
 export const postAprovarAnuncio = async (slug) => {
     const { data } = await autenticar({

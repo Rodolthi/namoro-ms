@@ -1,5 +1,5 @@
 import postData from '../services/criacao-conta';
-import autenticar from 'api/services/autenticar';
+import autenticar from 'interface/services/autenticar';
 
 export const postUsuario = async (dataUser) => {
     const { data } = await autenticar({
