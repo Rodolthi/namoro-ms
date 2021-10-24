@@ -19,7 +19,6 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   const [comprovante, setComprovante] = useState([])
   const [loadingAtivo, setLoadingAtivo] = useState(false)
   const [tokenLS, setTokenST] = useState("")
-
   const token = useSelector(state => state.token);
 
   useEffect(() => {
@@ -27,8 +26,6 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   }, [loadingAtivo])
 
   const finalizarCadastro = async () => {
-    setLoadingAtivo(true)
-
     const dados = obterDadosDoFormulario("dadosDoFormulario")
     const todosOsdados = {
       ...dados,
@@ -37,7 +34,6 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       ...{ imagensGaleria },
       ...{ comprovante }
     }
-
 
     const form = new FormData();
     form.append('aceitaCartao', todosOsdados.aceitaCartao);
@@ -67,7 +63,12 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
     });
     form.append('comprovante', todosOsdados.comprovante.length ? todosOsdados.comprovante[0].files : "");
     if (!deposito) {
-      publicarAnuncio(form)
+      publicarAnuncio(form).then(res => {
+        if (res.status == 200) {
+          setLoadingAtivo(false)
+          irParaCheckoutDoMP(dados)
+        }
+      })
     }
 
     if (deposito && !comprovante.length) {
@@ -76,11 +77,10 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
       publicarAnuncio(form).then(res => {
         if (res.status == 200) {
           router.push("/portal/inicio");
+          setLoadingAtivo(false)
         }
       })
     }
-
-    setLoadingAtivo(false)
   }
 
   const publicarAnuncio = async (form) => {
@@ -101,11 +101,13 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   }
 
   const pagarComCartao = () => {
-    const anuncio = obterDadosDoFormulario("dadosDoFormulario")
-
+    setLoadingAtivo(true)
     finalizarCadastro();
-    obterDadosMP(`Plano de ${anuncio.plano}`, anuncio.preco).then(res => {
-      router.push(res.init_point)z
+  }
+
+  const irParaCheckoutDoMP = (dados) => {
+    obterDadosMP(`Plano de ${dados.plano}`, dados.preco).then(res => {
+      router.push(res.init_point)
     })
   }
 
