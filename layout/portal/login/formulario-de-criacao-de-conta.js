@@ -45,6 +45,7 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("usuarioId", response.data.user_email);
                     irParaLogin();
+                    setLoadingAtivo(false)
                   }
                 })
               }
@@ -54,9 +55,8 @@ const FormularioDeCriacaoDeConta = ({ irParaLogin }) => {
       }
     } catch (error) {
       alert("O e-mail já existe")
+      setLoadingAtivo(false)
     }
-
-    setLoadingAtivo(false)
   }
 
   const [novaSenha, setNovaSenha] = useState("");

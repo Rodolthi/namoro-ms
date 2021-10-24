@@ -105,7 +105,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
 
     finalizarCadastro();
     obterDadosMP(`Plano de ${anuncio.plano}`, anuncio.preco).then(res => {
-      router.push(res.init_point)
+      router.push(res.init_point)z
     })
   }
 
