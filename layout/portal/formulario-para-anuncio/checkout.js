@@ -26,6 +26,7 @@ const Checkout = ({ imagensGaleria, imagemPrincipal }) => {
   }, [loadingAtivo])
 
   const finalizarCadastro = async () => {
+    setLoadingAtivo(true)
     const dados = obterDadosDoFormulario("dadosDoFormulario")
     const todosOsdados = {
       ...dados,
